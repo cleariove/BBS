@@ -1,87 +1,85 @@
 package cn.edu.ncu.bbs.domain;
 
+import java.util.Date;
 
 public class User {
+    private Integer userId;
 
-  private long userId;
-  private String userName;
-  private String password;
-  private long age;
-  private String gender;
-  private java.sql.Timestamp birthDay;
-  private long power;
-  private long integral;
+    private String userName;
 
+    private String password;
 
-  public long getUserId() {
-    return userId;
-  }
+    private Integer age;
 
-  public void setUserId(long userId) {
-    this.userId = userId;
-  }
+    private String gender;
 
+    private Date birthday;
 
-  public String getUserName() {
-    return userName;
-  }
+    private Integer power;
 
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
+    private Integer integral;
 
+    public Integer getUserId() {
+        return userId;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public String getUserName() {
+        return userName;
+    }
 
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
+    }
 
-  public long getAge() {
-    return age;
-  }
+    public String getPassword() {
+        return password;
+    }
 
-  public void setAge(long age) {
-    this.age = age;
-  }
+    public void setPassword(String password) {
+        this.password = password == null ? null : password.trim();
+    }
 
+    public Integer getAge() {
+        return age;
+    }
 
-  public String getGender() {
-    return gender;
-  }
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-  public void setGender(String gender) {
-    this.gender = gender;
-  }
+    public String getGender() {
+        return gender;
+    }
 
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
+    }
 
-  public java.sql.Timestamp getBirthDay() {
-    return birthDay;
-  }
+    public Date getBirthday() {
+        return birthday;
+    }
 
-  public void setBirthDay(java.sql.Timestamp birthDay) {
-    this.birthDay = birthDay;
-  }
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
+    public Integer getPower() {
+        return power;
+    }
 
-  public long getPower() {
-    return power;
-  }
+    public void setPower(Integer power) {
+        this.power = power;
+    }
 
-  public void setPower(long power) {
-    this.power = power;
-  }
+    public Integer getIntegral() {
+        return integral;
+    }
 
-
-  public long getIntegral() {
-    return integral;
-  }
-
-  public void setIntegral(long integral) {
-    this.integral = integral;
-  }
-
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
 }

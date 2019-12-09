@@ -3,14 +3,17 @@ package cn.edu.ncu.bbs.mapper;
 import cn.edu.ncu.bbs.domain.Comment;
 import cn.edu.ncu.bbs.domain.CommentExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface CommentMapper {
     int countByExample(CommentExample example);
 
     int deleteByExample(CommentExample example);
 
-    int deleteByPrimaryKey(Integer commentid);
+    int deleteByPrimaryKey(Integer commentId);
 
     int insert(Comment record);
 
@@ -18,7 +21,7 @@ public interface CommentMapper {
 
     List<Comment> selectByExample(CommentExample example);
 
-    Comment selectByPrimaryKey(Integer commentid);
+    Comment selectByPrimaryKey(Integer commentId);
 
     int updateByExampleSelective(@Param("record") Comment record, @Param("example") CommentExample example);
 

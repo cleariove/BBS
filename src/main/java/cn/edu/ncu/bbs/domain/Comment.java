@@ -3,40 +3,40 @@ package cn.edu.ncu.bbs.domain;
 import java.util.Date;
 
 public class Comment {
-    private Integer commentid;
+    private Integer commentId;//主键
 
-    private Integer commentfrom;
+    private Integer commentFrom;//评论者
 
-    private Integer commentto;
+    private Integer commentTo;//对谁的评论
 
-    private String content;
+    private String content;//评论内容
 
-    private Date date;
+    private Date date;//评论时间
 
-    private Integer topicid;
+    private Integer topicId;//所属帖子的id
 
-    public Integer getCommentid() {
-        return commentid;
+    public Integer getCommentId() {
+        return commentId;
     }
 
-    public void setCommentid(Integer commentid) {
-        this.commentid = commentid;
+    public void setCommentId(Integer commentId) {
+        this.commentId = commentId;
     }
 
-    public Integer getCommentfrom() {
-        return commentfrom;
+    public Integer getCommentFrom() {
+        return commentFrom;
     }
 
-    public void setCommentfrom(Integer commentfrom) {
-        this.commentfrom = commentfrom;
+    public void setCommentFrom(Integer commentFrom) {
+        this.commentFrom = commentFrom;
     }
 
-    public Integer getCommentto() {
-        return commentto;
+    public Integer getCommentTo() {
+        return commentTo;
     }
 
-    public void setCommentto(Integer commentto) {
-        this.commentto = commentto;
+    public void setCommentTo(Integer commentTo) {
+        this.commentTo = commentTo;
     }
 
     public String getContent() {
@@ -55,11 +55,11 @@ public class Comment {
         this.date = date;
     }
 
-    public Integer getTopicid() {
-        return topicid;
+    public Integer getTopicId() {
+        return topicId;
     }
 
-    public void setTopicid(Integer topicid) {
-        this.topicid = topicid;
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
     }
 }

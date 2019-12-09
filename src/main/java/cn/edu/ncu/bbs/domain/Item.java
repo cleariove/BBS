@@ -1,48 +1,43 @@
 package cn.edu.ncu.bbs.domain;
 
-
 public class Item {
+    private Integer itemId;//主键
 
+    private String itemName;//栏目名字
 
-  private long itemID;
-  private String itemName;
-  private String itemDescription;
-  private long manager;
+    private String itemDescription;//栏目描述
 
+    private Integer manager;//栏目管理员
 
-  public long getItemID() {
-    return itemID;
-  }
+    public Integer getItemId() {
+        return itemId;
+    }
 
-  public void setItemID(long itemID) {
-    this.itemID = itemID;
-  }
+    public void setItemId(Integer itemId) {
+        this.itemId = itemId;
+    }
 
+    public String getItemName() {
+        return itemName;
+    }
 
-  public String getItemName() {
-    return itemName;
-  }
+    public void setItemName(String itemName) {
+        this.itemName = itemName == null ? null : itemName.trim();
+    }
 
-  public void setItemName(String itemName) {
-    this.itemName = itemName;
-  }
+    public String getItemDescription() {
+        return itemDescription;
+    }
 
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription == null ? null : itemDescription.trim();
+    }
 
-  public String getItemDescription() {
-    return itemDescription;
-  }
+    public Integer getManager() {
+        return manager;
+    }
 
-  public void setItemDescription(String itemDescription) {
-    this.itemDescription = itemDescription;
-  }
-
-
-  public long getManager() {
-    return manager;
-  }
-
-  public void setManager(long manager) {
-    this.manager = manager;
-  }
-
+    public void setManager(Integer manager) {
+        this.manager = manager;
+    }
 }

@@ -2,17 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.edu.ncu.bbs.mapper.TopicMapper" >
   <resultMap id="BaseResultMap" type="cn.edu.ncu.bbs.domain.Topic" >
-    <id column="topicID" property="topicid" jdbcType="INTEGER" />
+    <id column="topic_id" property="topicId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="topicManager" property="topicmanager" jdbcType="INTEGER" />
+    <result column="manager" property="manager" jdbcType="INTEGER" />
     <result column="date" property="date" jdbcType="TIMESTAMP" />
     <result column="browse" property="browse" jdbcType="INTEGER" />
     <result column="integral" property="integral" jdbcType="INTEGER" />
     <result column="help" property="help" jdbcType="BIT" />
     <result column="elite" property="elite" jdbcType="BIT" />
-    <result column="onPageTop" property="onpagetop" jdbcType="BIT" />
-    <result column="subItemID" property="subitemid" jdbcType="INTEGER" />
+    <result column="on_page_top" property="onPageTop" jdbcType="BIT" />
+    <result column="sub_item_id" property="subItemId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    topicID, title, content, topicManager, date, browse, integral, help, elite, onPageTop, 
-    subItemID
+    topic_id, title, content, manager, date, browse, integral, help, elite, on_page_top, 
+    sub_item_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.ncu.bbs.domain.TopicExample" >
     select
@@ -94,11 +94,11 @@
     select 
     <include refid="Base_Column_List" />
     from topic
-    where topicID = #{topicid,jdbcType=INTEGER}
+    where topic_id = #{topicId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from topic
-    where topicID = #{topicid,jdbcType=INTEGER}
+    where topic_id = #{topicId,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="cn.edu.ncu.bbs.domain.TopicExample" >
     delete from topic
@@ -107,20 +107,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Topic" >
-    insert into topic (topicID, title, content, 
-      topicManager, date, browse, 
-      integral, help, elite, onPageTop, 
-      subItemID)
-    values (#{topicid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{topicmanager,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{browse,jdbcType=INTEGER}, 
-      #{integral,jdbcType=INTEGER}, #{help,jdbcType=BIT}, #{elite,jdbcType=BIT}, #{onpagetop,jdbcType=BIT}, 
-      #{subitemid,jdbcType=INTEGER})
+    insert into topic (topic_id, title, content, 
+      manager, date, browse, 
+      integral, help, elite, on_page_top, 
+      sub_item_id)
+    values (#{topicId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{manager,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{browse,jdbcType=INTEGER}, 
+      #{integral,jdbcType=INTEGER}, #{help,jdbcType=BIT}, #{elite,jdbcType=BIT}, #{onPageTop,jdbcType=BIT}, 
+      #{subItemId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.Topic" >
     insert into topic
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="topicid != null" >
-        topicID,
+      <if test="topicId != null" >
+        topic_id,
       </if>
       <if test="title != null" >
         title,
@@ -128,8 +128,8 @@
       <if test="content != null" >
         content,
       </if>
-      <if test="topicmanager != null" >
-        topicManager,
+      <if test="manager != null" >
+        manager,
       </if>
       <if test="date != null" >
         date,
@@ -146,16 +146,16 @@
       <if test="elite != null" >
         elite,
       </if>
-      <if test="onpagetop != null" >
-        onPageTop,
+      <if test="onPageTop != null" >
+        on_page_top,
       </if>
-      <if test="subitemid != null" >
-        subItemID,
+      <if test="subItemId != null" >
+        sub_item_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="topicid != null" >
-        #{topicid,jdbcType=INTEGER},
+      <if test="topicId != null" >
+        #{topicId,jdbcType=INTEGER},
       </if>
       <if test="title != null" >
         #{title,jdbcType=VARCHAR},
@@ -163,8 +163,8 @@
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="topicmanager != null" >
-        #{topicmanager,jdbcType=INTEGER},
+      <if test="manager != null" >
+        #{manager,jdbcType=INTEGER},
       </if>
       <if test="date != null" >
         #{date,jdbcType=TIMESTAMP},
@@ -181,11 +181,11 @@
       <if test="elite != null" >
         #{elite,jdbcType=BIT},
       </if>
-      <if test="onpagetop != null" >
-        #{onpagetop,jdbcType=BIT},
+      <if test="onPageTop != null" >
+        #{onPageTop,jdbcType=BIT},
       </if>
-      <if test="subitemid != null" >
-        #{subitemid,jdbcType=INTEGER},
+      <if test="subItemId != null" >
+        #{subItemId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -198,8 +198,8 @@
   <update id="updateByExampleSelective" parameterType="map" >
     update topic
     <set >
-      <if test="record.topicid != null" >
-        topicID = #{record.topicid,jdbcType=INTEGER},
+      <if test="record.topicId != null" >
+        topic_id = #{record.topicId,jdbcType=INTEGER},
       </if>
       <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
@@ -207,8 +207,8 @@
       <if test="record.content != null" >
         content = #{record.content,jdbcType=VARCHAR},
       </if>
-      <if test="record.topicmanager != null" >
-        topicManager = #{record.topicmanager,jdbcType=INTEGER},
+      <if test="record.manager != null" >
+        manager = #{record.manager,jdbcType=INTEGER},
       </if>
       <if test="record.date != null" >
         date = #{record.date,jdbcType=TIMESTAMP},
@@ -225,11 +225,11 @@
       <if test="record.elite != null" >
         elite = #{record.elite,jdbcType=BIT},
       </if>
-      <if test="record.onpagetop != null" >
-        onPageTop = #{record.onpagetop,jdbcType=BIT},
+      <if test="record.onPageTop != null" >
+        on_page_top = #{record.onPageTop,jdbcType=BIT},
       </if>
-      <if test="record.subitemid != null" >
-        subItemID = #{record.subitemid,jdbcType=INTEGER},
+      <if test="record.subItemId != null" >
+        sub_item_id = #{record.subItemId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -238,17 +238,17 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update topic
-    set topicID = #{record.topicid,jdbcType=INTEGER},
+    set topic_id = #{record.topicId,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       content = #{record.content,jdbcType=VARCHAR},
-      topicManager = #{record.topicmanager,jdbcType=INTEGER},
+      manager = #{record.manager,jdbcType=INTEGER},
       date = #{record.date,jdbcType=TIMESTAMP},
       browse = #{record.browse,jdbcType=INTEGER},
       integral = #{record.integral,jdbcType=INTEGER},
       help = #{record.help,jdbcType=BIT},
       elite = #{record.elite,jdbcType=BIT},
-      onPageTop = #{record.onpagetop,jdbcType=BIT},
-      subItemID = #{record.subitemid,jdbcType=INTEGER}
+      on_page_top = #{record.onPageTop,jdbcType=BIT},
+      sub_item_id = #{record.subItemId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -262,8 +262,8 @@
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="topicmanager != null" >
-        topicManager = #{topicmanager,jdbcType=INTEGER},
+      <if test="manager != null" >
+        manager = #{manager,jdbcType=INTEGER},
       </if>
       <if test="date != null" >
         date = #{date,jdbcType=TIMESTAMP},
@@ -280,27 +280,27 @@
       <if test="elite != null" >
         elite = #{elite,jdbcType=BIT},
       </if>
-      <if test="onpagetop != null" >
-        onPageTop = #{onpagetop,jdbcType=BIT},
+      <if test="onPageTop != null" >
+        on_page_top = #{onPageTop,jdbcType=BIT},
       </if>
-      <if test="subitemid != null" >
-        subItemID = #{subitemid,jdbcType=INTEGER},
+      <if test="subItemId != null" >
+        sub_item_id = #{subItemId,jdbcType=INTEGER},
       </if>
     </set>
-    where topicID = #{topicid,jdbcType=INTEGER}
+    where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.edu.ncu.bbs.domain.Topic" >
     update topic
     set title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
-      topicManager = #{topicmanager,jdbcType=INTEGER},
+      manager = #{manager,jdbcType=INTEGER},
       date = #{date,jdbcType=TIMESTAMP},
       browse = #{browse,jdbcType=INTEGER},
       integral = #{integral,jdbcType=INTEGER},
       help = #{help,jdbcType=BIT},
       elite = #{elite,jdbcType=BIT},
-      onPageTop = #{onpagetop,jdbcType=BIT},
-      subItemID = #{subitemid,jdbcType=INTEGER}
-    where topicID = #{topicid,jdbcType=INTEGER}
+      on_page_top = #{onPageTop,jdbcType=BIT},
+      sub_item_id = #{subItemId,jdbcType=INTEGER}
+    where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
 </mapper>

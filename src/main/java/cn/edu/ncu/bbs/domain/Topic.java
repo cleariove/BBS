@@ -3,34 +3,34 @@ package cn.edu.ncu.bbs.domain;
 import java.util.Date;
 
 public class Topic {
-    private Integer topicid;
+    private Integer topicId;//主键
 
-    private String title;
+    private String title;//帖子标题
 
-    private String content;
+    private String content;//帖子内容
 
-    private Integer topicmanager;
+    private Integer manager;//贴主
 
-    private Date date;
+    private Date date;//发帖时间
 
-    private Integer browse;
+    private Integer browse;//浏览数量
 
-    private Integer integral;
+    private Integer integral;//积分
 
-    private Boolean help;
+    private Boolean help;//是否为求助帖
 
-    private Boolean elite;
+    private Boolean elite;//是否加精
 
-    private Boolean onpagetop;
+    private Boolean onPageTop;//是否置顶
 
-    private Integer subitemid;
+    private Integer subItemId;//所属子栏目id
 
-    public Integer getTopicid() {
-        return topicid;
+    public Integer getTopicId() {
+        return topicId;
     }
 
-    public void setTopicid(Integer topicid) {
-        this.topicid = topicid;
+    public void setTopicId(Integer topicId) {
+        this.topicId = topicId;
     }
 
     public String getTitle() {
@@ -49,12 +49,12 @@ public class Topic {
         this.content = content == null ? null : content.trim();
     }
 
-    public Integer getTopicmanager() {
-        return topicmanager;
+    public Integer getManager() {
+        return manager;
     }
 
-    public void setTopicmanager(Integer topicmanager) {
-        this.topicmanager = topicmanager;
+    public void setManager(Integer manager) {
+        this.manager = manager;
     }
 
     public Date getDate() {
@@ -97,19 +97,19 @@ public class Topic {
         this.elite = elite;
     }
 
-    public Boolean getOnpagetop() {
-        return onpagetop;
+    public Boolean getOnPageTop() {
+        return onPageTop;
     }
 
-    public void setOnpagetop(Boolean onpagetop) {
-        this.onpagetop = onpagetop;
+    public void setOnPageTop(Boolean onPageTop) {
+        this.onPageTop = onPageTop;
     }
 
-    public Integer getSubitemid() {
-        return subitemid;
+    public Integer getSubItemId() {
+        return subItemId;
     }
 
-    public void setSubitemid(Integer subitemid) {
-        this.subitemid = subitemid;
+    public void setSubItemId(Integer subItemId) {
+        this.subItemId = subItemId;
     }
 }

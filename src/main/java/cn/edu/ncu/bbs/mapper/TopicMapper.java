@@ -3,14 +3,17 @@ package cn.edu.ncu.bbs.mapper;
 import cn.edu.ncu.bbs.domain.Topic;
 import cn.edu.ncu.bbs.domain.TopicExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface TopicMapper {
     int countByExample(TopicExample example);
 
     int deleteByExample(TopicExample example);
 
-    int deleteByPrimaryKey(Integer topicid);
+    int deleteByPrimaryKey(Integer topicId);
 
     int insert(Topic record);
 
@@ -18,7 +21,7 @@ public interface TopicMapper {
 
     List<Topic> selectByExample(TopicExample example);
 
-    Topic selectByPrimaryKey(Integer topicid);
+    Topic selectByPrimaryKey(Integer topicId);
 
     int updateByExampleSelective(@Param("record") Topic record, @Param("example") TopicExample example);
 

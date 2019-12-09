@@ -105,63 +105,63 @@ public class TopicExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andTopicidIsNull() {
-            addCriterion("topicID is null");
+        public Criteria andTopicIdIsNull() {
+            addCriterion("topic_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidIsNotNull() {
-            addCriterion("topicID is not null");
+        public Criteria andTopicIdIsNotNull() {
+            addCriterion("topic_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidEqualTo(Integer value) {
-            addCriterion("topicID =", value, "topicid");
+        public Criteria andTopicIdEqualTo(Integer value) {
+            addCriterion("topic_id =", value, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidNotEqualTo(Integer value) {
-            addCriterion("topicID <>", value, "topicid");
+        public Criteria andTopicIdNotEqualTo(Integer value) {
+            addCriterion("topic_id <>", value, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidGreaterThan(Integer value) {
-            addCriterion("topicID >", value, "topicid");
+        public Criteria andTopicIdGreaterThan(Integer value) {
+            addCriterion("topic_id >", value, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("topicID >=", value, "topicid");
+        public Criteria andTopicIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("topic_id >=", value, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidLessThan(Integer value) {
-            addCriterion("topicID <", value, "topicid");
+        public Criteria andTopicIdLessThan(Integer value) {
+            addCriterion("topic_id <", value, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidLessThanOrEqualTo(Integer value) {
-            addCriterion("topicID <=", value, "topicid");
+        public Criteria andTopicIdLessThanOrEqualTo(Integer value) {
+            addCriterion("topic_id <=", value, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidIn(List<Integer> values) {
-            addCriterion("topicID in", values, "topicid");
+        public Criteria andTopicIdIn(List<Integer> values) {
+            addCriterion("topic_id in", values, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidNotIn(List<Integer> values) {
-            addCriterion("topicID not in", values, "topicid");
+        public Criteria andTopicIdNotIn(List<Integer> values) {
+            addCriterion("topic_id not in", values, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidBetween(Integer value1, Integer value2) {
-            addCriterion("topicID between", value1, value2, "topicid");
+        public Criteria andTopicIdBetween(Integer value1, Integer value2) {
+            addCriterion("topic_id between", value1, value2, "topicId");
             return (Criteria) this;
         }
 
-        public Criteria andTopicidNotBetween(Integer value1, Integer value2) {
-            addCriterion("topicID not between", value1, value2, "topicid");
+        public Criteria andTopicIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("topic_id not between", value1, value2, "topicId");
             return (Criteria) this;
         }
 
@@ -305,63 +305,63 @@ public class TopicExample {
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerIsNull() {
-            addCriterion("topicManager is null");
+        public Criteria andManagerIsNull() {
+            addCriterion("manager is null");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerIsNotNull() {
-            addCriterion("topicManager is not null");
+        public Criteria andManagerIsNotNull() {
+            addCriterion("manager is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerEqualTo(Integer value) {
-            addCriterion("topicManager =", value, "topicmanager");
+        public Criteria andManagerEqualTo(Integer value) {
+            addCriterion("manager =", value, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerNotEqualTo(Integer value) {
-            addCriterion("topicManager <>", value, "topicmanager");
+        public Criteria andManagerNotEqualTo(Integer value) {
+            addCriterion("manager <>", value, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerGreaterThan(Integer value) {
-            addCriterion("topicManager >", value, "topicmanager");
+        public Criteria andManagerGreaterThan(Integer value) {
+            addCriterion("manager >", value, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerGreaterThanOrEqualTo(Integer value) {
-            addCriterion("topicManager >=", value, "topicmanager");
+        public Criteria andManagerGreaterThanOrEqualTo(Integer value) {
+            addCriterion("manager >=", value, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerLessThan(Integer value) {
-            addCriterion("topicManager <", value, "topicmanager");
+        public Criteria andManagerLessThan(Integer value) {
+            addCriterion("manager <", value, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerLessThanOrEqualTo(Integer value) {
-            addCriterion("topicManager <=", value, "topicmanager");
+        public Criteria andManagerLessThanOrEqualTo(Integer value) {
+            addCriterion("manager <=", value, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerIn(List<Integer> values) {
-            addCriterion("topicManager in", values, "topicmanager");
+        public Criteria andManagerIn(List<Integer> values) {
+            addCriterion("manager in", values, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerNotIn(List<Integer> values) {
-            addCriterion("topicManager not in", values, "topicmanager");
+        public Criteria andManagerNotIn(List<Integer> values) {
+            addCriterion("manager not in", values, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerBetween(Integer value1, Integer value2) {
-            addCriterion("topicManager between", value1, value2, "topicmanager");
+        public Criteria andManagerBetween(Integer value1, Integer value2) {
+            addCriterion("manager between", value1, value2, "manager");
             return (Criteria) this;
         }
 
-        public Criteria andTopicmanagerNotBetween(Integer value1, Integer value2) {
-            addCriterion("topicManager not between", value1, value2, "topicmanager");
+        public Criteria andManagerNotBetween(Integer value1, Integer value2) {
+            addCriterion("manager not between", value1, value2, "manager");
             return (Criteria) this;
         }
 
@@ -665,123 +665,123 @@ public class TopicExample {
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopIsNull() {
-            addCriterion("onPageTop is null");
+        public Criteria andOnPageTopIsNull() {
+            addCriterion("on_page_top is null");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopIsNotNull() {
-            addCriterion("onPageTop is not null");
+        public Criteria andOnPageTopIsNotNull() {
+            addCriterion("on_page_top is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopEqualTo(Boolean value) {
-            addCriterion("onPageTop =", value, "onpagetop");
+        public Criteria andOnPageTopEqualTo(Boolean value) {
+            addCriterion("on_page_top =", value, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopNotEqualTo(Boolean value) {
-            addCriterion("onPageTop <>", value, "onpagetop");
+        public Criteria andOnPageTopNotEqualTo(Boolean value) {
+            addCriterion("on_page_top <>", value, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopGreaterThan(Boolean value) {
-            addCriterion("onPageTop >", value, "onpagetop");
+        public Criteria andOnPageTopGreaterThan(Boolean value) {
+            addCriterion("on_page_top >", value, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopGreaterThanOrEqualTo(Boolean value) {
-            addCriterion("onPageTop >=", value, "onpagetop");
+        public Criteria andOnPageTopGreaterThanOrEqualTo(Boolean value) {
+            addCriterion("on_page_top >=", value, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopLessThan(Boolean value) {
-            addCriterion("onPageTop <", value, "onpagetop");
+        public Criteria andOnPageTopLessThan(Boolean value) {
+            addCriterion("on_page_top <", value, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopLessThanOrEqualTo(Boolean value) {
-            addCriterion("onPageTop <=", value, "onpagetop");
+        public Criteria andOnPageTopLessThanOrEqualTo(Boolean value) {
+            addCriterion("on_page_top <=", value, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopIn(List<Boolean> values) {
-            addCriterion("onPageTop in", values, "onpagetop");
+        public Criteria andOnPageTopIn(List<Boolean> values) {
+            addCriterion("on_page_top in", values, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopNotIn(List<Boolean> values) {
-            addCriterion("onPageTop not in", values, "onpagetop");
+        public Criteria andOnPageTopNotIn(List<Boolean> values) {
+            addCriterion("on_page_top not in", values, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopBetween(Boolean value1, Boolean value2) {
-            addCriterion("onPageTop between", value1, value2, "onpagetop");
+        public Criteria andOnPageTopBetween(Boolean value1, Boolean value2) {
+            addCriterion("on_page_top between", value1, value2, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andOnpagetopNotBetween(Boolean value1, Boolean value2) {
-            addCriterion("onPageTop not between", value1, value2, "onpagetop");
+        public Criteria andOnPageTopNotBetween(Boolean value1, Boolean value2) {
+            addCriterion("on_page_top not between", value1, value2, "onPageTop");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidIsNull() {
-            addCriterion("subItemID is null");
+        public Criteria andSubItemIdIsNull() {
+            addCriterion("sub_item_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidIsNotNull() {
-            addCriterion("subItemID is not null");
+        public Criteria andSubItemIdIsNotNull() {
+            addCriterion("sub_item_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidEqualTo(Integer value) {
-            addCriterion("subItemID =", value, "subitemid");
+        public Criteria andSubItemIdEqualTo(Integer value) {
+            addCriterion("sub_item_id =", value, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidNotEqualTo(Integer value) {
-            addCriterion("subItemID <>", value, "subitemid");
+        public Criteria andSubItemIdNotEqualTo(Integer value) {
+            addCriterion("sub_item_id <>", value, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidGreaterThan(Integer value) {
-            addCriterion("subItemID >", value, "subitemid");
+        public Criteria andSubItemIdGreaterThan(Integer value) {
+            addCriterion("sub_item_id >", value, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("subItemID >=", value, "subitemid");
+        public Criteria andSubItemIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sub_item_id >=", value, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidLessThan(Integer value) {
-            addCriterion("subItemID <", value, "subitemid");
+        public Criteria andSubItemIdLessThan(Integer value) {
+            addCriterion("sub_item_id <", value, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidLessThanOrEqualTo(Integer value) {
-            addCriterion("subItemID <=", value, "subitemid");
+        public Criteria andSubItemIdLessThanOrEqualTo(Integer value) {
+            addCriterion("sub_item_id <=", value, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidIn(List<Integer> values) {
-            addCriterion("subItemID in", values, "subitemid");
+        public Criteria andSubItemIdIn(List<Integer> values) {
+            addCriterion("sub_item_id in", values, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidNotIn(List<Integer> values) {
-            addCriterion("subItemID not in", values, "subitemid");
+        public Criteria andSubItemIdNotIn(List<Integer> values) {
+            addCriterion("sub_item_id not in", values, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidBetween(Integer value1, Integer value2) {
-            addCriterion("subItemID between", value1, value2, "subitemid");
+        public Criteria andSubItemIdBetween(Integer value1, Integer value2) {
+            addCriterion("sub_item_id between", value1, value2, "subItemId");
             return (Criteria) this;
         }
 
-        public Criteria andSubitemidNotBetween(Integer value1, Integer value2) {
-            addCriterion("subItemID not between", value1, value2, "subitemid");
+        public Criteria andSubItemIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("sub_item_id not between", value1, value2, "subItemId");
             return (Criteria) this;
         }
     }
