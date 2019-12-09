@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 09/12/2019 20:49:42
+ Date: 10/12/2019 00:16:17
 */
 
 SET NAMES utf8mb4;
@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `topic`;
 CREATE TABLE `topic`  (
-  `topic_id` int(11) NOT NULL COMMENT '帖子id',
+  `topic_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '帖子id',
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '帖子标题',
   `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '帖子内容',
   `manager` int(11) NOT NULL COMMENT '贴主',
@@ -34,10 +34,10 @@ CREATE TABLE `topic`  (
   `on_page_top` tinyint(1) NULL DEFAULT NULL COMMENT '是否置顶',
   `sub_item_id` int(11) NULL DEFAULT NULL COMMENT '子栏目ID',
   PRIMARY KEY (`topic_id`) USING BTREE,
-  INDEX `topicID`(`sub_item_id`) USING BTREE,
-  INDEX `topicManager`(`manager`) USING BTREE,
-  CONSTRAINT `topicID` FOREIGN KEY (`sub_item_id`) REFERENCES `subitem` (`sub_item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `topicManager` FOREIGN KEY (`manager`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  INDEX `sub_item_id`(`sub_item_id`) USING BTREE,
+  INDEX `topic_manager`(`manager`) USING BTREE,
+  CONSTRAINT `sub_item_id` FOREIGN KEY (`sub_item_id`) REFERENCES `sub_item` (`sub_item_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `topic_manager` FOREIGN KEY (`manager`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

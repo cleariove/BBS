@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 09/12/2019 20:49:29
+ Date: 10/12/2019 00:16:00
 */
 
 SET NAMES utf8mb4;
@@ -22,13 +22,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item`  (
-  `item_id` int(11) NOT NULL COMMENT '栏目ID',
+  `item_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '栏目ID',
   `item_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '栏目名称',
   `item_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '栏目描述',
   `manager` int(11) NULL DEFAULT NULL COMMENT '栏目管理员ID',
   PRIMARY KEY (`item_id`) USING BTREE,
-  INDEX `manager`(`manager`) USING BTREE,
-  CONSTRAINT `manager` FOREIGN KEY (`manager`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
+  INDEX `item_manager`(`manager`) USING BTREE,
+  CONSTRAINT `item_manager` FOREIGN KEY (`manager`) REFERENCES `user` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
