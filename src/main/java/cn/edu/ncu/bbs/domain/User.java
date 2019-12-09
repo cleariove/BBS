@@ -3,21 +3,21 @@ package cn.edu.ncu.bbs.domain;
 import java.util.Date;
 
 public class User {
-    private Integer userId;
+    private Integer userId;//主键
 
-    private String userName;
+    private String userName;//昵称
 
-    private String password;
+    private String password;//密码
 
-    private Integer age;
+    private Integer age;//年龄
 
-    private String gender;
+    private String gender;//性别
 
-    private Date birthday;
+    private Date birthday;//生日
 
-    private Integer power;
+    private Integer power;//权限
 
-    private Integer integral;
+    private Integer integral;//积分
 
     public Integer getUserId() {
         return userId;

@@ -3,14 +3,14 @@ package cn.edu.ncu.bbs.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubitemExample {
+public class SubItemExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SubitemExample() {
+    public SubItemExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

@@ -1,6 +1,6 @@
 package cn.edu.ncu.bbs.domain;
 
-public class Subitem {
+public class SubItem {
     private Integer subItemId;//主键
 
     private String subItemName;//子栏目名

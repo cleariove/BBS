@@ -11,17 +11,17 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 09/12/2019 20:49:35
+ Date: 09/12/2019 22:05:19
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for subitem
+-- Table structure for sub_item
 -- ----------------------------
-DROP TABLE IF EXISTS `subitem`;
-CREATE TABLE `subitem`  (
+DROP TABLE IF EXISTS `sub_item`;
+CREATE TABLE `sub_item`  (
   `sub_item_id` int(11) NOT NULL COMMENT '子栏目id',
   `sub_item_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '子栏目名称',
   `sub_item_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '子栏目描述',
