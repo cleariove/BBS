@@ -3,18 +3,19 @@ package cn.edu.ncu.bbs.domain;
 
 public class Item {
 
-  private long itemId;
+
+  private long itemID;
   private String itemName;
   private String itemDescription;
   private long manager;
 
 
-  public long getItemId() {
-    return itemId;
+  public long getItemID() {
+    return itemID;
   }
 
-  public void setItemId(long itemId) {
-    this.itemId = itemId;
+  public void setItemID(long itemID) {
+    this.itemID = itemID;
   }
 
 

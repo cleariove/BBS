@@ -1,7 +1,8 @@
 package cn.edu.ncu.bbs.domain;
 
 
-public class Subitem {
+public class SubItem
+{
 
   private long subItemId;
   private String subItemName;

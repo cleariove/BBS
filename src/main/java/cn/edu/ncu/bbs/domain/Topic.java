@@ -10,9 +10,9 @@ public class Topic {
   private java.sql.Timestamp date;
   private long browse;
   private long integral;
-  private long help;
-  private long elite;
-  private long onPageTop;
+  private boolean help;
+  private boolean elite;
+  private boolean onPageTop;
   private long subItemId;
 
 
@@ -79,29 +79,29 @@ public class Topic {
   }
 
 
-  public long getHelp() {
+  public boolean getHelp() {
     return help;
   }
 
-  public void setHelp(long help) {
+  public void setHelp(boolean help) {
     this.help = help;
   }
 
 
-  public long getElite() {
+  public boolean getElite() {
     return elite;
   }
 
-  public void setElite(long elite) {
+  public void setElite(boolean elite) {
     this.elite = elite;
   }
 
 
-  public long getOnPageTop() {
+  public boolean getOnPageTop() {
     return onPageTop;
   }
 
-  public void setOnPageTop(long onPageTop) {
+  public void setOnPageTop(boolean onPageTop) {
     this.onPageTop = onPageTop;
   }
 

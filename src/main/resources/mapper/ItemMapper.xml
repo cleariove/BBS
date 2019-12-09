@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.ncu.bbs.dao.ItemDao">
+    <resultMap id="result_map" type="cn.edu.ncu.bbs.domain.Item">
+        <id column="itemID" property="itemID"/>
+        <result column="itemName" property="itemName"/>
+        <result column="itemDescription" property="itemDescription"/>
+        <result column="manager" property="manager"/>
+    </resultMap>
+
+    <insert id="addItem">
+        INSERT INTO item (itemID,itemName,itemDescription) VALUES (#{itemID},#{itemName},#{itemDescription})
+    </insert>
+</mapper>
