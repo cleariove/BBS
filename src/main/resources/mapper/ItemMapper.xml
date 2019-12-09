@@ -98,10 +98,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Item" >
-    insert into item (item_id, item_name, item_description, 
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Item" useGeneratedKeys="true" keyProperty="item_id">
+    insert into item (item_name, item_description,
       manager)
-    values (#{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{itemDescription,jdbcType=VARCHAR}, 
+    values (#{itemName,jdbcType=VARCHAR}, #{itemDescription,jdbcType=VARCHAR},
       #{manager,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.Item" >

@@ -102,11 +102,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.User" >
-    insert into user (user_id, user_name, password, 
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.User" useGeneratedKeys="true" keyProperty="user_id">
+    insert into user (user_name, password,
       age, gender, birthday, 
       power, integral)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{age,jdbcType=INTEGER}, #{gender,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
       #{power,jdbcType=INTEGER}, #{integral,jdbcType=INTEGER})
   </insert>

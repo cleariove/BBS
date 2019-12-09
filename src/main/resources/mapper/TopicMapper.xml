@@ -106,12 +106,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Topic" >
-    insert into topic (topic_id, title, content, 
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Topic" useGeneratedKeys="true" keyProperty="topic_id">
+    insert into topic (title, content,
       manager, date, browse, 
       integral, help, elite, on_page_top, 
       sub_item_id)
-    values (#{topicId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+    values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
       #{manager,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{browse,jdbcType=INTEGER}, 
       #{integral,jdbcType=INTEGER}, #{help,jdbcType=BIT}, #{elite,jdbcType=BIT}, #{onPageTop,jdbcType=BIT}, 
       #{subItemId,jdbcType=INTEGER})

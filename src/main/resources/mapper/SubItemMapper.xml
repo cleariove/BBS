@@ -99,10 +99,10 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.SubItem" >
-    insert into sub_item (sub_item_id, sub_item_name, sub_item_description, 
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.SubItem" useGeneratedKeys="true" keyProperty="sub_item_id">
+    insert into sub_item (sub_item_name, sub_item_description,
       manager, item_id)
-    values (#{subItemId,jdbcType=INTEGER}, #{subItemName,jdbcType=VARCHAR}, #{subItemDescription,jdbcType=VARCHAR}, 
+    values (#{subItemName,jdbcType=VARCHAR}, #{subItemDescription,jdbcType=VARCHAR},
       #{manager,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.SubItem" >

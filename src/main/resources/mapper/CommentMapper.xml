@@ -100,11 +100,11 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Comment" >
-    insert into comment (comment_id, comment_from, comment_to, 
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Comment" useGeneratedKeys="true" keyProperty="comment_id">
+    insert into comment (comment_from, comment_to,
       content, date, topic_id
       )
-    values (#{commentId,jdbcType=INTEGER}, #{commentFrom,jdbcType=INTEGER}, #{commentTo,jdbcType=INTEGER}, 
+    values (#{commentFrom,jdbcType=INTEGER}, #{commentTo,jdbcType=INTEGER},
       #{content,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, #{topicId,jdbcType=INTEGER}
       )
   </insert>
