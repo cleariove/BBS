@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.ncu.bbs.mapper.SubItemMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.ncu.bbs.domain.SubItem" >
+    <id column="sub_item_id" property="subItemId" jdbcType="INTEGER" />
+    <result column="sub_item_name" property="subItemName" jdbcType="VARCHAR" />
+    <result column="sub_item_description" property="subItemDescription" jdbcType="VARCHAR" />
+    <result column="manager" property="manager" jdbcType="INTEGER" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="sub_item_icon" property="subItemIcon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sub_item_id, sub_item_name, sub_item_description, manager, item_id, sub_item_icon
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.ncu.bbs.domain.SubItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sub_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sub_item
+    where sub_item_id = #{subItemId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sub_item
+    where sub_item_id = #{subItemId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.edu.ncu.bbs.domain.SubItemExample" >
+    delete from sub_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.SubItem" useGeneratedKeys="true" keyProperty="sub_item_id">
+    insert into sub_item (sub_item_name, sub_item_description,
+      manager, item_id, sub_item_icon
+      )
+    values (#{subItemName,jdbcType=VARCHAR}, #{subItemDescription,jdbcType=VARCHAR},
+      #{manager,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{subItemIcon,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.SubItem" >
+    insert into sub_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subItemId != null" >
+        sub_item_id,
+      </if>
+      <if test="subItemName != null" >
+        sub_item_name,
+      </if>
+      <if test="subItemDescription != null" >
+        sub_item_description,
+      </if>
+      <if test="manager != null" >
+        manager,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="subItemIcon != null" >
+        sub_item_icon,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subItemId != null" >
+        #{subItemId,jdbcType=INTEGER},
+      </if>
+      <if test="subItemName != null" >
+        #{subItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="subItemDescription != null" >
+        #{subItemDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        #{manager,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="subItemIcon != null" >
+        #{subItemIcon,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.edu.ncu.bbs.domain.SubItemExample" resultType="java.lang.Integer" >
+    select count(*) from sub_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sub_item
+    <set >
+      <if test="record.subItemId != null" >
+        sub_item_id = #{record.subItemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subItemName != null" >
+        sub_item_name = #{record.subItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subItemDescription != null" >
+        sub_item_description = #{record.subItemDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manager != null" >
+        manager = #{record.manager,jdbcType=INTEGER},
+      </if>
+      <if test="record.itemId != null" >
+        item_id = #{record.itemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.subItemIcon != null" >
+        sub_item_icon = #{record.subItemIcon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sub_item
+    set sub_item_id = #{record.subItemId,jdbcType=INTEGER},
+      sub_item_name = #{record.subItemName,jdbcType=VARCHAR},
+      sub_item_description = #{record.subItemDescription,jdbcType=VARCHAR},
+      manager = #{record.manager,jdbcType=INTEGER},
+      item_id = #{record.itemId,jdbcType=INTEGER},
+      sub_item_icon = #{record.subItemIcon,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.ncu.bbs.domain.SubItem" >
+    update sub_item
+    <set >
+      <if test="subItemName != null" >
+        sub_item_name = #{subItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="subItemDescription != null" >
+        sub_item_description = #{subItemDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="manager != null" >
+        manager = #{manager,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="subItemIcon != null" >
+        sub_item_icon = #{subItemIcon,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sub_item_id = #{subItemId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.ncu.bbs.domain.SubItem" >
+    update sub_item
+    set sub_item_name = #{subItemName,jdbcType=VARCHAR},
+      sub_item_description = #{subItemDescription,jdbcType=VARCHAR},
+      manager = #{manager,jdbcType=INTEGER},
+      item_id = #{itemId,jdbcType=INTEGER},
+      sub_item_icon = #{subItemIcon,jdbcType=VARCHAR}
+    where sub_item_id = #{subItemId,jdbcType=INTEGER}
+  </update>
+</mapper>
