@@ -50,7 +50,7 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table tableName="user">
+        <table tableName="sub_comment">
 
         </table>
     </context>
