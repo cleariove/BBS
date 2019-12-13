@@ -8,7 +8,7 @@
     <result column="age" property="age" jdbcType="INTEGER" />
     <result column="gender" property="gender" jdbcType="VARCHAR" />
     <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
-    <result column="power" property="power" jdbcType="INTEGER" />
+    <result column="power" property="power" jdbcType="VARCHAR" />
     <result column="integral" property="integral" jdbcType="INTEGER" />
     <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
   </resultMap>
@@ -110,10 +110,10 @@
       )
     values (#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{age,jdbcType=INTEGER}, #{gender,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP}, 
-      #{power,jdbcType=INTEGER}, #{integral,jdbcType=INTEGER}, #{userIcon,jdbcType=VARCHAR}
+      #{power,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, #{userIcon,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.User">
+  <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -164,7 +164,7 @@
         #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="power != null" >
-        #{power,jdbcType=INTEGER},
+        #{power,jdbcType=VARCHAR},
       </if>
       <if test="integral != null" >
         #{integral,jdbcType=INTEGER},
@@ -202,7 +202,7 @@
         birthday = #{record.birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="record.power != null" >
-        power = #{record.power,jdbcType=INTEGER},
+        power = #{record.power,jdbcType=VARCHAR},
       </if>
       <if test="record.integral != null" >
         integral = #{record.integral,jdbcType=INTEGER},
@@ -223,7 +223,7 @@
       age = #{record.age,jdbcType=INTEGER},
       gender = #{record.gender,jdbcType=VARCHAR},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
-      power = #{record.power,jdbcType=INTEGER},
+      power = #{record.power,jdbcType=VARCHAR},
       integral = #{record.integral,jdbcType=INTEGER},
       user_icon = #{record.userIcon,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -249,7 +249,7 @@
         birthday = #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="power != null" >
-        power = #{power,jdbcType=INTEGER},
+        power = #{power,jdbcType=VARCHAR},
       </if>
       <if test="integral != null" >
         integral = #{integral,jdbcType=INTEGER},
@@ -267,7 +267,7 @@
       age = #{age,jdbcType=INTEGER},
       gender = #{gender,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=TIMESTAMP},
-      power = #{power,jdbcType=INTEGER},
+      power = #{power,jdbcType=VARCHAR},
       integral = #{integral,jdbcType=INTEGER},
       user_icon = #{userIcon,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}

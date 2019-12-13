@@ -15,7 +15,7 @@ public class User {
 
     private Date birthday;//生日
 
-    private Integer power;//权限
+    private String power;//权限
 
     private Integer integral;//积分
 
@@ -69,12 +69,12 @@ public class User {
         this.birthday = birthday;
     }
 
-    public Integer getPower() {
+    public String getPower() {
         return power;
     }
 
-    public void setPower(Integer power) {
-        this.power = power;
+    public void setPower(String power) {
+        this.power = power == null ? null : power.trim();
     }
 
     public Integer getIntegral() {

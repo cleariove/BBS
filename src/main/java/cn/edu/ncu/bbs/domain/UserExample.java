@@ -505,52 +505,62 @@ public class UserExample {
             return (Criteria) this;
         }
 
-        public Criteria andPowerEqualTo(Integer value) {
+        public Criteria andPowerEqualTo(String value) {
             addCriterion("power =", value, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerNotEqualTo(Integer value) {
+        public Criteria andPowerNotEqualTo(String value) {
             addCriterion("power <>", value, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerGreaterThan(Integer value) {
+        public Criteria andPowerGreaterThan(String value) {
             addCriterion("power >", value, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerGreaterThanOrEqualTo(Integer value) {
+        public Criteria andPowerGreaterThanOrEqualTo(String value) {
             addCriterion("power >=", value, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerLessThan(Integer value) {
+        public Criteria andPowerLessThan(String value) {
             addCriterion("power <", value, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerLessThanOrEqualTo(Integer value) {
+        public Criteria andPowerLessThanOrEqualTo(String value) {
             addCriterion("power <=", value, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerIn(List<Integer> values) {
+        public Criteria andPowerLike(String value) {
+            addCriterion("power like", value, "power");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerNotLike(String value) {
+            addCriterion("power not like", value, "power");
+            return (Criteria) this;
+        }
+
+        public Criteria andPowerIn(List<String> values) {
             addCriterion("power in", values, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerNotIn(List<Integer> values) {
+        public Criteria andPowerNotIn(List<String> values) {
             addCriterion("power not in", values, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerBetween(Integer value1, Integer value2) {
+        public Criteria andPowerBetween(String value1, String value2) {
             addCriterion("power between", value1, value2, "power");
             return (Criteria) this;
         }
 
-        public Criteria andPowerNotBetween(Integer value1, Integer value2) {
+        public Criteria andPowerNotBetween(String value1, String value2) {
             addCriterion("power not between", value1, value2, "power");
             return (Criteria) this;
         }
