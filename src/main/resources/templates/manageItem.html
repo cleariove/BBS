@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${selectItem} == null?'创建栏目':'修改栏目'"></title>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/item.js}"></script>
+</head>
+<body>
+<div th:object="${selectItem}">
+    <div th:if="${selectItem}">
+        <img th:src="*{itemIcon}" alt="栏目图片">
+        <input id="itemFile" type="file" value="文件" th:onchange="|javascript:uploadItemIcon(*{itemId})|">
+    </div>
+    <div>
+        <label for="itemName">栏目名称</label>
+        <input id="itemName" type="text" th:value="${selectItem} eq null?'':*{itemName}">
+    </div>
+    <div>
+        <label for="itemDescription">栏目介绍</label>
+        <input id="itemDescription" type="text" th:value="${selectItem}==null?'':*{itemDescription}">
+    </div>
+    <div>
+        <label for="itemManager">管理员</label>
+        <input id="itemManager" type="text" th:value="${selectItem?.manager}==null?'':*{manager}">
+    </div>
+    <div>
+<!--        <button th:onclick=("${selectItem}==null" ? "|javascript:addItem()|":|javascript:updateItem(*{itemId})|)-->
+<!--                th:text="${selectItem}==null?'创建':'修改'"></button>-->
+        <button th:if="${selectItem}" th:onclick="|javascript:updateItem(*{itemId})|">修改</button>
+        <button th:if="${selectItem}" th:onclick="|javascript:deleteItem(*{itemId})|">删除</button>
+        <button th:if="!${selectItem}" onclick="insertItem()">创建</button>
+    </div>
+</div>
+</body>
+</html>

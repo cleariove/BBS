@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查看子栏目栏目</title>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/subItem.js}"></script>
+</head>
+<body>
+<div>
+    <div th:each="subItem:${allSubItem}" style="border:1px solid;float: left;margin-left: 30px">
+        <img th:src="*{subItem.getSubItemIcon()}" alt="栏目图标">
+        <p th:text="|id:*{subItem.getSubItemId()}|">id</p>
+        <button th:onclick="|javascript:manageSubItem(*{subItem.getSubItemId()})|">修改</button>
+        <p th:text="|名称:*{subItem.getSubItemName()}|">名称</p>
+        <p th:text="|简介:*{subItem.getSubItemDescription()}|">
+            简介
+        </p>
+        <p th:text=" '管理:' + (*{subItem.getManager()} eq null ? '未设置' : *{subItem.getManager()})">
+            管理
+        </p>
+        <input type="hidden" th:onload="|javascript:getItem(*{subItem.getItemId()})|">
+        <p th:text=" '所属栏目:' + (*{subItem.getItemId()} eq null ? '未设置' :*{subItem.getItemId()})">
+            所属栏目
+        </p>
+    </div>
+    <div>
+        <button th:onclick="|javascript:manageSubItem(0)|"> 创建子栏目</button>
+    </div>
+</div>
+</body>
+</html>

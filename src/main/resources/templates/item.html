@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查看所有栏目</title>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/item.js}"></script>
+</head>
+<body>
+<div>
+    <div th:each="item:${items}" style="border:1px solid;float: left;margin-left: 30px">
+        <img th:src="*{item.getItemIcon()}" alt="栏目图标">
+        <p th:text="|id:*{item.getItemId()}|">id</p>
+        <button th:onclick="|javascript:manageItem(*{item.getItemId()})|">修改</button>
+        <p th:text="|名称:*{item.getItemName()}|">名称</p>
+        <a th:href="@{'/subItem/show?itemId='+${item.itemId}}">查看该栏目下的子栏目</a>
+        <p th:text="|简介:*{item.getItemDescription()}|">简介</p>
+        <p th:text=" '管理:' + (*{item.getManager()} eq null ? '未设置' : *{item.getManager()})">管理</p>
+    </div>
+    <div>
+        <button th:onclick="|javascript:manageItem(0)|"> 创建栏目</button>
+    </div>
+</div>
+</body>
+</html>
