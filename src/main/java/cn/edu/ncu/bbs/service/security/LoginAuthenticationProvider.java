@@ -1,5 +1,6 @@
 package cn.edu.ncu.bbs.service.security;
 
+import cn.edu.ncu.bbs.domain.security.MyToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+
 
 
 @Component
@@ -35,7 +37,10 @@ public class LoginAuthenticationProvider implements AuthenticationProvider
             throw new BadCredentialsException("用户名或密码不正确");
         }
         //这个返回对象标志着用户登录成功，分别保存用户名，密码，用户的权限
-        return new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
+        MyToken myToken = new MyToken(username,password,userDetails.getAuthorities());
+        myToken.setPower("nmsl");
+        return myToken;
+//        return new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
     }
 
     @Override
