@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>查看所有栏目</title>
@@ -17,7 +18,7 @@
         <p th:text="|简介:*{item.getItemDescription()}|">简介</p>
         <p th:text=" '管理:' + (*{item.getManager()} eq null ? '未设置' : *{item.getManager()})">管理</p>
     </div>
-    <div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
         <button th:onclick="|javascript:manageItem(0)|"> 创建栏目</button>
     </div>
 </div>

@@ -53,15 +53,17 @@ public class SubItemServiceImpl implements SubItemService
         subItem.setSubItemIcon(path);
         SubItemExample subItemExample = new SubItemExample();
         SubItemExample.Criteria criteria = subItemExample.createCriteria();
-        criteria.andItemIdEqualTo(Integer.valueOf(id));
+        criteria.andSubItemIdEqualTo(Integer.valueOf(id));
         subItemMapper.updateByExampleSelective(subItem,subItemExample);
     }
 
     public void update(String id, String name, String description, String manager, String itemId)
     {
         SubItem subItem = createSubItem(name, description, manager, itemId);
-        subItem.setSubItemId(Integer.valueOf(id));
-        subItemMapper.updateByPrimaryKey(subItem);
+        SubItemExample subItemExample = new SubItemExample();
+        SubItemExample.Criteria criteria = subItemExample.createCriteria();
+        criteria.andItemIdEqualTo(Integer.valueOf(id));
+        subItemMapper.updateByExampleSelective(subItem,subItemExample);
     }
 
     private SubItem createSubItem(String name, String description, String manager, String itemId)

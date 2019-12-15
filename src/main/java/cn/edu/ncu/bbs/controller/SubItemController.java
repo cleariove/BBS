@@ -27,7 +27,7 @@ public class SubItemController
     public String showSubItemByItemId(Model model, @RequestParam("itemId")String id)
     {
         List<SubItem> subItems = subItemService.selectByExample(id);
-        model.addAttribute("subItems",subItems);
+        model.addAttribute("allSubItem",subItems);
         return "subItem";
     }
 
@@ -37,6 +37,16 @@ public class SubItemController
         List<SubItem> subItems = subItemService.selectAll();
         model.addAttribute("allSubItem",subItems);
         return "subItem";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    public String upload(@RequestParam("subItemFile") MultipartFile file,
+                         @RequestParam("subItemId") String id)
+    {
+        String path = FileUtil.uploadFile(file,"subItem"+id);
+        subItemService.setIconPath(id,path);
+        return "/subItem/manage?subItemId="+id;
     }
 
     @RequestMapping("/manage")
@@ -59,15 +69,16 @@ public class SubItemController
                                 @RequestParam(value = "itemId",defaultValue = "")String itemId)
     {
         subItemService.insert(name, description, manager, itemId);
-        return "/subItem/show";
+        return "/subItem/show?itemId="+itemId;
     }
 
     @ResponseBody
     @RequestMapping("/delete")
     public String deleteSubItem(@RequestParam("subItemId")String id)
     {
+        Integer itemId = subItemService.selectByPrimaryKey(id).getItemId();
         subItemService.delete(id);
-        return "/subItem/show";
+        return "/subItem/show?itemId="+itemId;
     }
 
     @ResponseBody
@@ -83,12 +94,10 @@ public class SubItemController
     }
 
     @ResponseBody
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
-    public String insertIcon(@RequestParam("itemId")String id,
-                             @RequestParam("file") MultipartFile file)
+    @RequestMapping("/getItem")
+    public String getItem(Model model,@RequestParam("itemId")String id)
     {
-        String path = FileUtil.uploadFile(file,"item"+id);
-        subItemService.setIconPath(id,path);
-        return "/subItem/manage?subItemId="+id;
+        model.addAttribute("belongItem",itemService.selectByPrimaryKey(id));
+        return null;
     }
 }

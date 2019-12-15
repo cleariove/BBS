@@ -37,7 +37,7 @@ public class ItemController
     }
 
     @ResponseBody
-    @RequestMapping(value = "/delete")
+    @RequestMapping(value = "/manage/delete")
     public String delete(@RequestParam("itemId")String id)
     {
         itemService.deleteByPrimaryKey(id);
@@ -45,7 +45,7 @@ public class ItemController
     }
 
     @ResponseBody
-    @RequestMapping(value = "/insert",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/insert",method = RequestMethod.POST)
     public String insert(@RequestParam("itemName")String name,
                              @RequestParam("itemDescription")String description,
                              @RequestParam(value = "manager",defaultValue = "") String manager)
@@ -55,17 +55,17 @@ public class ItemController
     }
 
     @ResponseBody
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/upload",method = RequestMethod.POST)
     public String insertIcon(@RequestParam("itemId")String id,
-                             @RequestParam("file")MultipartFile file)
+                             @RequestParam("itemFile")MultipartFile file)
     {
         String path = FileUtil.uploadFile(file,"item"+id);
-        itemService.updateItemPath(id, path);
+        itemService.setIconPath(id, path);
         return "/item/manage?itemId="+id;
     }
 
     @ResponseBody
-    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/update",method = RequestMethod.POST)
     public String update(@RequestParam("itemId")String id,
                          @RequestParam("itemName")String name,
                          @RequestParam("itemDescription")String description,

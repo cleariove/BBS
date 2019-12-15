@@ -3,8 +3,13 @@ package cn.edu.ncu.bbs.mapper;
 import cn.edu.ncu.bbs.domain.SubComment;
 import cn.edu.ncu.bbs.domain.SubCommentExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Mapper
+@Repository
 public interface SubCommentMapper {
     int countByExample(SubCommentExample example);
 

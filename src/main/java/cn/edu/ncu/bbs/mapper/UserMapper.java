@@ -3,8 +3,15 @@ package cn.edu.ncu.bbs.mapper;
 import cn.edu.ncu.bbs.domain.User;
 import cn.edu.ncu.bbs.domain.UserExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+@Mapper
+@Repository
 public interface UserMapper {
     int countByExample(UserExample example);
 

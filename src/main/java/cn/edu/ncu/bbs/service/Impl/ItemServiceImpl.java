@@ -4,7 +4,6 @@ import cn.edu.ncu.bbs.domain.Item;
 import cn.edu.ncu.bbs.domain.ItemExample;
 import cn.edu.ncu.bbs.mapper.ItemMapper;
 import cn.edu.ncu.bbs.service.ItemService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,13 +56,13 @@ public class ItemServiceImpl implements ItemService
         return itemMapper.deleteByPrimaryKey(Integer.valueOf(itemId));
     }
 
-    public int updateItemPath(String id, String path)
+    public void setIconPath(String id, String path)
     {
         Item item = new Item();
         item.setItemIcon(path);
         ItemExample itemExample = new ItemExample();
         ItemExample.Criteria criteria = itemExample.createCriteria();
         criteria.andItemIdEqualTo(Integer.valueOf(id));
-        return itemMapper.updateByExampleSelective(item, itemExample);
+        itemMapper.updateByExampleSelective(item, itemExample);
     }
 }
