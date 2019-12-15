@@ -1,8 +1,15 @@
 package cn.edu.ncu.bbs.domain;
 
-import java.util.Date;
 
-public class User {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+public class User implements UserDetails
+{
     private Integer userId;
 
     private String userName;
@@ -21,6 +28,8 @@ public class User {
 
     private String userIcon;
 
+    private List<GrantedAuthority> authorities;
+
     public Integer getUserId() {
         return userId;
     }
@@ -37,8 +46,49 @@ public class User {
         this.userName = userName == null ? null : userName.trim();
     }
 
+    public void setAuthorities(List<GrantedAuthority> authorities)
+    {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        return authorities;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername()
+    {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled()
+    {
+        return true;
     }
 
     public void setPassword(String password) {

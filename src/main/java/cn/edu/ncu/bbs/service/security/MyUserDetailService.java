@@ -2,6 +2,7 @@ package cn.edu.ncu.bbs.service.security;
 
 import cn.edu.ncu.bbs.domain.Role;
 import cn.edu.ncu.bbs.domain.User;
+import cn.edu.ncu.bbs.domain.security.UserDetailImpl;
 import cn.edu.ncu.bbs.service.Impl.RoleServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +52,9 @@ public class MyUserDetailService implements UserDetailsService
                 }
             }
             System.out.println("密码"+pwd);
-            return new org.springframework.security.core.userdetails.User(String.valueOf(user.getUserId()),pwd,grantedAuthorities);
+            user.setAuthorities(grantedAuthorities);
+            return user;
+//            return new org.springframework.security.core.userdetails.User(String.valueOf(user.getUserId()),pwd,grantedAuthorities);
         }
     }
 }

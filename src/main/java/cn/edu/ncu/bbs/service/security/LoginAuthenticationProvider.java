@@ -1,5 +1,6 @@
 package cn.edu.ncu.bbs.service.security;
 
+import cn.edu.ncu.bbs.domain.User;
 import cn.edu.ncu.bbs.domain.security.MyToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -29,16 +30,17 @@ public class LoginAuthenticationProvider implements AuthenticationProvider
         //获取密码
         String password = (String) authentication.getCredentials();
         //根据用户名通过userDetailService获取数据库中对应数据
-        UserDetails userDetails = myUserDetailService.loadUserByUsername(username);
-        String password1 = userDetails.getPassword();
+        User user = (User) myUserDetailService.loadUserByUsername(username);
+//        UserDetails userDetails = myUserDetailService.loadUserByUsername(username);
+        String password1 = user.getPassword();
         if(!Objects.equals(password,password1))
         {
             System.out.println("用户名或密码不正确");
             throw new BadCredentialsException("用户名或密码不正确");
         }
         //这个返回对象标志着用户登录成功，分别保存用户名，密码，用户的权限
-        MyToken myToken = new MyToken(username,password,userDetails.getAuthorities());
-        myToken.setPower("nmsl");
+        MyToken myToken = new MyToken(username,password,user.getAuthorities());
+        myToken.setPower(user.getPower());
         return myToken;
 //        return new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
     }
