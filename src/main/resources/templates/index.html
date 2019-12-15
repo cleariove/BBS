@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +7,8 @@
 <body>
 <a href="/item/show">查看所有栏目</a>
 <a href="/subItem/showAll">查看所有子栏目</a>
+<p th:text="${#authentication.user_name}"></p>
+<p th:text="${session.SPRING_SECURITY_CONTEXT.authentication.principal.user_name}"></p>
+
 </body>
 </html>

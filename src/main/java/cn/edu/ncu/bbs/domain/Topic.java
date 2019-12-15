@@ -1,29 +1,53 @@
 package cn.edu.ncu.bbs.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jdk.nashorn.internal.objects.annotations.Constructor;
+
 import java.util.Date;
 
+
 public class Topic {
-    private Integer topicId;
 
-    private String title;
+    private Integer topicId;//主键
 
-    private String content;
+    private String title;//帖子标题
 
-    private Integer manager;
+    private String content;//帖子内容
 
-    private Date date;
+    private Integer manager;//贴主
 
-    private Integer browse;
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    private Date date;//发帖时间
 
-    private Integer integral;
+    private Integer browse;//浏览数量
 
-    private Boolean help;
+    private Integer integral;//积分
 
-    private Boolean elite;
+    private Boolean help;//是否为求助帖
 
-    private Boolean onPageTop;
+    private Boolean elite;//是否加精
 
-    private Integer subItemId;
+    private Boolean onPageTop;//是否置顶
+
+    private Integer subItemId;//所属子栏目id
+
+    public Topic(Integer topicId, String title, String content, Integer manager, Date date, Integer browse, Integer integral, Boolean help, Boolean elite, Boolean onPageTop, Integer subItemId) {
+        this.topicId = topicId;
+        this.title = title;
+        this.content = content;
+        this.manager = manager;
+        this.date = date;
+        this.browse = browse;
+        this.integral = integral;
+        this.help = help;
+        this.elite = elite;
+        this.onPageTop = onPageTop;
+        this.subItemId = subItemId;
+    }
+
+    public Topic(){
+
+    }
 
     public Integer getTopicId() {
         return topicId;

@@ -1,5 +1,7 @@
 package cn.edu.ncu.bbs.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Comment {
@@ -11,6 +13,7 @@ public class Comment {
 
     private String content;//评论内容
 
+    @JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     private Date date;//评论时间
 
     private Integer topicId;//所属帖子的id

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="initAJAX()">
+<table border="1" th:width="500" id="div1">
+<tr>
+    <td>ID</td>
+    <td>标题</td>
+    <td>内容</td>
+
+</tr>
+<tr >
+    <td >
+        <input id="topicId" type="text" th:value="${topic.topicId}">
+    </td>
+<td>
+<input  id="title" type="text"  th:value="${topic.title}"/>
+</td>
+<td>
+<input id="content" type="text"  th:value="${topic.content}">
+</td>
+<input type="button" value="提交" onclick="updateTopic()">
+    <td>
+        <input type="button" value="删除" onclick="deleteTopic()">
+    </td>
+
+
+</tr>
+</table>
+</body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/topic.js" ></script>
+</html>

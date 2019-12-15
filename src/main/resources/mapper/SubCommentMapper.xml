@@ -70,6 +70,10 @@
   <sql id="Base_Column_List" >
     sub_comment_id, sub_comment_from, sub_comment_to, content, date, comment_id
   </sql>
+  <!--<select id="selectByTopicId" resultMap="BaseResultMap" parameterType="java.lang.Integer">-->
+
+
+  <!--</select>-->
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.ncu.bbs.domain.SubCommentExample" >
     select
     <if test="distinct" >

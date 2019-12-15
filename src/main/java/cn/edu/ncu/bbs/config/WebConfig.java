@@ -17,6 +17,7 @@ public class WebConfig implements WebMvcConfigurer
                 .addResourceLocations("classpath:/META-INF/resources/")
                 .addResourceLocations("classpath:/resources/")
                 .addResourceLocations("classpath:/static/")
-                .addResourceLocations("classpath:/public/");
+                .addResourceLocations("classpath:/test/");
+
     }
 }
