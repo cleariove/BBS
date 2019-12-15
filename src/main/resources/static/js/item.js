@@ -1,6 +1,6 @@
 function insertItem()
 {
-    pushItem(null,"/item/insert");
+    pushItem(null,"/item/manage/insert");
 }
 
 function checkImgType(element)
@@ -34,7 +34,7 @@ function uploadItemIcon(itemId)
             {
                 data:formData,
                 type:"post",
-                url:"/item/upload",
+                url:"/item/manage/upload",
                 processData: false,
                 contentType: false,
                 success:function (data)
@@ -55,7 +55,7 @@ function deleteItem(itemId)
     {
         $.ajax(
             {
-                url:"/item/delete",
+                url:"/item/manage/delete",
                 data:{"itemId":itemId},
                 type: "post",
                 success:function (data)
@@ -73,7 +73,7 @@ function deleteItem(itemId)
 
 function updateItem(itemId)
 {
-    pushItem(itemId,"/item/update");
+    pushItem(itemId,"/item/manage/update");
 }
 
 function manageItem(itemId)
