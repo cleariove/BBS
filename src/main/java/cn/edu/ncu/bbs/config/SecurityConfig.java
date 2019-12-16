@@ -85,20 +85,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
 
                 .and()
+                .logout()
+                .logoutUrl("/logout")
+
+                .and()
                 .httpBasic();
 
     }
 }
-
-//    @Autowired
-//    private MyFilterSecurityInterceptor myFilterSecurityInterceptor;
-//                http
-//                .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/loginSuccess")
-//                .failureUrl("/loginError")
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-//                .permitAll()
-//        http.addFilterBefore(myFilterSecurityInterceptor,FilterSecurityInterceptor.class);

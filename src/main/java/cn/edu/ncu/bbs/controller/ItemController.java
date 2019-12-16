@@ -1,7 +1,9 @@
 package cn.edu.ncu.bbs.controller;
 
 import cn.edu.ncu.bbs.domain.Item;
+import cn.edu.ncu.bbs.domain.SubItem;
 import cn.edu.ncu.bbs.service.Impl.ItemServiceImpl;
+import cn.edu.ncu.bbs.service.Impl.SubItemServiceImpl;
 import cn.edu.ncu.bbs.until.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +20,17 @@ public class ItemController
     @Autowired
     private ItemServiceImpl itemService;
 
+    @Autowired
+    private SubItemServiceImpl subItemService;
+
     @RequestMapping("/show")
     public String showItem(Model model)
     {
         List<Item> items = itemService.findAll();
         model.addAttribute("items",items);
-        return "item";
+        List<SubItem> subItems = subItemService.selectAll();
+        model.addAttribute("showSubItemInItem",subItems);
+        return "page-categories";
     }
 
     @RequestMapping("/manage")

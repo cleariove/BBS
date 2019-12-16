@@ -32,7 +32,7 @@ public class LoginSuccessAuthenticationHandler implements AuthenticationSuccessH
         httpServletRequest.getRequestDispatcher("/index").forward(httpServletRequest,httpServletResponse);
         PrintWriter writer = httpServletResponse.getWriter();
         System.out.println("LoginSuccessAuthenticationHandler登录成功");
-        writer.print("LoginSuccessAuthenticationHandler登录成功");
+        writer.print("登录成功");
         writer.flush();
     }
 

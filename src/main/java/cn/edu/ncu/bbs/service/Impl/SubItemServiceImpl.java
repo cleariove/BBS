@@ -62,7 +62,7 @@ public class SubItemServiceImpl implements SubItemService
         SubItem subItem = createSubItem(name, description, manager, itemId);
         SubItemExample subItemExample = new SubItemExample();
         SubItemExample.Criteria criteria = subItemExample.createCriteria();
-        criteria.andItemIdEqualTo(Integer.valueOf(id));
+        criteria.andSubItemIdEqualTo(Integer.valueOf(id));
         subItemMapper.updateByExampleSelective(subItem,subItemExample);
     }
 
