@@ -24,9 +24,11 @@
     <div>
         <span>所属栏目</span>
         <select id="itemId">
+<!--            th:selected="${subItem}==null?'':(${subItem.itemId} eq ${item.itemId}?'selected':'')"-->
             <!--                    th:selected="(${subItem?.itemId} != ${item.itemId})?'':'selected'"-->
             <option th:each="item:${allItem}" th:text="${item.itemName}" th:value="${item.itemId}"
-                    th:selected="${subItem}==null?'':(${subItem.itemId} eq ${item.itemId}?'selected':'')">
+                    th:if="(${subItem?.itemId} == ${item.itemId})"
+                    th:selected="(${subItem?.itemId} != ${item.itemId})?'':'selected'">
             </option>
         </select>
     </div>

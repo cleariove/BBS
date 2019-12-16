@@ -8,10 +8,7 @@
 </head>
 <body>
 <div th:object="${selectItem}">
-    <div th:if="${selectItem}">
-        <img th:src="*{itemIcon}" alt="栏目图片">
-        <input id="itemFile" type="file" value="文件" th:onchange="|javascript:uploadItemIcon(*{itemId})|">
-    </div>
+    *{item.getItemId()}
     <div>
         <label for="itemName">栏目名称</label>
         <input id="itemName" type="text" th:value="${selectItem} eq null?'':*{itemName}">
