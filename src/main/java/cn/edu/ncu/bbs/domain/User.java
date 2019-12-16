@@ -1,13 +1,9 @@
 package cn.edu.ncu.bbs.domain;
 
 import org.springframework.security.core.GrantedAuthority;
-
-
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 public class User implements UserDetails
@@ -18,13 +14,13 @@ public class User implements UserDetails
 
     private String password;
 
-    private Integer age;
+    private String name;
 
     private String gender;
 
-    private Date birthday;
+    private Integer age;
 
-    private String power;
+    private String job;
 
     private Integer integral;
 
@@ -52,7 +48,7 @@ public class User implements UserDetails
     {
         this.authorities = authorities;
     }
-
+    
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()
     {
@@ -97,12 +93,12 @@ public class User implements UserDetails
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getAge() {
-        return age;
+    public String getName() {
+        return name;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     public String getGender() {
@@ -113,20 +109,20 @@ public class User implements UserDetails
         this.gender = gender == null ? null : gender.trim();
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
-    public String getPower() {
-        return power;
+    public String getJob() {
+        return job;
     }
 
-    public void setPower(String power) {
-        this.power = power == null ? null : power.trim();
+    public void setJob(String job) {
+        this.job = job == null ? null : job.trim();
     }
 
     public Integer getIntegral() {
@@ -143,21 +139,5 @@ public class User implements UserDetails
 
     public void setUserIcon(String userIcon) {
         this.userIcon = userIcon == null ? null : userIcon.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", birthday=" + birthday +
-                ", power='" + power + '\'' +
-                ", integral=" + integral +
-                ", userIcon='" + userIcon + '\'' +
-                ", authorities=" + authorities +
-                '}';
     }
 }
