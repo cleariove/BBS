@@ -2,6 +2,7 @@ package cn.edu.ncu.bbs.controller;
 
 
 import cn.edu.ncu.bbs.domain.*;
+import cn.edu.ncu.bbs.domain.security.MyToken;
 import cn.edu.ncu.bbs.service.Impl.CommentServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.SubCommentServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.TopicServiceImpl;
@@ -11,6 +12,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,22 +42,21 @@ public class TopicController {
     //根据SubItemId查找对对应topic 默认page为1 pageSize=3
     //url:  /topic?subItemId=1&pageSize=1
     @RequestMapping(value = "",method = RequestMethod.GET)
-    @ResponseBody
-    public List<Topic> getSomePerson(@RequestParam int subItemId,
+    public String getSomePerson(@RequestParam int subItemId,
                                      @RequestParam(value = "pageNum",defaultValue="1") int pageNum,
-                                     Model model
-    ){
+                                     Model model){
         TopicExample topicExample =new TopicExample();
         //pageNum:表示第几页  pageSize:表示一页展示的数据
         PageHelper.startPage(pageNum,3);
         List<Topic> topics=topicService.findTopicBySubItemId(topicExample,subItemId);
         List<Topic> topTopics = topicService.findTopTopic(topicExample);
+        System.out.println(topTopics);
         //将查询到的数据封装到PageInfo对象
         //PageInfo<Topic> pageInfo=new PageInfo(list,3);
         //分割数据成功
         model.addAttribute("topics",topics);
         model.addAttribute("topTopics",topTopics);
-        return topics;
+        return "page-categories-single";
     }
 
     //显示所有文章
@@ -82,6 +83,11 @@ public class TopicController {
     @RequestMapping(value = "/createTopic",method = RequestMethod.POST)
     @ResponseBody
     public String createTopic(@RequestBody Topic topic){
+
+        MyToken user=(MyToken) SecurityContextHolder.getContext().getAuthentication();
+
+        topic.setManager(user.getUserId());
+        topic.setIntegral(user.getIntegral()+10);
         topicService.createTopic(topic);
         return "page-categories-single";
 

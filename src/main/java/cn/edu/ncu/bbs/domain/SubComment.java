@@ -3,17 +3,17 @@ package cn.edu.ncu.bbs.domain;
 import java.util.Date;
 
 public class SubComment {
-    private Integer subCommentId;//主键
+    private Integer subCommentId;
 
-    private Integer subCommentFrom;//谁的子评论
+    private Integer subCommentFrom;
 
-    private Integer subCommentTo;//对谁的子评论
+    private Integer subCommentTo;
 
-    private String content;//子评论内容
+    private String content;
 
-    private Date date;//子评论时间
+    private Date date;
 
-    private Integer commentId;//所属评论的id
+    private Integer commentId;
 
     public Integer getSubCommentId() {
         return subCommentId;

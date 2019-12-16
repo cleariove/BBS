@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
+import org.springframework.stereotype.Repository;
 
 @Mapper
 @Repository
@@ -33,6 +33,4 @@ public interface SubCommentMapper {
     int updateByPrimaryKeySelective(SubComment record);
 
     int updateByPrimaryKey(SubComment record);
-
-    List<SubComment> selectByTopicId(Integer topicId);
 }

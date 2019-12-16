@@ -12,6 +12,34 @@ public class MyToken extends AbstractAuthenticationToken
     private Object credentials;
 
     private String power;
+    private String userName;
+    private Integer integral;
+    private Integer userId;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
+
+    public Integer getUserId() {
+
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public MyToken(Object principal, Object credentials) {
         super((Collection)null);

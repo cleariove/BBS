@@ -18,7 +18,7 @@ public class SubCommentServiceImpl implements SubCommentService {
 
 
     @Override
-    public List<SubComment> getAllSubComment(SubCommentExample subCommentExample,List<Integer> commentIds ) {
+    public List<SubComment> getAllSubComment(SubCommentExample subCommentExample, List<Integer> commentIds ) {
         SubCommentExample.Criteria criteria = subCommentExample.createCriteria();
         criteria.andCommentIdIn(commentIds);
         return   subCommentMapper.selectByExample(subCommentExample);

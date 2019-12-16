@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <title>Forum - Responsive HTML5 Template</title>
@@ -374,6 +374,10 @@
                                 <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>
                                 <p th:text="${comment.date}"></p>
                             </a>
+
+                            <div sec:authorize="hasRole('ROLE_Manager')">
+                                删除
+                            </div>
                         </div>
                     </div>
                     <div class="tt-item-description">

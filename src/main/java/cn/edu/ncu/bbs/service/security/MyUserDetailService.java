@@ -51,7 +51,9 @@ public class MyUserDetailService implements UserDetailsService
                 }
             }
             System.out.println("密码"+pwd);
-            return new org.springframework.security.core.userdetails.User(String.valueOf(user.getUserId()),pwd,grantedAuthorities);
+            user.setAuthorities(grantedAuthorities);
+            return user;
+//            return new org.springframework.security.core.userdetails.User(String.valueOf(user.getUserId()),pwd,grantedAuthorities);
         }
     }
 }

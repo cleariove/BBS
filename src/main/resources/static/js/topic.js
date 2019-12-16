@@ -21,6 +21,14 @@ function getTopic() {
     var topicId =document.getElementById("topicId").value;
     var title = document.getElementById("title").value;
     var content =  document.getElementById("content").value;
+    var topicType = document.getElementsByName("topicType");
+
+    var help="";
+    for (var j = 0; j < topicType.length; j++) {
+        if (topicType[j].checked)
+           help = topicType[j].innerText;
+    }
+    alert(help);
     var date=getDate();
     //alert(topicId);
     var data={
@@ -150,7 +158,7 @@ function commentModel(model) {
         "            </div>\n" +
         "            <div class=\"col-auto\">\n" +
         "                <!--提交评论-->\n" +
-        "                <a style=\"color: white\"  onclick=\"insertComment()\" class=\"btn btn-secondary btn-width-lg\">reply</a>\n" +
+        "                <a style=\"color: white\"  onclick=\"insertSubComment()\" class=\"btn btn-secondary btn-width-lg\">reply</a>\n" +
         "            </div>\n" +
         "        </div>\n" +
         "    </div>\n" +

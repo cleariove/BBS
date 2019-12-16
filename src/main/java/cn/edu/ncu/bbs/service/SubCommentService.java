@@ -6,7 +6,7 @@ import cn.edu.ncu.bbs.domain.SubCommentExample;
 import java.util.List;
 
 public interface SubCommentService {
-    List<SubComment> getAllSubComment(SubCommentExample subCommentExample,List<Integer> commentIds );
+    List<SubComment> getAllSubComment(SubCommentExample subCommentExample, List<Integer> commentIds );
 
     void deleteSubComment(int id);
 
