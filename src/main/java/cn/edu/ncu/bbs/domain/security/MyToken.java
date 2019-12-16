@@ -11,7 +11,17 @@ public class MyToken extends AbstractAuthenticationToken
     private final Object principal;
     private Object credentials;
 
-    private String power;
+    private String name;
+
+    private String gender;
+
+    private Integer age;
+
+    private String job;
+
+    private Integer integral;
+
+    private String userIcon;
 
     public MyToken(Object principal, Object credentials) {
         super((Collection)null);
@@ -48,13 +58,64 @@ public class MyToken extends AbstractAuthenticationToken
         this.credentials = null;
     }
 
-    public String getPower()
+    @Override
+    public String getName()
     {
-        return power;
+        return name;
     }
 
-    public void setPower(String power)
+    public void setName(String name)
     {
-        this.power = power;
+        this.name = name;
+    }
+
+    public String getGender()
+    {
+        return gender;
+    }
+
+    public void setGender(String gender)
+    {
+        this.gender = gender;
+    }
+
+    public Integer getAge()
+    {
+        return age;
+    }
+
+    public void setAge(Integer age)
+    {
+        this.age = age;
+    }
+
+    public String getJob()
+    {
+        return job;
+    }
+
+    public void setJob(String job)
+    {
+        this.job = job;
+    }
+
+    public Integer getIntegral()
+    {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral)
+    {
+        this.integral = integral;
+    }
+
+    public String getUserIcon()
+    {
+        return userIcon;
+    }
+
+    public void setUserIcon(String userIcon)
+    {
+        this.userIcon = userIcon;
     }
 }

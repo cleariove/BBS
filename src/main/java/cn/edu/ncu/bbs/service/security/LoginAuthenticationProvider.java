@@ -5,10 +5,8 @@ import cn.edu.ncu.bbs.domain.security.MyToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -40,7 +38,12 @@ public class LoginAuthenticationProvider implements AuthenticationProvider
         }
         //这个返回对象标志着用户登录成功，分别保存用户名，密码，用户的权限
         MyToken myToken = new MyToken(username,password,user.getAuthorities());
-        myToken.setPower(user.getPower());
+        myToken.setName(user.getName());
+        myToken.setGender(user.getGender());
+        myToken.setAge(user.getAge());
+        myToken.setUserIcon(user.getUserIcon());
+        myToken.setIntegral(user.getIntegral());
+        myToken.setJob(user.getJob());
         return myToken;
 //        return new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
     }
