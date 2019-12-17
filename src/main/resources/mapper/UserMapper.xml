@@ -103,7 +103,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.User" useGeneratedKeys="true" keyProperty="user_id">
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.User" useGeneratedKeys="true" keyProperty="userId" >
     insert into user (user_name, password,
       name, gender, age, 
       job, integral, user_icon
@@ -113,12 +113,12 @@
       #{job,jdbcType=VARCHAR}, #{integral,jdbcType=INTEGER}, #{userIcon,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.User" >
+  <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.User" useGeneratedKeys="true" keyProperty="userId">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
+     <!-- <if test="userId != null" >
         user_id,
-      </if>
+      </if>-->
       <if test="userName != null" >
         user_name,
       </if>
@@ -145,9 +145,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
+      <!--<if test="userId != null" >
         #{userId,jdbcType=INTEGER},
-      </if>
+      </if>-->
       <if test="userName != null" >
         #{userName,jdbcType=VARCHAR},
       </if>
@@ -233,28 +233,28 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.edu.ncu.bbs.domain.User" >
     update user
     <set >
-      <if test="userName != null" >
+      <if test="userName != null and userName!=''" >
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
-      <if test="password != null" >
+      <if test="password != null and password != ''" >
         password = #{password,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null" >
+      <if test="gender != null and gender!=''">
         gender = #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="age != null" >
+      <if test="age != null">
         age = #{age,jdbcType=INTEGER},
       </if>
-      <if test="job != null" >
+      <if test="job != null and job!=''">
         job = #{job,jdbcType=VARCHAR},
       </if>
       <if test="integral != null" >
         integral = #{integral,jdbcType=INTEGER},
       </if>
-      <if test="userIcon != null" >
+      <if test="userIcon != null and userIcon!=''" >
         user_icon = #{userIcon,jdbcType=VARCHAR},
       </if>
     </set>
