@@ -356,6 +356,7 @@
             </div>
 
             <!--文章评论-->
+            <div th:if="${comments}">
 
             <div th:each="comment:${comments}">
             <div class="tt-item">
@@ -372,11 +373,11 @@
                             <a href="#" class="tt-info-time">
                                 <!--评论时间-->
                                 <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>
-                                <p th:text="${comment.date}"></p>
+                                <p th:text="${#dates.format(comment.date,'MM-dd')}"></p>
                             </a>
 
-                            <div sec:authorize="hasRole('ROLE_Manager')">
-                                删除
+                            <div sec:authorize="hasRole('ROLE_MANAGER')">
+                                <a th:href="@{'/comment/delete/?commentId='+${comment.commentId}+'&topicId='+${topic.topicId}}">删除 </a>
                             </div>
                         </div>
                     </div>
@@ -389,7 +390,7 @@
 
                         <div class="topic-inner-list">
                             <div th:each="subComment:${subComments}">
-                                <div th:if="${subComment.commentId}==${comment.commentId}">
+                                <div th:if="${subComment.commentId}==${comment.coammentId}">
                             <div class="topic-inner">
                                 <div class="topic-inner-title">
                                     <div class="topic-inner-avatar">
@@ -438,6 +439,7 @@
                         </a>
                     </div>
                 </div>
+            </div>
             </div>
             </div>
             <div class="tt-item tt-wrapper-success">

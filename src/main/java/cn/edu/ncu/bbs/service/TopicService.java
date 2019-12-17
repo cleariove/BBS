@@ -22,11 +22,15 @@ public interface TopicService {
 
     List<Topic> findAllTopic(TopicExample topicExample);
 
-    List<Topic> findTopTopic(TopicExample topicExample);
+    List<Topic> findTopTopic(TopicExample topicExample,int id);
 
     List<Topic> findTopicBySubItemId(TopicExample topicExample,int id);
 
     void onTopPageById(int id);
+
+    void outTopPageById(int id);
+
+    void outEliteById(int id);
 
     void eliteById(int id);
 }

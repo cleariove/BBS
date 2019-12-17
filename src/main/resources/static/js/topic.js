@@ -1,4 +1,5 @@
 var xmlHttp = false;
+var topicType=false;
 
 function initAJAX() {
     if (window.XMLHttpRequest) {
@@ -16,49 +17,70 @@ function initAJAX() {
     }
 }
 
+function getTopicType(type) {
+    topicType =  type.innerText;
+
+}
+
 function getTopic() {
 
     var topicId =document.getElementById("topicId").value;
     var title = document.getElementById("title").value;
     var content =  document.getElementById("content").value;
-    var topicType = document.getElementsByName("topicType");
-
-    var help="";
-    for (var j = 0; j < topicType.length; j++) {
-        if (topicType[j].checked)
-           help = topicType[j].innerText;
-    }
-    alert(help);
+    var subItemId = document.getElementById("subItemId").value;
+    topicType = topicType == "Question";
     var date=getDate();
-    //alert(topicId);
+
     var data={
         "topicId":topicId,
         "title":title,
         "content":content,
-        "manager":"1",
+        "manager":"",
         "date":date,
         "browse":"111",
         "integral":"111",
-        "help":false,
+        "help":topicType,
         "elite":false,
         "onpageTop":false,
-        "subItemId":"1"
+        "subItemId":subItemId
     };
     return JSON.stringify(data);
 }
 
 function createTopic() {
 
-    var data =getTopic();
+    var title = document.getElementById("title").value;
+    var content =  document.getElementById("content").value;
+    var subItemId = document.getElementById("subItemId").value;
+    topicType = topicType == "Question";
+    var date=getDate();
+
+    var data={
+        "topicId":"",
+        "title":title,
+        "content":content,
+        "manager":"",
+        "date":date,
+        "browse":"111",
+        "integral":"111",
+        "help":topicType,
+        "elite":false,
+        "onPageTop":false,
+        "subItemId":subItemId
+    };
 
     $.ajax({
         url:"/topic/createTopic",
-        data:data,
+        data:JSON.stringify(data),
         contentType : "application/json",              //发送至服务器的类型   
         dataType : "json",                                     //预期服务器返回类型  
         type:"post",
         success:function (data) {
-           alert(data);
+            if(data.result == "OK") {
+                alert("文章发表成功");
+                window.location.href = "/topic?subItemId=" + subItemId
+            }
+
         }
     });
 
@@ -75,8 +97,6 @@ function deleteTopic() {
         type:"GET",
         success:function (data) {
             alert(data);
-            window.location.href="/createTopic"
-
         }
     });
 }
@@ -108,16 +128,37 @@ function getDate() {
 
 function updateTopic() {
 
-    var data=getTopic();
+    var topicId =document.getElementById("topicId").value;
+    var title = document.getElementById("title").value;
+    var content =  document.getElementById("content").value;
+    var subItemId = document.getElementById("subItemId").value;
+    var manager= document.getElementById("manager").innerText;
+    var date=getDate();
+
+    var data={
+        "topicId":topicId,
+        "title":title,
+        "content":content,
+        "manager":manager,
+        "date":date,
+        "browse":"",
+        "integral":"",
+        "help":topicType,
+        "elite":false,
+        "onpageTop":false,
+        "subItemId":subItemId
+    };
 
     $.ajax({
         url:"/topic/update",
-        data:data,
+        data:JSON.stringify(data),
         contentType : "application/json",              //发送至服务器的类型   
         dataType : "json",                                     //预期服务器返回类型  
         type:"post",
-        success:function (data) {
-           alert(data);
+        success:function (data){
+            if(data.result == "OK")
+                alert("修改成功");
+
         }
     });
 

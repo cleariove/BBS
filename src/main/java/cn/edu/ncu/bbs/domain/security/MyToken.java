@@ -11,7 +11,7 @@ public class MyToken extends AbstractAuthenticationToken
     private final Object principal;
     private Object credentials;
 
-    private String name;
+    private String userName;
 
     private String gender;
 
@@ -22,6 +22,9 @@ public class MyToken extends AbstractAuthenticationToken
     private Integer integral;
 
     private String userIcon;
+
+    private Integer userId;
+
 
     public MyToken(Object principal, Object credentials) {
         super((Collection)null);
@@ -36,6 +39,7 @@ public class MyToken extends AbstractAuthenticationToken
         this.credentials = credentials;
         super.setAuthenticated(true);
     }
+
 
     public Object getCredentials() {
         return this.credentials;
@@ -58,15 +62,20 @@ public class MyToken extends AbstractAuthenticationToken
         this.credentials = null;
     }
 
-    @Override
-    public String getName()
-    {
-        return name;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getGender()

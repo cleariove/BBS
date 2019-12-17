@@ -251,7 +251,7 @@
 <!--                                    <li><a href="#"><span class="tt-badge">foreign policy</span></a></li>-->
                                     <li th:each="subItem:${showSubItemInItem}">
                                         <a th:if="*{subItem.getItemId()} == *{item.getItemId()}"
-                                           th:href="@{'/subItem/show?itemId='+${subItem.subItemId}}">
+                                           th:href="@{'/topic?subItemId='+${subItem.subItemId}}">
                                             <span class="tt-badge" th:text="*{subItem.getSubItemName()}">
 
                                             </span>
@@ -688,7 +688,7 @@
 <!--                </div>-->
                 <div class="col-12">
                     <div class="tt-row-btn">
-                        <button type="button" class="btn-icon js-topiclist-showmore">
+                        <button type="button" class="btn-icon js-topiclist-showmore" th:onclick="|javascript:manageItem(0)|">
                             <svg class="tt-icon">
                               <use xlink:href="#icon-load_lore_icon"></use>
                             </svg>
@@ -788,6 +788,7 @@
 		</div>
 		</form>
 </div>
+
 <a href="page-create-topic.html" class="tt-btn-create-topic">
     <span class="tt-icon">
         <svg>
@@ -795,6 +796,7 @@
         </svg>
     </span>
 </a>
+
 
 <div class="modal fade" id="modalAdvancedSearch" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">

@@ -30,7 +30,7 @@ public class ItemController
         model.addAttribute("items",items);
         List<SubItem> subItems = subItemService.selectAll();
         model.addAttribute("showSubItemInItem",subItems);
-        return "page-categories";
+        return "aaa";
     }
 
     @RequestMapping("/manage")

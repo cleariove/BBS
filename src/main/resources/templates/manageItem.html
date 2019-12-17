@@ -8,7 +8,6 @@
 </head>
 <body>
 <div th:object="${selectItem}">
-    *{item.getItemId()}
     <div>
         <label for="itemName">栏目名称</label>
         <input id="itemName" type="text" th:value="${selectItem} eq null?'':*{itemName}">

@@ -38,7 +38,8 @@ public class LoginAuthenticationProvider implements AuthenticationProvider
         }
         //这个返回对象标志着用户登录成功，分别保存用户名，密码，用户的权限
         MyToken myToken = new MyToken(username,password,user.getAuthorities());
-        myToken.setName(user.getName());
+        myToken.setUserId(user.getUserId());
+        myToken.setUserName(user.getUserName());
         myToken.setGender(user.getGender());
         myToken.setAge(user.getAge());
         myToken.setUserIcon(user.getUserIcon());

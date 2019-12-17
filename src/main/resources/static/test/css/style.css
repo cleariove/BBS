@@ -5236,7 +5236,7 @@ hr {
     border-bottom: 1px solid #e2e7ea; }
   .tt-topic-list .tt-item:nth-child(even):not(.tt-itemselect):not(.tt-item-popup) {
     background-color: #f2f4f6; }
-  .tt-topic-list .tt-item:nth-child(odd):not(.tt-itemselect):not(.tt-item-popup) {
+  .tt-topic-list .tt-item:nth-child(odd):not(.tt-itemselect):not(.tt-item-popup):not(.tt-wrapper-success) {
     background-color: #ffffff; }
   .tt-topic-list .tt-item .tt-col-avatar .tt-icon {
     width: 40px;

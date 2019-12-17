@@ -26,6 +26,7 @@ public class User implements UserDetails
 
     private String userIcon;
 
+
     private List<GrantedAuthority> authorities;
 
     public Integer getUserId() {

@@ -1,18 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <head th:insert="import"></head>
-    <!--<title>Forum - Responsive HTML5 Template</title>-->
-    <!--<meta name="keywords" content="HTML5 Template">-->
-    <!--<meta name="description" content="Forum - Responsive HTML5 Template">-->
-    <!--<meta name="author" content="Forum">-->
-    <!--<link rel="shortcut icon" href="../static/test/favicon/favicon.ico">-->
-    <!--<meta name="format-detection" content="telephone=no">-->
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
-    <!--<link rel="stylesheet" href="../static/test/css/style.css">-->
-    <!--<script src="/js/jquery.min.js"></script>-->
-    <!--<script src="/js/topic.js" ></script>-->
+    <title>Forum - Responsive HTML5 Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Forum - Responsive HTML5 Template">
+    <meta name="author" content="Forum">
+    <link rel="shortcut icon" href="/static/test/favicon/favicon.ico">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/static/test/css/style.css">
+    <script src="/static/js/topic.js"></script>
+    <script src="/static/js/jquery.min.js" ></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/test/js/bundle.js"></script>
 </head>
 <body onload="initAJAX()">
 <!-- tt-mobile menu -->
@@ -190,9 +192,9 @@
 <main id="tt-pageContent">
     <div class="container">
         <div class="tt-wrapper-inner">
-            <p id="topicId"></p>
             <h1 class="tt-title-border">
-                新 建 文 章
+                新建文章  (<span th:text="${subItem.subItemName}"></span>)
+                <input id="subItemId" type="hidden" th:value="${subItem.subItemId}">
             </h1>
             <form class="form-default form-create-topic">
                 <div class="form-group">
@@ -201,20 +203,17 @@
                     <div class="tt-value-wrapper">
                         <!--文章标题-->
                         <input id="title" type="text" name="name" class="form-control"  placeholder="Subject of your topic">
-                        <span class="tt-value-input">99</span>
                     </div>
                     <div class="tt-note">Describe your topic well, while keeping the subject as short as possible.</div>
                 </div>
                 <div class="form-group">
                     <label>文 章 类 型</label>
                     <!--文章类型-->
-                    <p th:text="${#authentication.userName}"> </p>
 
                     <div class="tt-js-active-btn tt-wrapper-btnicon">
                         <div class="row tt-w410-col-02">
                             <div class="col-4 col-lg-3 col-xl-2">
-                                <a type="radio" class="tt-button-icon" name="topicType" >
-                                <!--<a href="#" class="tt-button-icon">-->
+                                <a onclick="getTopicType(this)"  class="tt-button-icon">
                                     <span class="tt-icon">
                                         <svg>
                                             <use xlink:href="#icon-discussion"></use>
@@ -224,8 +223,8 @@
                                 </a>
                             </div>
                             <div class="col-4 col-lg-3 col-xl-2">
-                                <a type="radio" class="tt-button-icon" name="topicType">
-                                <!--<a href="#" class="tt-button-icon">-->
+
+                                <a onclick="getTopicType(this)"  class="tt-button-icon">
                                     <span class="tt-icon">
                                          <svg>
                                             <use xlink:href="#Question"></use>
@@ -235,16 +234,6 @@
                                 </a>
                             </div>
 
-                            <!--<div class="col-4 col-lg-3 col-xl-2">-->
-                                <!--<a href="#" class="tt-button-icon">-->
-                                    <!--<span class="tt-icon">-->
-                                         <!--<svg>-->
-                                            <!--<use xlink:href="#Others"></use>-->
-                                        <!--</svg>-->
-                                    <!--</span>-->
-                                    <!--<span class="tt-text">Other</span>-->
-                                <!--</a>-->
-                            <!--</div>-->
                         </div>
                     </div>
 
@@ -253,101 +242,17 @@
                     <h6 class="pt-title">文 章 内 容</h6>
                     <div class="pt-row">
                         <div class="col-left">
-                            <!--<ul class="pt-edit-btn">-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-quote"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-bold"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-italic"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-share_topic"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-blockquote"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-performatted"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li class="hr"></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-upload_files"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-bullet_list"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-heading"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-horizontal_line"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-emoticon"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-settings"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--<li><button type="button" class="btn-icon">-->
-                            <!--<svg class="tt-icon">-->
-                            <!--<use xlink:href="#icon-color_picker"></use>-->
-                            <!--</svg>-->
-                            <!--</button></li>-->
-                            <!--</ul>-->
+
                         </div>
                     </div>
                     <div class="form-group">
                         <!--文章内容-->
                         <textarea id="content" name="message" class="form-control" rows="5" placeholder="Lets get started"></textarea>
                     </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="title">Category</label>
-                                <select class="form-control">
-                                    <option value="Select">Select</option>
-                                    <option value="Value 01">Value 01</option>
-                                    <option value="Value 02">Value 02</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="inputTopicTags">Tags</label>
-                                <input type="text" name="name" class="form-control" id="inputTopicTags" placeholder="Use comma to separate tags">
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <a onclick="createTopic()"  class="btn btn-secondary btn-width-lg">提交文章</a>
+                            <a style="color: white" onclick="createTopic()"  class="btn btn-secondary btn-width-lg">创建文章</a>
                         </div>
                     </div>
                 </div>
@@ -355,6 +260,10 @@
         </div>
     </div>
 </main>
+
+
+
+
 
 <a href="page-create-topic.html" class="tt-btn-create-topic">
     <span class="tt-icon">
@@ -365,7 +274,9 @@
 </a>
 
 
-<script src="../static/test/js/bundle.js"></script>
+
+
+
 <svg width="0" height="0" class="hidden">
     <symbol aria-hidden="true" data-prefix="fab" data-icon="facebook-f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" id="facebook-f-brands">
         <path fill="currentColor" d="M215.8 85H264V3.6C255.7 2.5 227.1 0 193.8 0 124.3 0 76.7 42.4 76.7 120.3V192H0v91h76.7v229h94V283h73.6l11.7-91h-85.3v-62.7c0-26.3 7.3-44.3 45.1-44.3z"></path>

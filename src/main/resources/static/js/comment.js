@@ -17,12 +17,10 @@ function insertComment() {
         data:JSON.stringify(data),
         contentType : "application/json",              //发送至服务器的类型                                      
         type:"post",
-        success:function () {
+        success:function (data) {
            window.location.reload();
-        },
-        error:function () {
-          alert("错误")
         }
+
     });
 
 }

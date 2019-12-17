@@ -136,4 +136,21 @@ public class Topic {
     public void setSubItemId(Integer subItemId) {
         this.subItemId = subItemId;
     }
+
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "topicId=" + topicId +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", manager=" + manager +
+                ", date=" + date +
+                ", browse=" + browse +
+                ", integral=" + integral +
+                ", help=" + help +
+                ", elite=" + elite +
+                ", onPageTop=" + onPageTop +
+                ", subItemId=" + subItemId +
+                '}';
+    }
 }

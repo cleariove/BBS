@@ -32,7 +32,12 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public void updateTopic(Topic topic) {
-       topicMapper.updateByPrimaryKey(topic);
+        Topic newTopic =new Topic();
+        newTopic.setTitle(topic.getTitle());
+        newTopic.setContent(topic.getContent());
+        newTopic.setTopicId(topic.getTopicId());
+        newTopic.setManager(topic.getManager());
+       topicMapper.updateByPrimaryKeySelective(newTopic);
     }
 
     @Override
@@ -46,8 +51,9 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> findTopTopic(TopicExample topicExample) {
+    public List<Topic> findTopTopic(TopicExample topicExample,int subItemId) {
         TopicExample.Criteria criteria =topicExample.createCriteria();
+        criteria.andSubItemIdEqualTo(subItemId);
         criteria.andOnPageTopEqualTo(true);
         return topicMapper.selectByExample(topicExample);
 
@@ -56,7 +62,9 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public List<Topic> findTopicBySubItemId(TopicExample topicExample,int subItemId) {
         TopicExample.Criteria criteria = topicExample.createCriteria();
+        topicExample.setOrderByClause("date desc");
         criteria.andSubItemIdEqualTo(subItemId);
+        criteria.andOnPageTopEqualTo(false);
         return topicMapper.selectByExample(topicExample);
     }
 
@@ -69,10 +77,25 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public void outTopPageById(int id) {
+        Topic topic = new Topic();
+        topic.setTopicId(id);
+        topic.setOnPageTop(false);
+        topicMapper.updateByPrimaryKeySelective(topic);
+    }
+
+    @Override
     public void eliteById(int id) {
         Topic topic = new Topic();
         topic.setTopicId(id);
         topic.setElite(true);
+        topicMapper.updateByPrimaryKeySelective(topic);
+    }
+    @Override
+    public void outEliteById(int id) {
+        Topic topic = new Topic();
+        topic.setTopicId(id);
+        topic.setElite(false);
         topicMapper.updateByPrimaryKeySelective(topic);
     }
 
