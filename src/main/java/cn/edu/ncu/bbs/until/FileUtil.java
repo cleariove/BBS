@@ -59,32 +59,33 @@ public class FileUtil
 
     public static String ChangeToBase64(MultipartFile file)
     {
-        ByteArrayOutputStream bAOS = new ByteArrayOutputStream();
-        BufferedImage img = FileUtil.changeFileToBufferedImage(file);
-        String oldName = file.getOriginalFilename();
-        int index = 0;
-        String suffix = null;
-        if (oldName != null)
+        if(!file.isEmpty())
         {
-            index = oldName.lastIndexOf('.');
-            suffix = oldName.substring(index+1);
-        }
-        try
-        {
-            if (suffix != null)
+            ByteArrayOutputStream bAOS = new ByteArrayOutputStream();
+            BufferedImage img = FileUtil.changeFileToBufferedImage(file);
+            String oldName = file.getOriginalFilename();
+            int index = 0;
+            String suffix = null;
+            if (oldName != null)
             {
-                System.out.println(suffix);
-                ImageIO.write(img,suffix,bAOS);
+                index = oldName.lastIndexOf('.');
+                suffix = oldName.substring(index+1);
             }
+            try
+            {
+                if (suffix != null)
+                    ImageIO.write(img,suffix,bAOS);
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            byte[] bytes = bAOS.toByteArray();//转换成字节
+            BASE64Encoder encoder = new BASE64Encoder();
+            String png_base64 = encoder.encodeBuffer(bytes).trim();//转换成base64串
+            png_base64 = png_base64.replaceAll("\n", "").replaceAll("\r", "");//删除 \r\n
+            return png_base64;
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        byte[] bytes = bAOS.toByteArray();//转换成字节
-        BASE64Encoder encoder = new BASE64Encoder();
-        String png_base64 = encoder.encodeBuffer(bytes).trim();//转换成base64串
-        png_base64 = png_base64.replaceAll("\n", "").replaceAll("\r", "");//删除 \r\n
-        return png_base64;
+        return null;
     }
 }
