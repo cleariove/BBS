@@ -85,6 +85,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
 
                 .and()
+                .rememberMe()
+
+                .and()
                 .logout()
                 .logoutUrl("/logout")
 

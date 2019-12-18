@@ -2,15 +2,20 @@ package cn.edu.ncu.bbs.controller;
 
 import cn.edu.ncu.bbs.domain.Item;
 import cn.edu.ncu.bbs.domain.SubItem;
+import cn.edu.ncu.bbs.domain.User;
+import cn.edu.ncu.bbs.domain.security.MyToken;
 import cn.edu.ncu.bbs.service.Impl.ItemServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.SubItemServiceImpl;
+import cn.edu.ncu.bbs.service.Impl.UserServiceImpl;
 import cn.edu.ncu.bbs.until.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -23,10 +28,38 @@ public class SubItemController
     @Autowired
     private ItemServiceImpl itemService;
 
+    @Autowired
+    private UserServiceImpl userService;
+
     @RequestMapping("/show")
     public String showSubItemByItemId(Model model, @RequestParam("itemId")String id)
     {
         List<SubItem> subItems = subItemService.selectByExample(id);
+        Item item = itemService.selectByPrimaryKey(id);
+        int count = subItemService.countByItemId(id);
+        MyToken myToken = null;
+        if(SecurityContextHolder.getContext().getAuthentication() instanceof MyToken)
+            myToken = (MyToken) SecurityContextHolder.getContext().getAuthentication();
+        if(myToken != null)
+        {
+            List<User> users = null;
+            if(myToken.getAuthorities().contains("ROLE_ADMIN"))
+            {
+                users = userService.findAll();
+                model.addAttribute("managers",users);
+            }
+            else
+            {
+                int manager = itemService.getManagerIdByItemId(id);
+                if(manager == myToken.getUserId())
+                {
+                    users = userService.findAll();
+                    model.addAttribute("managers",users);
+                }
+            }
+        }
+        model.addAttribute("count",count);
+        model.addAttribute("selectItem",item);
         model.addAttribute("allSubItem",subItems);
         return "subItem";
     }
@@ -36,7 +69,7 @@ public class SubItemController
     {
         List<SubItem> subItems = subItemService.selectAll();
         model.addAttribute("allSubItem",subItems);
-        return "subItem";
+        return "oldsubItem";
     }
 
     @ResponseBody
@@ -44,21 +77,20 @@ public class SubItemController
     public String upload(@RequestParam("subItemFile") MultipartFile file,
                          @RequestParam("subItemId") String id)
     {
-        String path = FileUtil.uploadFile(file,"subItem"+id);
+//        String path = FileUtil.uploadFile(file,"subItem"+id);
+        String path = FileUtil.ChangeToBase64(file);
         subItemService.setIconPath(id,path);
         return "/subItem/manage?subItemId="+id;
     }
 
-    @RequestMapping("/manage")
-    public String manageSubItem(Model model,@RequestParam("subItemId")String subItemId)
+    @RequestMapping("/create")
+    public String manageSubItem(Model model,@RequestParam("itemId")String itemId)
     {
-        SubItem subItem = null;
-        if(!subItemId.equals("0"))
-            subItem = subItemService.selectByPrimaryKey(subItemId);
-        List<Item> items =  itemService.findAll();
-        model.addAttribute("allItem",items);
-        model.addAttribute("subItem",subItem);
-        return "manageSubItem";
+        Item item = itemService.selectByPrimaryKey(itemId);
+        List<Item> items = itemService.findAll();
+        model.addAttribute("oneItem",item);
+        model.addAttribute("items",items);
+        return "createSubItem";
     }
 
     @ResponseBody
@@ -84,13 +116,13 @@ public class SubItemController
     @ResponseBody
     @RequestMapping("/update")
     public String update(@RequestParam("subItemId")String id,
-                       @RequestParam("subItemName")String name,
-                       @RequestParam("subItemDescription")String description,
+                       @RequestParam(value = "subItemName",defaultValue = "")String name,
+                       @RequestParam(value = "subItemDescription",defaultValue = "")String description,
                        @RequestParam(value = "manager",defaultValue = "") String manager,
                        @RequestParam(value = "itemId",defaultValue = "")String itemId)
     {
         subItemService.update(id, name, description, manager, itemId);
-        return "/subItem/manage?subItemId="+id;
+        return "/subItem/show?itemId="+itemId;
     }
 
     @ResponseBody

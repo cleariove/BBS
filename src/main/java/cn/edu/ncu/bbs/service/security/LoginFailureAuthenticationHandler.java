@@ -18,8 +18,7 @@ public class LoginFailureAuthenticationHandler implements AuthenticationFailureH
     {
         httpServletResponse.setContentType("application/json;charset=utf-8");
         PrintWriter writer = httpServletResponse.getWriter();
-        System.out.println("LoginFailureAuthenticationHandler登录失败");
-        writer.print("LoginFailureAuthenticationHandler登录失败");
+        writer.print("用户名或密码错误");
         writer.flush();
         writer.close();
     }

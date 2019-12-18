@@ -10,6 +10,8 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/subItem.js}"></script>
 </head>
 <style>
     hr{
@@ -89,7 +91,7 @@
         </div>
     </div>
 </header>
-<main id="tt-pageContent">
+<main id="tt-pageContent" class="tt-offset-small">
     <div class="tt-wrapper-section">
         <div class="container">
             <div class="tt-user-header">
@@ -105,11 +107,12 @@
                         <li><a href="#"><span class="tt-color14 tt-badge" th:text="|帖子总数:${count}|"></span></a></li>
                     </ul>
                 </div>
-                <div class="tt-col-btn" id="js-settings-btn" >
-<!--                     sec:authorize="isAuthenticated()">-->
+<!--                <div class="tt-innerwrapper">-->
+                    <span th:text="${subItem.subItemDescription}"></span>
+<!--                </div>-->
+                <div class="tt-col-btn" id="js-settings-btn" sec:authorize="isAuthenticated()">
                     <div class="tt-list-btn">
-                        <a href="#" class="tt-btn-icon">
-<!--                           th:if="(${#authentication.userId} eq ${selectItem.getManager()}) or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
+                        <a href="#" class="tt-btn-icon" th:if="(${#authentication.userId} eq ${subItem.getManager()}) or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-settings_fill"></use>
                             </svg>
@@ -120,37 +123,6 @@
         </div>
     </div>
     <div class="container">
-<!--        <div class="tt-catSingle-title">-->
-<!--            <div class="tt-innerwrapper tt-row">-->
-<!--                <div class="tt-col-left">-->
-<!--                    <ul class="tt-list-badge">-->
-<!--                        <li>-->
-<!--                            <a href="#">-->
-<!--                                <span th:text="${subItem.subItemName}" class="tt-color01 tt-badge">-->
-<!--                                </span>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--                <div class="ml-left tt-col-right">-->
-<!--&lt;!&ndash;                    <div class="tt-col-item">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <h2 class="tt-value">Threads - 1,245</h2>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div class="tt-col-item">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <a href="#" class="tt-btn-icon">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <i class="tt-icon">&ndash;&gt;-->
-<!--&lt;!&ndash;                                <svg>&ndash;&gt;-->
-<!--&lt;!&ndash;                                    <use xlink:href="#icon-settings_fill"></use>&ndash;&gt;-->
-<!--&lt;!&ndash;                                </svg>&ndash;&gt;-->
-<!--&lt;!&ndash;                            </i>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="tt-innerwrapper">-->
-<!--                <span th:text="${subItem.subItemDescription}"></span>-->
-<!--            </div>-->
-<!--        </div>-->
         <div class="tt-topic-list">
             <div class="tt-list-header">
                 <div   class="tt-col-topic">文章</div>
@@ -372,49 +344,56 @@
 			</span>
         </a>
     </div>
-<!--    <form class="form-default">-->
-<!--        <div class="tt-form-upload">-->
-<!--            <div class="row no-gutter">-->
-<!--                <div class="col-auto">-->
-<!--                    <div class="tt-avatar">-->
-<!--                        <svg>-->
-<!--                            <use xlink:href="#icon-ava-d"></use>-->
-<!--                        </svg>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-auto ml-auto">-->
-<!--                    <img th:src="|data:image/jpg;base64,${selectItem.getItemIcon()}|" alt="图片"-->
-<!--                         style="max-height: 40px;max-width: 40px">-->
-<!--                    <input id="itemFile" type="file" value="文件" style="display: none"-->
-<!--                           th:onchange="|javascript:uploadItemIcon(${selectItem.itemId})|">-->
-<!--                    <a href="#" class="btn btn-primary" onclick="clickInputFile()" style="color: black">上传头像</a>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="itemName">栏目名称</label>-->
-<!--            <input type="text" name="name" class="form-control" id="itemName"-->
-<!--                   th:placeholder="${selectItem.getItemName()}">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="itemDescription">栏目描述</label>-->
-<!--            <input type="text" name="name" class="form-control" id="itemDescription"-->
-<!--                   th:placeholder="${selectItem.getItemDescription()}">-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <label for="itemManager">设置管理</label>-->
-<!--            <select id="itemManager" class="form-control">-->
-<!--                <option th:each="user:${managers}" th:text="${user.getUserName()}" th:value="${user.getUserId()}"-->
-<!--                        th:selected="(${user.getUserId()} != ${selectItem.manager})?'false':'true'">-->
-<!--            </select>-->
-<!--        </div>-->
-<!--        <div class="form-group">-->
-<!--            <a  th:href="|javascript:updateItem(${selectItem.getItemId()})|" class="btn btn-secondary" style="color: white">保存</a>-->
-<!--        </div>-->
-<!--        <div class="form-group" style="position: relative;left: 190px;top: -60px">-->
-<!--            <a th:href="|javascript:deleteItem(${selectItem.getItemId()})|" class="btn btn-secondary" style="color: white">删除</a>-->
-<!--        </div>-->
-<!--    </form>-->
+    <form class="form-default">
+        <div class="tt-form-upload">
+            <div class="row no-gutter">
+                <div class="col-auto">
+                    <div class="tt-avatar">
+                        <svg>
+                            <use xlink:href="#icon-ava-d"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="col-auto ml-auto">
+                    <img th:src="|data:image/jpg;base64,${subItem.getSubItemIcon()}|" alt="图片"
+                         style="max-height: 40px;max-width: 40px">
+                    <input id="subItemFile" type="file" value="文件" style="display: none"
+                           th:onchange="|javascript:uploadSubItemIcon(${subItem.subItemId})|">
+                    <a href="#" class="btn btn-primary" onclick="clickSubInputFile()" style="color: black">上传头像</a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="subItemName">子栏目名称</label>
+            <input type="text" name="name" class="form-control" id="subItemName"
+                   th:placeholder="${subItem.getSubItemName()}">
+        </div>
+        <div class="form-group">
+            <label for="subItemDescription">子栏目简介</label>
+            <input type="text" name="name" class="form-control" id="subItemDescription"
+                   th:placeholder="${subItem.getSubItemDescription()}">
+        </div>
+        <div class="form-group">
+            <label for="itemId">所属栏目</label>
+            <select id="itemId" class="form-control">
+                <option th:each="item:${items}" th:text="${item.getItemName()}" th:value="${item.getItemId()}"
+                        th:selected="(${item.getItemId()} != ${subItem.getItemId()})?'false':'true'">
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="subItemManager">设置管理</label>
+            <select id="subItemManager" class="form-control">
+                <option th:each="user:${users}" th:text="${user.getUserName()}" th:value="${user.getUserId()}"
+                        th:selected="(${user.getUserId()} != ${subItem.manager})?'false':'true'">
+            </select>
+        </div>
+        <div class="form-group">
+            <a  th:href="|javascript:updateSubItem(${subItem.getSubItemId()})|" class="btn btn-secondary" style="color: white">保存</a>
+        </div>
+        <div class="form-group" style="position: relative;left: 190px;top: -60px">
+            <a th:href="|javascript:deleteSubItem(${subItem.getSubItemId()})|" class="btn btn-secondary" style="color: white">删除</a>
+        </div>
+    </form>
 </div>
 
 <!--跳转编辑文章页面-->

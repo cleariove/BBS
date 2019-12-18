@@ -57,7 +57,6 @@ public class UrlPathFilterInvocationSecurityMetadataSource implements FilterInvo
             }
         }
         //到这一步表明数据库资源表不包括该url，那么就默认设置该url登录即可访问
-        System.out.println("该url谁都可以访问");
         return null;
 //        return SecurityConfig.createList("ROLE_LOGIN");
     }

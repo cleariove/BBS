@@ -30,17 +30,13 @@ public class ItemController
         model.addAttribute("items",items);
         List<SubItem> subItems = subItemService.selectAll();
         model.addAttribute("showSubItemInItem",subItems);
-        return "aaa";
+        return "item";
     }
 
     @RequestMapping("/manage")
-    public String manageItem(Model model, @RequestParam("itemId") String itemId)
+    public String manageItem()
     {
-        Item item = null;
-        if(!itemId.equals("0"))
-            item = itemService.selectByPrimaryKey(itemId);
-        model.addAttribute("selectItem",item);
-        return "manageItem";
+        return "createItem";
     }
 
     @ResponseBody
@@ -66,19 +62,20 @@ public class ItemController
     public String insertIcon(@RequestParam("itemId")String id,
                              @RequestParam("itemFile")MultipartFile file)
     {
-        String path = FileUtil.uploadFile(file,"item"+id);
-        itemService.setIconPath(id, path);
+//        String path = FileUtil.uploadFile(file,"item"+id);
+        String base64 = FileUtil.ChangeToBase64(file);
+        itemService.setIconPath(id, base64);
         return "/item/manage?itemId="+id;
     }
 
     @ResponseBody
     @RequestMapping(value = "/manage/update",method = RequestMethod.POST)
     public String update(@RequestParam("itemId")String id,
-                         @RequestParam("itemName")String name,
-                         @RequestParam("itemDescription")String description,
+                         @RequestParam(value = "itemName",defaultValue = "")String name,
+                         @RequestParam(value = "itemDescription",defaultValue = "")String description,
                          @RequestParam(value = "manager",defaultValue = "") String manager)
     {
         itemService.updateByPrimaryKey(id, name, description, manager);
-        return "/item/manage?itemId="+id;
+        return "/subItem/show?itemId="+id;
     }
 }

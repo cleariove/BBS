@@ -87,5 +87,10 @@ public class UserServiceImpl implements UserService {
         return   user;
     }
 
+    public List<User> findAll()
+    {
+        UserExample userExample=new UserExample();
+        return userMapper.selectByExample(userExample);
+    }
 }
 

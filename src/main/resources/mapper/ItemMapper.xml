@@ -83,6 +83,11 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="getManagerIdByItemId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select manager
+    from item
+    where item_id = #{itemId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -99,7 +104,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Item" useGeneratedKeys="true" keyProperty="item_id">
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Item" useGeneratedKeys="true" keyProperty="itemId">
     insert into item (item_name, item_description,
       manager, item_icon)
     values (#{itemName,jdbcType=VARCHAR}, #{itemDescription,jdbcType=VARCHAR},

@@ -32,4 +32,6 @@ public interface ItemMapper {
     int updateByPrimaryKeySelective(Item record);
 
     int updateByPrimaryKey(Item record);
+
+    int getManagerIdByItemId(Integer itemId);
 }

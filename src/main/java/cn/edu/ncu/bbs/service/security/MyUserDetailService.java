@@ -34,7 +34,6 @@ public class MyUserDetailService implements UserDetailsService
         User user = userService.findById(s);
         if(user == null)
         {
-            System.out.println("用户不存在");
             throw new UsernameNotFoundException("用户不存在");
         }
         else
@@ -50,7 +49,6 @@ public class MyUserDetailService implements UserDetailsService
                     grantedAuthorities.add(grantedAuthority);
                 }
             }
-            System.out.println("密码"+pwd);
             user.setAuthorities(grantedAuthorities);
             return user;
 //            return new org.springframework.security.core.userdetails.User(String.valueOf(user.getUserId()),pwd,grantedAuthorities);

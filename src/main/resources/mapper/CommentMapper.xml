@@ -100,7 +100,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Comment" useGeneratedKeys="true" keyProperty="comment_id">
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.Comment" useGeneratedKeys="true" keyProperty="commentId">
     insert into comment (comment_from, comment_to,
       content, date, topic_id
       )

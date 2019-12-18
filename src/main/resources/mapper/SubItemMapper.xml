@@ -84,6 +84,11 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="getManagerIdBySubItemId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select manager
+    from sub_item
+    where sub_item_id = #{subItemId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -100,7 +105,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.SubItem" useGeneratedKeys="true" keyProperty="sub_item_id">
+  <insert id="insert" parameterType="cn.edu.ncu.bbs.domain.SubItem" useGeneratedKeys="true" keyProperty="subItemId">
     insert into sub_item (sub_item_name, sub_item_description,
       manager, item_id, sub_item_icon
       )

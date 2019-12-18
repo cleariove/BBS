@@ -33,7 +33,6 @@ public class LoginAuthenticationProvider implements AuthenticationProvider
         String password1 = user.getPassword();
         if(!Objects.equals(password,password1))
         {
-            System.out.println("用户名或密码不正确");
             throw new BadCredentialsException("用户名或密码不正确");
         }
         //这个返回对象标志着用户登录成功，分别保存用户名，密码，用户的权限

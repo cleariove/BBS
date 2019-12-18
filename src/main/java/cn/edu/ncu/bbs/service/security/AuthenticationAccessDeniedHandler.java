@@ -22,9 +22,7 @@ public class AuthenticationAccessDeniedHandler implements AccessDeniedHandler
         httpServletResponse.setContentType("application/json;charset=UTF-8");
 
         PrintWriter out = httpServletResponse.getWriter();
-        System.out.println("AuthenticationAccessDeniedHandler您的权限不足");
-        System.out.println("------------------------------------------");
-        out.print("AuthenticationAccessDeniedHandler您的权限不足");
+        out.print("您的权限不足无法访问");
         out.flush();
     }
 }

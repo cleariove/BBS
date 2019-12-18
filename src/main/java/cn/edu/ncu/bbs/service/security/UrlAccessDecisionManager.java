@@ -40,13 +40,11 @@ public class UrlAccessDecisionManager implements AccessDecisionManager
                 // 在MyUserDetailService中未登录或登录失败返回AnonymousAuthenticationToken对象
                 if(authentication instanceof AnonymousAuthenticationToken)
                 {
-                    System.out.println("请登录后访问");
                     throw new BadCredentialsException("请登录后在进行访问");
                 }
                 //如果登录就直接放行
                 else
                 {
-                    System.out.println("登录了就可以访问的url");
                     break;
                 }
 
@@ -62,7 +60,6 @@ public class UrlAccessDecisionManager implements AccessDecisionManager
             }
         }
         //遍历完url所需所有角色，与用户所拥有角色无交集
-        System.out.println("权限不足");
         throw new AccessDeniedException("权限不足!");
     }
 

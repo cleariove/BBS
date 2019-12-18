@@ -1,6 +1,37 @@
-function insertItem()
+function insertItem(id)
 {
-    pushItem(null,"/item/manage/insert");
+    var itemName=$("#itemName").val();
+    var itemDescription=$("#itemDescription").val();
+    if(itemName !== "" && itemDescription !== "")
+    {
+        $.ajax(
+            {
+                type:"post",
+                url:"/item/manage/insert",
+                data:
+                    {
+                        "itemName":itemName,
+                        "itemDescription":itemDescription,
+                        "manager":id,
+                    },
+                success:function (data)
+                {
+                    location.href = data;
+                },
+                error:function ()
+                {
+                    alert("未知错误");
+                }
+            }
+        )
+    }
+    else
+        alert("请填写完整名称与简介")
+}
+
+function clickInputFile()
+{
+    document.getElementById("itemFile").click();
 }
 
 function checkImgType(element)
@@ -37,7 +68,7 @@ function uploadItemIcon(itemId)
                 url:"/item/manage/upload",
                 processData: false,
                 contentType: false,
-                success:function (data)
+                success:function ()
                 {
                     location.reload();
                 },
@@ -73,16 +104,6 @@ function deleteItem(itemId)
 
 function updateItem(itemId)
 {
-    pushItem(itemId,"/item/manage/update");
-}
-
-function manageItem(itemId)
-{
-    location.href = "/item/manage?itemId="+itemId;
-}
-
-function pushItem(itemId,url)
-{
     let jsonData =
         {
             "itemId":itemId,
@@ -90,22 +111,24 @@ function pushItem(itemId,url)
             "itemDescription":$("#itemDescription").val(),
             "manager":$("#itemManager").val(),
         };
-    if(jsonData.itemDescription !== '' && jsonData.itemName !== '')
-    {
-        $.ajax(
+    $.ajax(
+        {
+            type:"post",
+            url:"/item/manage/update",
+            data:jsonData,
+            success:function (data)
             {
-                type:"post",
-                url:url,
-                data:jsonData,
-                success:function (data)
-                {
-                    location.href = data;
-                },
-                error:function ()
-                {
-                    alert("未知错误");
-                }
+                location.href = data;
+            },
+            error:function ()
+            {
+                alert("未知错误");
             }
-        )
-    }
+        }
+    )
 }
+
+// function manageItem(itemId)
+// {
+//     location.href = "/item/manage?itemId="+itemId;
+// }

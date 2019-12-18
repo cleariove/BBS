@@ -1,7 +1,7 @@
-function manageSubItem(subItemId)
-{
-    location.href="/subItem/manage?subItemId="+subItemId;
-}
+// function manageSubItem(subItemId)
+// {
+//     location.href="/subItem/manage?subItemId="+subItemId;
+// }
 
 function getItem(itemId)
 {
@@ -20,6 +20,11 @@ function getItem(itemId)
             }
         }
     )
+}
+
+function clickSubInputFile()
+{
+    document.getElementById("subItemFile").click();
 }
 
 function checkImgType(element)
@@ -92,12 +97,69 @@ function deleteSubItem(subItemId)
 
 function updateSubItem(subItemId)
 {
-    pushSubItem(subItemId,"/subItem/update")
+    let jsonData =
+        {
+            "subItemId":subItemId,
+            "subItemName":$("#subItemName").val(),
+            "subItemDescription":$("#subItemDescription").val(),
+            "itemId":$("#itemId").val(),
+            "manager":$("#subItemManager").val(),
+        };
+    // "manager":$("#subItemManager").val(),
+    // "itemId":$("#itemId").val(),
+    // if(jsonData.subItemDescription !== '' && jsonData.subItemName !== '')
+    // {
+        $.ajax(
+            {
+                type:"post",
+                url:"/subItem/update",
+                data:jsonData,
+                success:function (data)
+                {
+                    location.href = data;
+                },
+                error:function ()
+                {
+                    alert("未知错误");
+                }
+            }
+        )
+    // }
 }
 
-function insertSubItem()
+function insertSubItem(id)
 {
-    pushSubItem(null,"/subItem/insert");
+    var subItemName = $("#subItemName").val();
+    var subItemDescription = $("#subItemDescription").val();
+    var itemId=$("#itemId").val();
+    if(subItemDescription !== '' && subItemName !== '')
+    {
+        $.ajax(
+            {
+                type:"post",
+                url:"/subItem/insert",
+                data:
+                    {
+                        "subItemName":subItemName,
+                        "subItemDescription":subItemDescription,
+                        "manager":id,
+                        "itemId":itemId,
+                    },
+                success:function (data)
+                {
+                    location.href = data;
+                },
+                error:function ()
+                {
+                    alert("未知错误");
+                }
+            }
+        )
+    }
+    else
+    {
+        alert("请填写完整名称与简介")
+    }
 }
 
 function pushSubItem(subItemId,url)

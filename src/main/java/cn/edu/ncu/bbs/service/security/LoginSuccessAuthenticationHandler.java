@@ -18,22 +18,22 @@ public class LoginSuccessAuthenticationHandler implements AuthenticationSuccessH
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException
     {
         response.setContentType("application/json;charset=utf-8");
-        request.getRequestDispatcher("/index").forward(request,response);
-        PrintWriter writer = response.getWriter();
-        System.out.println("LoginSuccessAuthenticationHandler登录成功");
-        writer.print("LoginSuccessAuthenticationHandler登录成功");
-        writer.flush();
+        response.sendRedirect("/item/show");
+//        request.getRequestDispatcher("/item/show").forward(request,response);
+//        PrintWriter writer = response.getWriter();
+//        writer.print("LoginSuccessAuthenticationHandler登录成功");
+//        writer.flush();
     }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException
     {
         httpServletResponse.setContentType("application/json;charset=utf-8");
-        httpServletRequest.getRequestDispatcher("/index").forward(httpServletRequest,httpServletResponse);
-        PrintWriter writer = httpServletResponse.getWriter();
-        System.out.println("LoginSuccessAuthenticationHandler登录成功");
-        writer.print("登录成功");
-        writer.flush();
+        httpServletResponse.sendRedirect("/item/show");
+//        httpServletRequest.getRequestDispatcher("/item/show").forward(httpServletRequest,httpServletResponse);
+//        PrintWriter writer = httpServletResponse.getWriter();
+//        writer.print("登录成功");
+//        writer.flush();
     }
 
 }
