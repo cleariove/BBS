@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="/static/test/favicon/favicon.ico">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/static/test/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <style>
     hr{
@@ -119,7 +119,6 @@
             <div class="tt-list-header">
                 <div   class="tt-col-topic">文章</div>
                 <div class="tt-col-category">分类</div>
-                <div class="tt-col-value hide-mobile">回复量</div>
                 <div class="tt-col-value hide-mobile">点击量</div>
                 <div class="tt-col-value hide-mobile">发表时间</div>
                 <div class="tt-col-value">
@@ -147,7 +146,7 @@
                                 <ul class="tt-list-badge">
                                     <li class="tt-col-message">
                                         <!--文章内容-->
-                                        <span th:text="${#strings.abbreviate(topic.content,50)}" class="tt-badge"></span>
+                                        <span th:text="${#strings.abbreviate(topic.content,50)}" ></span>
                                     </li>
                                 </ul>
                             </div>
@@ -158,10 +157,10 @@
                     </div>
                     <!--子栏目名称-->
                     <div class="tt-col-category"><span th:text="${subItem.subItemName}" class="tt-color01 tt-badge"></span></div>
-                    <!---->
-                    <div class="tt-col-value tt-color-select hide-mobile">502</div>
                     <!--文章浏览量-->
-                    <div class="tt-col-value hide-mobile">15.1k</div>
+                    <div class="tt-col-value hide-mobile">
+                        <span th:text="${topic.browse}"></span>
+                    </div>
                     <!--文章发布时间-->
                     <div class="tt-col-value hide-mobile">
                         <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
@@ -216,10 +215,10 @@
                     </div>
                     <!--子栏目名称-->
                     <div class="tt-col-category"><span th:text="${subItem.subItemName}" class="tt-color01 tt-badge"></span></div>
-                    <!---->
-                    <div class="tt-col-value tt-color-select hide-mobile">502</div>
                     <!--文章浏览量-->
-                    <div class="tt-col-value hide-mobile">15.1k</div>
+                    <div class="tt-col-value hide-mobile">
+                        <span th:text="${topic.browse}"></span>
+                    </div>
                     <!--文章发布时间-->
                     <div class="tt-col-value hide-mobile">
                         <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
@@ -255,7 +254,14 @@
                             <div class="tt-col-description">
                                 <h6 class="tt-title"><a th:href="@{'/topic/'+${topic.topicId}}">
                                     <!--文章标题-->
-                                    <span th:text="${topic.title}"></span>
+                                    <div th:if="${topic.help} eq true">
+                                    <span class="tt-color08 tt-badge">求助!</span>
+                                        <span th:text="${topic.title}"></span>
+                                    </div>
+                                    <div th:if="${topic.help} eq false">
+                                        <span class=" tt-badge">讨论</span>
+                                        <span th:text="${topic.title}"></span>
+                                    </div>
                                 </a></h6>
                                 <div class="row align-items-center no-gutters ">
                                     <div class="col-11">
@@ -273,10 +279,10 @@
                             </div>
                             <!--子栏目名称-->
                             <div class="tt-col-category"><span th:text="${subItem.subItemName}" class="tt-color01 tt-badge"></span></div>
-                            <!---->
-                            <div class="tt-col-value tt-color-select hide-mobile">502</div>
                             <!--文章浏览量-->
-                            <div class="tt-col-value hide-mobile">15.1k</div>
+                            <div class="tt-col-value hide-mobile">
+                                <span th:text="${topic.browse}"></span>
+                            </div>
                             <!--文章发布时间-->
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
@@ -446,7 +452,7 @@
         </div>
     </div>
 </div>
-<script src="/static/test/js/bundle.js"></script>
+<script src="/static/js/bundle.js"></script>
 
 
 
