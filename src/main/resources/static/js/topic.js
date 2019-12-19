@@ -235,3 +235,7 @@ function addBrowse(topicId) {
     
 }
 
+function unLogin(){
+    alert("请先登入");
+}
+

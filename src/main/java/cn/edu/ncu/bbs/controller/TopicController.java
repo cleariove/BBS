@@ -63,7 +63,7 @@ public class TopicController {
         TopicExample topicExample =new TopicExample();
         TopicExample topicExample2 = new TopicExample();
         //pageNum:表示第几页  pageSize:表示一页展示的数据
-        PageHelper.startPage(pageNum,5);
+        PageHelper.startPage(pageNum,1);
         List<Topic> topics=topicService.findTopicBySubItemId(topicExample,subItemId);
         //将查询到的数据封装到PageInfo对象
         PageInfo<Topic> pageInfo=new PageInfo(topics);
@@ -90,6 +90,26 @@ public class TopicController {
         model.addAttribute("topTopics",topTopics);
         model.addAttribute("subItem",subItem);
         return "singleSubItem";
+    }
+
+    @RequestMapping(value = "/mytopic",method = RequestMethod.GET)
+    public String myTopic( @RequestParam(value = "pageNum",defaultValue="1") int pageNum,Model model){
+        TopicExample topicExample =new TopicExample();
+
+        MyToken user = null;
+        if(SecurityContextHolder.getContext().getAuthentication() instanceof MyToken)
+            user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
+        if (user != null)
+        {
+            PageHelper.startPage(pageNum,1);
+            List<Topic> topics=topicService.getTopicByUserId(topicExample,user.getUserId());
+            //将查询到的数据封装到PageInfo对象
+            PageInfo<Topic> pageInfo=new PageInfo(topics);
+            model.addAttribute("pageInfo",pageInfo);
+            model.addAttribute("topics",topics);
+
+        }
+        return "myTopic";
     }
 
 //    //显示所有文章

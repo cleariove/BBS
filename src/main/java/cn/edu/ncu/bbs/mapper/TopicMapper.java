@@ -34,5 +34,7 @@ public interface TopicMapper {
 
     int updateByPrimaryKey(Topic record);
 
+    List<Topic> getTopicByUserId(TopicExample topicExample,int userId);
+
     //PageInfo<Topic> selectRoleList(Integer pageNum, Integer pageSize, Topic topic);
 }

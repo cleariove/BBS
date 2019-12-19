@@ -33,6 +33,14 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public List<Topic> getTopicByUserId(TopicExample topicExample,int userId) {
+        TopicExample.Criteria criteria =topicExample.createCriteria();
+        criteria.andManagerEqualTo(userId);
+        return topicMapper.selectByExample(topicExample);
+
+    }
+
+    @Override
     public void updateTopic(Topic topic) {
         Topic newTopic =new Topic();
         newTopic.setTitle(topic.getTitle());

@@ -37,5 +37,7 @@ public interface TopicService {
 
     void updateBrowse(int id,int browse);
 
+    List<Topic> getTopicByUserId(TopicExample topicExample,int userId);
+
     //PageInfo<Topic> selectRoleList(Integer pageNum, Integer pageSize, Topic topic);
 }

@@ -50,7 +50,7 @@ function getSubComment(commentId,topicId) {
                     "<span>" + content + "</span>" +
                     "         </div>\n" +
                     "                 <div id=\"sub" + subCommentId + "\" class=\"info-bottom\">\n" +
-                    "                    <a style=\"float: right\" onclick=\"subCommentModel(" + subCommentFrom + "," + commentId + "," + topicId + "," + subCommentId + ")\">回复</a>\n" +
+                    "                    <a  style=\"float: right\" onclick=\"subCommentModel(" + subCommentFrom + "," + commentId + "," + topicId + "," + subCommentId + ")\">回复</a>\n" +
                     "                </div>" +
                     "</div>"
             }
@@ -84,7 +84,7 @@ function commentModel(subCommentFrom,commentId,topicId) {
         "                                           <div class=\"form-group\">\n" +
         "                                              <input name=\"content\" class=\"form-control\" rows=\"1\">\n" +
         "                                               <input class=\"btn btn-secondary btn-width-lg\" type=\"submit\" value=\"回复\">\n" +
-             "<a style='float: right' onclick='cancelReply("+subCommentFrom+","+commentId+","+topicId+")'>收起</a>"+
+             "<a  style='float: right' onclick='cancelReply("+subCommentFrom+","+commentId+","+topicId+")'>收起</a>"+
         "                                           </div>\n" +
         "                                        </div>\n" +
         "                                    </div>"
