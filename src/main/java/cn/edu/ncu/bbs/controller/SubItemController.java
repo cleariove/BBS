@@ -6,6 +6,7 @@ import cn.edu.ncu.bbs.domain.User;
 import cn.edu.ncu.bbs.domain.security.MyToken;
 import cn.edu.ncu.bbs.service.Impl.ItemServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.SubItemServiceImpl;
+import cn.edu.ncu.bbs.service.Impl.UserRoleServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.UserServiceImpl;
 import cn.edu.ncu.bbs.until.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class SubItemController
     @Autowired
     private UserServiceImpl userService;
 
+    @Autowired
+    private UserRoleServiceImpl userRoleService;
+
     @RequestMapping("/show")
     public String showSubItemByItemId(Model model, @RequestParam("itemId")String id)
     {
@@ -44,7 +48,7 @@ public class SubItemController
         {
             if(myToken.getAuthorities().contains("ROLE_ADMIN") || myToken.getUserId().equals(item.getManager()))
             {
-                List<User> users = userService.findAll();
+                List<User> users = userRoleService.findAllManage();
                 model.addAttribute("managers",users);
             }
         }

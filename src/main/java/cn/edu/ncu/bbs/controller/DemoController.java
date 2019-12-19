@@ -19,4 +19,10 @@ public class DemoController
     {
         request.getRequestDispatcher("/item/show").forward(request,response);
     }
+
+    @RequestMapping("")
+    public void nullUrl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
+        request.getRequestDispatcher("/item/show").forward(request,response);
+    }
 }

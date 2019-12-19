@@ -33,10 +33,7 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public String showRegister() { return "page-signup"; }
-
-    @RequestMapping("/showUserMes")
-    public String showUserMes() { return "userMes"; }
+    public String showRegister() { return "signUp"; }
 
     @RequestMapping("/showUserMesUpdate")
     public String showUserMesUpdate() {
@@ -44,25 +41,25 @@ public class UserController {
     }
 
 
- @RequestMapping(value = "/register",method = RequestMethod.POST)
- public String register(User user, Model model){
-     userService.userRegister(user);
-     model.addAttribute("userId", user.getUserId());
-     return "showId";
- }
+     @RequestMapping(value = "/register",method = RequestMethod.POST)
+     public String register(User user, Model model){
+         userService.userRegister(user);
+         model.addAttribute("userId", user.getUserId());
+         return "showId";
+     }
 
- @ResponseBody
- @RequestMapping(value = "/upload",method = RequestMethod.POST)
- public String upload(@RequestParam("userId")String userId,@RequestParam("userFile") MultipartFile file)
- {
-     String base64 = FileUtil.ChangeToBase64(file);// its maximum permitted size of 1048576 bytes.
-     User user=new User();
-     user.setUserId(Integer.valueOf( userId));
-     user.setUserIcon(base64);
-     userService.userChange(user);
-      return null;
+     @ResponseBody
+     @RequestMapping(value = "/upload",method = RequestMethod.POST)
+     public String upload(@RequestParam("userId")String userId,@RequestParam("userFile") MultipartFile file)
+     {
+         String base64 = FileUtil.ChangeToBase64(file);// its maximum permitted size of 1048576 bytes.
+         User user=new User();
+         user.setUserId(Integer.valueOf( userId));
+         user.setUserIcon(base64);
+         userService.userChange(user);
+         return null;
+     }
 
- }
     @RequestMapping(value = "/change",method = RequestMethod.POST)
     public String changeUser(User user){
 //        String path = FileUtil.uploadFile(file, "user" + user.getUserId());

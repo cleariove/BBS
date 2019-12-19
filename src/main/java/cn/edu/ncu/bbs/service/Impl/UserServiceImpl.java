@@ -56,11 +56,7 @@ public class UserServiceImpl implements UserService {
         userMapper.deleteByPrimaryKey(userId);
     }
 
-    public void userChange(User user/*,MultipartFile file*/){
-        /*String base64 = FileUtil.ChangeToBase64(file);
-        if (base64 != null) {
-            user.setUserIcon(base64);
-        }*/
+    public void userChange(User user){
         MyToken myToken=(MyToken) SecurityContextHolder.getContext().getAuthentication();
         userMapper.updateByPrimaryKeySelective(user);
         User newUser=userMapper.selectByPrimaryKey(user.getUserId());

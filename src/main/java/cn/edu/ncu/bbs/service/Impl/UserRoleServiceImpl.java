@@ -57,14 +57,15 @@ public class UserRoleServiceImpl implements UserRoleService {
         }
     }
 
-    public List<User> findAllManage(){//获得manage用户，权限为2
+    public List<User> findAllManage(){//获得manage用户，权限为2,3
         List<User> users=userService.findAll();
         System.out.println(users.size());
         List<User> manageUsers=new ArrayList<>();
-        for(int i=0;i<users.size();i++){
-            System.out.println(users.get(i).getUserId());
-                if (getHighPower((long)users.get(i).getUserId()) == 2)
-                    manageUsers.add(users.get(i));
+        for (User user : users)
+        {
+            System.out.println(user.getUserId());
+            if (getHighPower((long) user.getUserId()) == 2 || getHighPower((long) user.getUserId()) == 3)
+                manageUsers.add(user);
         }
         return manageUsers;
     }
