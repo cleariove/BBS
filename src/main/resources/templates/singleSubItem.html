@@ -104,12 +104,20 @@
                         <a href="#" th:text="${subItem.getSubItemName()}"></a>
                     </div>
                     <ul class="tt-list-badge">
-                        <li><a href="#"><span class="tt-color14 tt-badge" th:text="|帖子总数:${count}|"></span></a></li>
+                        <li>
+                            <a href="#">
+                                <span class="tt-color14 tt-badge" th:text="|帖子总数:${count}|">
+                                </span>
+                            </a>
+                        </li>
+                        <li style="position: relative;top: 30px;left: -180px">
+                            <a href="#">
+                                <span class="tt-color10 tt-badge" th:text="${subItem.subItemDescription}">
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
-<!--                <div class="tt-innerwrapper">-->
-                    <span th:text="${subItem.subItemDescription}"></span>
-<!--                </div>-->
                 <div class="tt-col-btn" id="js-settings-btn" sec:authorize="isAuthenticated()">
                     <div class="tt-list-btn">
                         <a href="#" class="tt-btn-icon" th:if="(${#authentication.userId} eq ${subItem.getManager()}) or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">

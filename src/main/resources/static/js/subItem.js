@@ -1,27 +1,3 @@
-// function manageSubItem(subItemId)
-// {
-//     location.href="/subItem/manage?subItemId="+subItemId;
-// }
-
-function getItem(itemId)
-{
-    $.ajax(
-        {
-            data:{"itemId":itemId},
-            type:"post",
-            url:"/subItem/getItem",
-            success:function ()
-            {
-
-            },
-            error:function ()
-            {
-
-            }
-        }
-    )
-}
-
 function clickSubInputFile()
 {
     document.getElementById("subItemFile").click();
@@ -58,7 +34,7 @@ function uploadSubItemIcon(subItemId)
             {
                 data:formData,
                 type:"post",
-                url:"/subItem/upload",
+                url:"/subItem/manage/upload",
                 processData: false,
                 contentType: false,
                 success:function ()
@@ -79,7 +55,7 @@ function deleteSubItem(subItemId)
     {
         $.ajax(
             {
-                url:"/subItem/delete",
+                url:"/subItem/manage/delete",
                 data:{"subItemId":subItemId},
                 type: "post",
                 success:function (data)
@@ -105,14 +81,10 @@ function updateSubItem(subItemId)
             "itemId":$("#itemId").val(),
             "manager":$("#subItemManager").val(),
         };
-    // "manager":$("#subItemManager").val(),
-    // "itemId":$("#itemId").val(),
-    // if(jsonData.subItemDescription !== '' && jsonData.subItemName !== '')
-    // {
         $.ajax(
             {
                 type:"post",
-                url:"/subItem/update",
+                url:"/subItem/manage/update",
                 data:jsonData,
                 success:function (data)
                 {
@@ -137,7 +109,7 @@ function insertSubItem(id)
         $.ajax(
             {
                 type:"post",
-                url:"/subItem/insert",
+                url:"/subItem/manage/insert",
                 data:
                     {
                         "subItemName":subItemName,
@@ -159,35 +131,5 @@ function insertSubItem(id)
     else
     {
         alert("请填写完整名称与简介")
-    }
-}
-
-function pushSubItem(subItemId,url)
-{
-    let jsonData =
-        {
-            "subItemId":subItemId,
-            "subItemName":$("#subItemName").val(),
-            "subItemDescription":$("#subItemDescription").val(),
-            "manager":$("#subItemManager").val(),
-            "itemId":$("#itemId").val(),
-        };
-    if(jsonData.subItemDescription !== '' && jsonData.subItemName !== '')
-    {
-        $.ajax(
-            {
-                type:"post",
-                url:url,
-                data:jsonData,
-                success:function (data)
-                {
-                    location.href = data;
-                },
-                error:function ()
-                {
-                    alert("未知错误");
-                }
-            }
-        )
     }
 }

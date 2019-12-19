@@ -127,8 +127,3 @@ function updateItem(itemId)
         }
     )
 }
-
-// function manageItem(itemId)
-// {
-//     location.href = "/item/manage?itemId="+itemId;
-// }

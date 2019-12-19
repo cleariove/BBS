@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.WebParam;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,9 @@ public class TopicController {
 
     @Autowired
     private SubCommentServiceImpl subCommentService;
+
+    @Autowired
+    private ItemServiceImpl itemService;
 
     @Autowired
     private SubItemServiceImpl subItemService;
@@ -67,6 +71,19 @@ public class TopicController {
 
         List<Topic> topTopics = topicService.findTopTopic(topicExample2,subItemId);
         SubItem subItem = subItemService.selectByPrimaryKey(String.valueOf(subItemId));
+        MyToken user = null;
+        if(SecurityContextHolder.getContext().getAuthentication() instanceof MyToken)
+            user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
+        if (user != null)
+        {
+            if (user.getUserId().equals(subItem.getManager()) || user.getAuthorities().contains("ROLE_ADMIN"))
+            {
+                List<Item> items = itemService.findAll();
+                model.addAttribute("items",items);
+                List<User> users = userService.findAll();
+                model.addAttribute("users",users);
+            }
+        }
 
         //分割数据成功
         model.addAttribute("topics",topics);

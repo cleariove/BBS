@@ -42,20 +42,10 @@ public class SubItemController
             myToken = (MyToken) SecurityContextHolder.getContext().getAuthentication();
         if(myToken != null)
         {
-            List<User> users = null;
-            if(myToken.getAuthorities().contains("ROLE_ADMIN"))
+            if(myToken.getAuthorities().contains("ROLE_ADMIN") || myToken.getUserId().equals(item.getManager()))
             {
-                users = userService.findAll();
+                List<User> users = userService.findAll();
                 model.addAttribute("managers",users);
-            }
-            else
-            {
-                int manager = itemService.getManagerIdByItemId(id);
-                if(manager == myToken.getUserId())
-                {
-                    users = userService.findAll();
-                    model.addAttribute("managers",users);
-                }
             }
         }
         model.addAttribute("count",count);
@@ -64,16 +54,8 @@ public class SubItemController
         return "subItem";
     }
 
-    @RequestMapping("/showAll")
-    public String showAll(Model model)
-    {
-        List<SubItem> subItems = subItemService.selectAll();
-        model.addAttribute("allSubItem",subItems);
-        return "oldsubItem";
-    }
-
     @ResponseBody
-    @RequestMapping(value = "/upload",method = RequestMethod.POST)
+    @RequestMapping(value = "/manage/upload",method = RequestMethod.POST)
     public String upload(@RequestParam("subItemFile") MultipartFile file,
                          @RequestParam("subItemId") String id)
     {
@@ -83,7 +65,7 @@ public class SubItemController
         return "/subItem/manage?subItemId="+id;
     }
 
-    @RequestMapping("/create")
+    @RequestMapping("/manage")
     public String manageSubItem(Model model,@RequestParam("itemId")String itemId)
     {
         Item item = itemService.selectByPrimaryKey(itemId);
@@ -94,7 +76,7 @@ public class SubItemController
     }
 
     @ResponseBody
-    @RequestMapping("/insert")
+    @RequestMapping("/manage/insert")
     public String insertSubItem(@RequestParam("subItemName")String name,
                                 @RequestParam("subItemDescription")String description,
                                 @RequestParam(value = "manager",defaultValue = "") String manager,
@@ -105,7 +87,7 @@ public class SubItemController
     }
 
     @ResponseBody
-    @RequestMapping("/delete")
+    @RequestMapping("/manage/delete")
     public String deleteSubItem(@RequestParam("subItemId")String id)
     {
         Integer itemId = subItemService.selectByPrimaryKey(id).getItemId();
@@ -114,7 +96,7 @@ public class SubItemController
     }
 
     @ResponseBody
-    @RequestMapping("/update")
+    @RequestMapping("/manage/update")
     public String update(@RequestParam("subItemId")String id,
                        @RequestParam(value = "subItemName",defaultValue = "")String name,
                        @RequestParam(value = "subItemDescription",defaultValue = "")String description,
@@ -123,13 +105,5 @@ public class SubItemController
     {
         subItemService.update(id, name, description, manager, itemId);
         return "/subItem/show?itemId="+itemId;
-    }
-
-    @ResponseBody
-    @RequestMapping("/getItem")
-    public String getItem(Model model,@RequestParam("itemId")String id)
-    {
-        model.addAttribute("belongItem",itemService.selectByPrimaryKey(id));
-        return null;
     }
 }
