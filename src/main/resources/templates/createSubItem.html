@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>创建子栏目</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Forum - Responsive HTML5 Template">
+    <meta name="author" content="Forum">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/subItem.js}"></script>
+</head>
+<body>
+<nav class="panel-menu" id="mobile-menu">
+    <ul>
+
+    </ul>
+    <div class="mm-navbtn-names">
+        <div class="mm-closebtn">
+            Close
+            <div class="tt-icon">
+                <svg>
+                    <use xlink:href="#icon-cancel"></use>
+                </svg>
+            </div>
+        </div>
+        <div class="mm-backbtn">Back</div>
+    </div>
+</nav>
+<header id="tt-header">
+    <div class="container">
+        <div class="row tt-row no-gutters">
+            <div class="col-auto">
+                <!-- toggle mobile menu -->
+                <a class="toggle-mobile-menu" href="#">
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-menu_icon"></use>
+                    </svg>
+                </a>
+                <!-- /toggle mobile menu -->
+                <!-- logo -->
+                <div class="tt-logo">
+                    <a href="../static/test/index.html"><img src="../static/images/logo.png" alt=""></a>
+                </div>
+                <!-- /logo -->
+                <!-- desctop menu -->
+                <div class="tt-desktop-menu">
+                    <nav>
+                        <ul>
+                            <li><a href="item.html"><span>Categories</span></a></li>
+                            <li><a href="../static/test/page-tabs.html"><span>Trending</span></a></li>
+                            <li><a href="page-create-topic.html"><span>New</span></a></li>
+                            <li>
+                                <a href="../static/test/page-single-user.html"><span>Pages</span></a>
+                                <ul>
+                                    <li><a href="../static/test/index.html">Home</a></li>
+                                    <li><a href="page-single-topic.html">Single Topic</a></li>
+                                    <li><a href="page-create-topic.html">Create Topic</a></li>
+                                    <li><a href="../static/test/page-single-user.html">Single User Activity</a></li>
+                                    <li><a href="../static/test/page-single_threads.html">Single User Threads</a></li>
+                                    <li><a href="../static/test/page-single_replies.html">Single User Replies</a></li>
+                                    <li><a href="../static/test/page-single_followers.html">Single User Followers</a></li>
+                                    <li><a href="subItem.html">Single User Categories</a></li>
+                                    <li><a href="modItem.html">Single User Settings</a></li>
+                                    <li><a href="../static/test/page-signup.html">Sign up</a></li>
+                                    <li><a href="../static/test/page-login.html">Log in</a></li>
+                                    <li><a href="item.html">Categories</a></li>
+                                    <li><a href="page-create-topic.html">Single Category</a></li>
+                                    <li><a href="../static/test/page-tabs.html">About</a></li>
+                                    <li><a href="../static/test/page-tabs_guidelines.html">Guidelines</a></li>
+                                    <li><a href="../static/test/_demo_modal-advancedSearch.html">Advanced Search</a></li>
+                                    <li><a href="../static/test/error404.html">Error 404</a></li>
+                                    <li><a href="../static/test/_demo_modal-age-confirmation.html">Age Verification</a></li>
+                                    <li><a href="../static/test/_demo_modal-level-up.html">Level up Notification</a></li>
+                                    <li><a href="../static/test/messages-page.html">Message</a></li>
+                                    <li><a href="../static/test/messages-compose.html">Message Compose</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- /desctop menu -->
+                <!-- tt-search -->
+                <div class="tt-search">
+                    <!-- toggle -->
+                    <button class="tt-search-toggle" data-toggle="modal" data-target="#modalAdvancedSearch">
+                        <svg class="tt-icon">
+                            <use xlink:href="#icon-search"></use>
+                        </svg>
+                    </button>
+                    <!-- /toggle -->
+                    <form class="search-wrapper">
+                        <div class="search-form">
+                            <input type="text" class="tt-search__input" placeholder="Search">
+                            <button class="tt-search__btn" type="submit">
+                                <svg class="tt-icon">
+                                    <use xlink:href="#icon-search"></use>
+                                </svg>
+                            </button>
+                            <button class="tt-search__close">
+                                <svg class="tt-icon">
+                                    <use xlink:href="#cancel"></use>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="search-results">
+                            <div class="tt-search-scroll">
+                                <ul>
+                                    <li>
+                                        <a href="page-single-topic.html">
+                                            <h6 class="tt-title">Rdr2 secret easter eggs</h6>
+                                            <div class="tt-description">
+                                                Here’s what I’ve found in Red Dead Redem..
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="page-single-topic.html">
+                                            <h6 class="tt-title">Top 10 easter eggs in Red Dead Rede..</h6>
+                                            <div class="tt-description">
+                                                You can find these easter eggs in Red Dea..
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="page-single-topic.html">
+                                            <h6 class="tt-title">Red Dead Redemtion: Arthur Morgan..</h6>
+                                            <div class="tt-description">
+                                                Here’s what I’ve found in Red Dead Redem..
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="page-single-topic.html">
+                                            <h6 class="tt-title">Rdr2 secret easter eggs</h6>
+                                            <div class="tt-description">
+                                                Here’s what I’ve found in Red Dead Redem..
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="page-single-topic.html">
+                                            <h6 class="tt-title">Top 10 easter eggs in Red Dead Rede..</h6>
+                                            <div class="tt-description">
+                                                You can find these easter eggs in Red Dea..
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="page-single-topic.html">
+                                            <h6 class="tt-title">Red Dead Redemtion: Arthur Morgan..</h6>
+                                            <div class="tt-description">
+                                                Here’s what I’ve found in Red Dead Redem..
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <button type="button" class="tt-view-all" data-toggle="modal" data-target="#modalAdvancedSearch">Advanced Search</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /tt-search -->
+            </div>
+            <div class="col-auto ml-auto">
+                <div class="tt-user-info d-flex justify-content-center">
+                    <a href="#" class="tt-btn-icon">
+                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                    </a>
+                    <div class="tt-avatar-icon tt-size-md">
+                        <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
+                    </div>
+                    <div class="custom-select-01">
+                        <select>
+                            <option value="Default Sorting">azyrusmax</option>
+                            <option value="value 01">value 01</option>
+                            <option value="value 02">value 02</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main id="tt-pageContent">
+    <div class="tt-custom-mobile-indent container">
+        <div class="tt-categories-title">
+            <div class="tt-title">创建子栏目</div>
+        </div>
+    </div>
+    <form class="form-default" style="width: 700px;margin:0 auto;position: relative;top: -150px">
+        <div class="tt-form-upload">
+            <div class="row no-gutter">
+                <div class="col-auto">
+                    <div class="tt-avatar">
+                        <svg>
+                            <use xlink:href="#icon-ava-d"></use>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="subItemName">子栏目名称</label>
+            <input type="text" name="name" class="form-control" id="subItemName"
+                   th:placeholder="此项为必填项">
+        </div>
+        <div class="form-group">
+            <label for="subItemDescription">子栏目描述</label>
+            <input type="text" name="name" class="form-control" id="subItemDescription"
+                   th:placeholder="此项为必填项">
+        </div>
+        <div class="form-group">
+            <label for="itemId">所属栏目</label>
+            <select id="itemId" class="form-control">
+                <option th:each="item:${items}" th:text="${item.itemName}" th:value="${item.itemId}"
+                        th:selected="(${oneItem.getItemId()} != ${item.itemId})?'false':'true'">
+            </select>
+        </div>
+        <div class="form-group">
+            <a  th:href="'javascript:insertSubItem('+${#authentication.userId}+')'" class="btn btn-secondary" style="color: white">创建</a>
+        </div>
+    </form>
+</main>
+</body>
+</html>
