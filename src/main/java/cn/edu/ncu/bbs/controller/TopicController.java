@@ -3,13 +3,11 @@ package cn.edu.ncu.bbs.controller;
 
 import cn.edu.ncu.bbs.domain.*;
 import cn.edu.ncu.bbs.domain.security.MyToken;
-import cn.edu.ncu.bbs.service.Impl.CommentServiceImpl;
-import cn.edu.ncu.bbs.service.Impl.SubCommentServiceImpl;
-import cn.edu.ncu.bbs.service.Impl.SubItemServiceImpl;
-import cn.edu.ncu.bbs.service.Impl.TopicServiceImpl;
+import cn.edu.ncu.bbs.service.Impl.*;
 
 import com.github.pagehelper.PageHelper;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -37,9 +35,18 @@ public class TopicController {
     @Autowired
     private SubItemServiceImpl subItemService;
 
+    @Autowired
+    private UserServiceImpl userService;
+
     @RequestMapping(value = "/test")
+    @ResponseBody
     public String test(){
-        return "test";
+        TopicExample topicExample =new TopicExample();
+        PageHelper.startPage(1,5);
+        List<Topic> topics = topicService.findAllTopic(topicExample);
+//        PageInfo page = new PageInfo(topics);
+        PageInfo<Topic> pageInfo=new PageInfo(topics);
+        return pageInfo.toString();
     }
 
 
@@ -52,14 +59,15 @@ public class TopicController {
         TopicExample topicExample =new TopicExample();
         TopicExample topicExample2 = new TopicExample();
         //pageNum:表示第几页  pageSize:表示一页展示的数据
-        PageHelper.startPage(pageNum,3);
-
+        PageHelper.startPage(pageNum,5);
         List<Topic> topics=topicService.findTopicBySubItemId(topicExample,subItemId);
+        //将查询到的数据封装到PageInfo对象
+        PageInfo<Topic> pageInfo=new PageInfo(topics);
+        model.addAttribute("pageInfo",pageInfo);
+
         List<Topic> topTopics = topicService.findTopTopic(topicExample2,subItemId);
         SubItem subItem = subItemService.selectByPrimaryKey(String.valueOf(subItemId));
 
-        //将查询到的数据封装到PageInfo对象
-        //PageInfo<Topic> pageInfo=new PageInfo(list,3);
         //分割数据成功
         model.addAttribute("topics",topics);
         model.addAttribute("topTopics",topTopics);
@@ -95,8 +103,11 @@ public class TopicController {
     public Map<String,Object> createTopic(@RequestBody Topic topic){
 
         Map<String,Object> map = new HashMap<>();
-        MyToken user=(MyToken) SecurityContextHolder.getContext().getAuthentication();
-        topic.setManager(user.getUserId());
+        MyToken user = null;
+        if(SecurityContextHolder.getContext().getAuthentication() instanceof MyToken)
+            user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
+        if(user != null)
+            topic.setManager(user.getUserId());
         topicService.createTopic(topic);
         map.put("result","OK");
         return map;
@@ -124,8 +135,12 @@ public class TopicController {
         Topic topic= topicService.getTopicById(Integer.parseInt(id));
         model.addAttribute("topic",topic);
 
+        //文章作者
+        User user =userService.findById(String.valueOf(topic.getManager()));
+        model.addAttribute("user",user);
 
-        return "page-single-topic.html";
+
+        return "singleTopic";
     }
 
 
@@ -187,5 +202,15 @@ public class TopicController {
         return "redirect:/topic?subItemId="+subItemId;
     }
 
+    @GetMapping("/updateBrowse/{topicId}")
+    @ResponseBody
+    public Map<String,Object> updateBrowse(@PathVariable int topicId){
+        Map<String,Object> map = new HashMap<>();
+        Topic topic = topicService.getTopicById(topicId);
+        int browse = topic.getBrowse()+1;
+        topicService.updateBrowse(topicId,browse);
+        map.put("result","OK");
+        return map;
+    }
 
 }

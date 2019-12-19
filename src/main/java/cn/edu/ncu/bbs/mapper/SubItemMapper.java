@@ -32,4 +32,6 @@ public interface SubItemMapper {
     int updateByPrimaryKeySelective(SubItem record);
 
     int updateByPrimaryKey(SubItem record);
+
+    int getManagerIdBySubItemId(Integer subItemId);
 }

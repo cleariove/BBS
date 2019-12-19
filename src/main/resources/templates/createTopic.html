@@ -10,11 +10,12 @@
     <link rel="shortcut icon" href="/static/test/favicon/favicon.ico">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/static/test/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
     <script src="/static/js/topic.js"></script>
     <script src="/static/js/jquery.min.js" ></script>
     <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/test/js/bundle.js"></script>
+    <script src="/static/js/bundle.js"></script>
 </head>
 <body onload="initAJAX()">
 <!-- tt-mobile menu -->
@@ -222,9 +223,9 @@
                                     <span class="tt-text">Discussion</span>
                                 </a>
                             </div>
-                            <div class="col-4 col-lg-3 col-xl-2">
 
-                                <a onclick="getTopicType(this)"  class="tt-button-icon">
+                            <div class="col-4 col-lg-3 col-xl-2">
+                                <a  onclick="getTopicType(this)"  class="tt-button-icon">
                                     <span class="tt-icon">
                                          <svg>
                                             <use xlink:href="#Question"></use>
@@ -233,10 +234,11 @@
                                     <span class="tt-text">Question</span>
                                 </a>
                             </div>
-
                         </div>
                     </div>
+                    <div id="setting">
 
+                </div>
                 </div>
                 <div class="pt-editor">
                     <h6 class="pt-title">文 章 内 容</h6>

@@ -6,6 +6,8 @@ import cn.edu.ncu.bbs.domain.Topic;
 import cn.edu.ncu.bbs.domain.TopicExample;
 import cn.edu.ncu.bbs.mapper.TopicMapper;
 import cn.edu.ncu.bbs.service.TopicService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -98,5 +100,22 @@ public class TopicServiceImpl implements TopicService {
         topic.setElite(false);
         topicMapper.updateByPrimaryKeySelective(topic);
     }
+
+    @Override
+    public void updateBrowse(int id,int browse) {
+        Topic topic = new Topic();
+        topic.setTopicId(id);
+        topic.setBrowse(browse);
+        topicMapper.updateByPrimaryKeySelective(topic);
+    }
+
+//    @Override
+//    public PageInfo<Topic> selectRoleList(Integer pageNum, Integer pageSize, Topic topic) {
+//        PageHelper.startPage(pageNum, pageSize);
+//        List<Topic> list = topicMapper.selectByExample(Topic);
+//        PageInfo<Topic> pageInfo = new Topic<>(list);
+//        return pageInfo;
+//    }
+
 
 }

@@ -18,7 +18,8 @@ function insertComment() {
         contentType : "application/json",              //发送至服务器的类型                                      
         type:"post",
         success:function (data) {
-           window.location.reload();
+            if(data.result=="OK")
+                window.location.reload();
         }
 
     });

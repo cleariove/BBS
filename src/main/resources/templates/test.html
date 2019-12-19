@@ -45,3 +45,32 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/topic.js" ></script>
 </html>
+
+<div class="topic-inner-list">
+    <div th:each="subComment:${subComments}">
+    <div class="topic-inner">
+        <div class="topic-inner-title">
+
+            <div class="topic-inner-title">
+                <span th:text="${subComment.subCommentFrom}"></span> To
+                <span th:text="${subComment.subCommentTo}"></span>
+            </div>
+        </div>
+        <div class="topic-inner-description">
+           <span th:text="${subComment.comment}"></span>
+        </div>
+    </div>
+    <hr>
+        <div class="topic-inner">
+            <div class="row">
+                <div class="topic-inner-title">
+                     <span >用户+subCommentFrom</span>+
+                    &nbsp;&nbsp;To&nbsp;&nbsp;+<span>用户 subCommentTo&nbsp;</span>+
+                    "<span>"+content+"</span>"+
+                    "            </div>\n" +
+                "                 <div style="text-align: right" class=\"row\">\n" +
+                    "                    <a style="text-align: right" onclick="">回复</a>\n" +
+                    "                </div>"+
+                "        </div>\n" +
+            "</div>
+</div>

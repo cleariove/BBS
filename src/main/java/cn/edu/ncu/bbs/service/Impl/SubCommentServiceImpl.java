@@ -27,6 +27,14 @@ public class SubCommentServiceImpl implements SubCommentService {
             return subCommentMapper.selectByExample(subCommentExample);
         }
     }
+    @Override
+    public List<SubComment> getSubComment(SubCommentExample subCommentExample, int commentId ) {
+        SubCommentExample.Criteria criteria = subCommentExample.createCriteria();
+
+            criteria.andCommentIdEqualTo(commentId);
+            return subCommentMapper.selectByExample(subCommentExample);
+
+    }
 
     @Override
     public void deleteSubComment(int id) {

@@ -1,5 +1,6 @@
 var xmlHttp = false;
-var topicType=false;
+var ifHelp=false;
+var topicType;
 
 function initAJAX() {
     if (window.XMLHttpRequest) {
@@ -18,7 +19,18 @@ function initAJAX() {
 }
 
 function getTopicType(type) {
-    topicType =  type.innerText;
+    topicType = type.innerText;
+    if (topicType == "Question") {
+        document.getElementById("setting").innerHTML = "<div class=\" form-default\">\n" +
+            "        <div class=\"form-group\">\n" +
+            "        <input name=\"settingIntegral\" class=\"form-control\" placeholder=\"设置积分\" rows=\"1\">\n" +
+            "        </div>\n" +
+            "        </div>"
+    }
+    else {
+        document.getElementById("setting").innerHTML="";
+    }
+
 
 }
 
@@ -28,7 +40,26 @@ function getTopic() {
     var title = document.getElementById("title").value;
     var content =  document.getElementById("content").value;
     var subItemId = document.getElementById("subItemId").value;
-    topicType = topicType == "Question";
+    var type=topicType
+    var integral;
+    alert(type);
+    if(type=="Question"){
+        var strValue = [];
+        $(".settingIntegral").each(function () {
+            var value = $(this).val();
+            strValue.push(value);
+        });
+        ifHelp=true;
+        alert(strValue);
+    }else {
+        ifHelp=false;
+        integral=10;
+        alert(integral)
+    }
+
+
+
+
     var date=getDate();
 
     var data={
@@ -38,8 +69,8 @@ function getTopic() {
         "manager":"",
         "date":date,
         "browse":"111",
-        "integral":"111",
-        "help":topicType,
+        "integral":integral,
+        "help":ifHelp,
         "elite":false,
         "onpageTop":false,
         "subItemId":subItemId
@@ -52,7 +83,18 @@ function createTopic() {
     var title = document.getElementById("title").value;
     var content =  document.getElementById("content").value;
     var subItemId = document.getElementById("subItemId").value;
-    topicType = topicType == "Question";
+    var type=topicType;
+    var integral;
+    if(type=="Question"){
+
+        integral = -(document.getElementsByName("settingIntegral")[0].value);
+        ifHelp=true;
+
+    }else {
+        ifHelp=false;
+        integral=10;
+
+    }
     var date=getDate();
 
     var data={
@@ -61,9 +103,9 @@ function createTopic() {
         "content":content,
         "manager":"",
         "date":date,
-        "browse":"111",
-        "integral":"111",
-        "help":topicType,
+        "browse":"0",
+        "integral":integral,
+        "help":ifHelp,
         "elite":false,
         "onPageTop":false,
         "subItemId":subItemId
@@ -178,30 +220,18 @@ function topicList() {
     
 }
 
-function commentModel(model) {
 
-    $(model).parent().html("<div class=\"tt-wrapper-inner\">\n" +
-        "    <div class=\"pt-editor form-default\">\n" +
-        "        <h6 class=\"pt-title\">Post Your Reply</h6>\n" +
-        "        <div class=\"pt-row\">\n" +
-        "            <div class=\"col-left\">\n" +
-        "            </div>\n" +
-        "            <div class=\"col-right tt-hidden-mobile\">\n" +
-        "                <a href=\"#\" class=\"btn btn-primary\">Preview</a>\n" +
-        "            </div>\n" +
-        "        </div>\n" +
-        "        <!--评论框-->\n" +
-        "        <div class=\"form-group\">\n" +
-        "            <textarea id=\"commentContent\" name=\"message\" class=\"form-control\" rows=\"5\"></textarea>\n" +
-        "        </div>\n" +
-        "        <div class=\"pt-row\">\n" +
-        "            <div class=\"col-auto\">\n" +
-        "            </div>\n" +
-        "            <div class=\"col-auto\">\n" +
-        "                <!--提交评论-->\n" +
-        "                <a style=\"color: white\"  onclick=\"insertSubComment()\" class=\"btn btn-secondary btn-width-lg\">reply</a>\n" +
-        "            </div>\n" +
-        "        </div>\n" +
-        "    </div>\n" +
-        "</div>");
+
+function addBrowse(topicId) {
+    $.ajax({
+        url:"/topic/updateBrowse/"+topicId,
+        data:{},
+        contentType : "application/json",              //发送至服务器的类型   
+        dataType : "json",                                     //预期服务器返回类型  
+        type:"GET",
+        success:function (data) {
+        }
+    });
+    
 }
+

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping({"/comment"})
@@ -23,11 +25,13 @@ public class CommentController {
 
     @PostMapping("")
     @ResponseBody
-    public String CreateComment(@RequestBody Comment comment){
+    public Map<String,Object> CreateComment(@RequestBody Comment comment){
+        Map<String,Object> map = new HashMap<>();
         MyToken user=(MyToken) SecurityContextHolder.getContext().getAuthentication();
         comment.setCommentFrom(user.getUserId());
         commentService.createComment(comment);
-        return "ok";
+        map.put("result","OK");
+        return map;
 
 
 

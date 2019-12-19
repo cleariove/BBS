@@ -2,6 +2,7 @@ package cn.edu.ncu.bbs.service;
 
 import cn.edu.ncu.bbs.domain.Topic;
 import cn.edu.ncu.bbs.domain.TopicExample;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -33,4 +34,8 @@ public interface TopicService {
     void outEliteById(int id);
 
     void eliteById(int id);
+
+    void updateBrowse(int id,int browse);
+
+    //PageInfo<Topic> selectRoleList(Integer pageNum, Integer pageSize, Topic topic);
 }

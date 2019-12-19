@@ -11,4 +11,5 @@ public interface SubCommentService {
     void deleteSubComment(int id);
 
     void createSubComment(SubComment subComment);
+    List<SubComment> getSubComment(SubCommentExample subCommentExample, int commentId );
 }
