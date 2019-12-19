@@ -30,9 +30,6 @@ public class SubItemController
     private ItemServiceImpl itemService;
 
     @Autowired
-    private UserServiceImpl userService;
-
-    @Autowired
     private UserRoleServiceImpl userRoleService;
 
     @RequestMapping("/show")
