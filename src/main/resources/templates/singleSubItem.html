@@ -363,7 +363,12 @@
                 <ul class="pagination">
                     <li><a  th:href="@{'/topic?subItemId='+${subItem.subItemId}}">«</a></li>
 
-                    <li th:each="i:${#numbers.sequence(1,pageInfo.getPages())}">
+                    <li th:if="${pageInfo.getPages()} eq 0" >
+
+                        <a  class="active" th:href="@{'/topic/mytopic?pageNum=1'}" th:text="${1}"></a>
+
+                    </li>
+                    <li th:if="${pageInfo.getPages()} ne 0" th:each="i:${#numbers.sequence(1,pageInfo.getPages())}">
 
                         <a th:if="${pageInfo.getPageNum()} eq ${i}" class="active" th:href="@{'/topic?subItemId='+${subItem.subItemId}+'&pageNum='+${i}}" th:text="${i}"></a>
 
