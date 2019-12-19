@@ -133,10 +133,18 @@
 
 
 
-<a href="page-create-topic.html" class="tt-btn-create-topic">
+<a class="tt-btn-create-topic" sec:authorize="isAuthenticated()"  th:href="@{'/topic/create/'+${topic.subItemId}}">
     <span class="tt-icon">
         <svg>
-          <use xlink:href="#icon-create_new"></use>
+            <use xlink:href="#icon-create_new"></use>
+        </svg>
+    </span>
+</a>
+
+<a class="tt-btn-create-topic" sec:authorize="!isAuthenticated()" onclick="unLogin()" >
+    <span class="tt-icon">
+        <svg>
+            <use xlink:href="#icon-create_new"></use>
         </svg>
     </span>
 </a>

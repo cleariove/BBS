@@ -198,9 +198,11 @@ function updateTopic() {
         dataType : "json",                                     //预期服务器返回类型  
         type:"post",
         success:function (data){
-            if(data.result == "OK")
+            if(data.result == "OK") {
                 alert("修改成功");
+                window.location.href = "/topic/" + topicId
 
+            }
         }
     });
 
