@@ -140,4 +140,20 @@ public class User implements UserDetails
     public void setUserIcon(String userIcon) {
         this.userIcon = userIcon == null ? null : userIcon.trim();
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", job='" + job + '\'' +
+                ", integral=" + integral +
+                ", userIcon='" + userIcon + '\'' +
+                ", authorities=" + authorities +
+                '}';
+    }
 }

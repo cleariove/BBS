@@ -33,39 +33,42 @@ public class UserController {
     }
 
     @RequestMapping("/register")
-    public String showRegister() { return "register"; }
-
-    @RequestMapping("/main")
-    public String showMain() { return "main"; }
+    public String showRegister() { return "page-signup"; }
 
     @RequestMapping("/showUserMes")
     public String showUserMes() { return "userMes"; }
 
     @RequestMapping("/showUserMesUpdate")
     public String showUserMesUpdate() {
-        return "userMesChange";
+        return "myCenter";
     }
 
-    @RequestMapping("/showUserManage")
-    public String showManageUser() {
-        return "userManage";
-    }
 
  @RequestMapping(value = "/register",method = RequestMethod.POST)
- public void register(User user, HttpServletResponse response){
+ public String register(User user, Model model){
      userService.userRegister(user);
-     try {
-         response.sendRedirect("/login");
-     } catch (IOException e) {
-         e.printStackTrace();
-     }
+     model.addAttribute("userId", user.getUserId());
+     return "showId";
  }
 
+ @ResponseBody
+ @RequestMapping(value = "/upload",method = RequestMethod.POST)
+ public String upload(@RequestParam("userId")String userId,@RequestParam("userFile") MultipartFile file)
+ {
+     String base64 = FileUtil.ChangeToBase64(file);// its maximum permitted size of 1048576 bytes.
+     User user=new User();
+     user.setUserId(Integer.valueOf( userId));
+     user.setUserIcon(base64);
+     userService.userChange(user);
+      return null;
+
+ }
     @RequestMapping(value = "/change",method = RequestMethod.POST)
-    public String changeUser(@RequestParam("file") MultipartFile file,User user){
+    public String changeUser(User user){
 //        String path = FileUtil.uploadFile(file, "user" + user.getUserId());
-        userService.userChange(user,file);
-        return "userManage";
+        userService.userChange(user);
+
+        return "myCenter";
     }
 
 

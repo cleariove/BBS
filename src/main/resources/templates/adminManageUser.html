@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8">
+    <title>Forum - Responsive HTML5 Template</title>
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Forum - Responsive HTML5 Template">
+    <meta name="author" content="Forum">
+    <link rel="shortcut icon" href="/static/test/favicon/favicon.ico">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../static/test/css/style.css">
+    <script src="../static/js/jquery.min.js"></script>
+</head>
+<body>
+<!--    <div th:each="user:${usersExceptSelf}" style="border:1px solid;float: left;margin-left: 30px;height: 330px">
+        <img  th:src="|data:image/jpg;base64,*{user.userIcon}|" width="80px" height="80px" alt="用户头像"/>
+        <p id="userId" th:text="*{user.userId}">用户编号</p>
+        <p th:text="*{user.userName}">用户昵称</p>
+        <p th:text="*{user.age}">用户年龄</p>
+        <p th:text="*{user.integral}">用户积分</p>
+        <a  th:onclick="|javascript:getHighPower(*{user.userId})|">查看最高权限</a><br>
+        <a th:href="@{/user/deleteUser(userId=*{user.userId})}">删除</a>
+        <a th:href="@{/userRole/updateUserRole(type='down',opUserId=${#authentication.name},userId=*{user.userId})}">权限下降</a>
+        <a th:href="@{/userRole/updateUserRole(type='up',opUserId=${#authentication.name},userId=*{user.userId})}">权限提升</a>
+    </div>-->
+<header id="tt-header">
+    <div class="container">
+        <div class="row tt-row no-gutters">
+            <div class="col-auto">
+                <a class="toggle-mobile-menu" href="#">
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-menu_icon"></use>
+                    </svg>
+                </a>
+                <div class="tt-logo">
+                    <a href="/index"><img src="../static/test/images/logo.png" alt=""></a>
+                </div>
+                <div class="tt-desktop-menu">
+                    <nav>
+                        <ul>
+                            <li><a href="/index"><span>主页</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="col-auto ml-auto" sec:authorize="hasRole('ROLE_USER')">
+                <div class="col-auto ml-auto">
+                    <div class="tt-user-info d-flex justify-content-center">
+                        <div class="tt-avatar-icon tt-size-md">
+                            <i class="tt-icon">
+                                <img  th:src="|data:image/jpg;base64,${#authentication.userIcon}|" style="height: 40px;width: 40px;border-radius:50%;margin-top: 15px">
+                            </i>
+                        </div>
+                        <div class="custom-select-01">
+                            <div class="tt-desktop-menu">
+                                <nav>
+                                    <ul>
+                                        <li>
+                                            <a><span sec:authentication="userName">用户昵称</span></a>
+                                            <ul>
+                                                <li><a th:href="@{/topic/mytopic}">我的帖子</a></li>
+                                                <li><a th:href="@{/user/showUserMesUpdate}">修改信息</a></li>
+                                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/user/showAdminManageUser(userId=${#authentication.name})}">用户管理</a></li>
+                                                <li><a th:href="@{/logout}">退出登录</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto ml-auto" sec:authorize="!hasRole('ROLE_USER')">
+                <div class="tt-account-btn">
+                    <a th:href="@{/user}" class="btn btn-primary">登录</a>
+                    <a th:href="@{/user/register}"   class="btn btn-secondary">注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<main id="tt-pageContent">
+        <div class="container">
+            <div class="tt-catSingle-title">
+                <div class="tt-innerwrapper tt-row">
+                    <div class="tt-col-left">
+                        <ul class="tt-list-badge">
+                            <li><a><span class="tt-color01 tt-badge">管理用户</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tt-innerwrapper">
+                    轻松便捷地管理用户
+                </div>
+            </div>
+            <div class="tt-topic-list">
+                <div class="tt-list-header">
+                    <div class="tt-col-value hide-mobile">用户头像</div>
+                    <div class="tt-col-value hide-mobile">用户编号</div>
+                    <div class="tt-col-value hide-mobile">用户昵称</div>
+                    <div class="tt-col-value hide-mobile">用户性别</div>
+                    <div class="tt-col-value hide-mobile">用户工作</div>
+                    <div class="tt-col-value hide-mobile">用户积分</div>
+                    <div class="tt-col-value hide-mobile">用户年龄</div>
+                    <div class="tt-col-value hide-mobile">最高权限</div>
+                    <div class="tt-col-value hide-mobile">用户管理</div>
+                    <div class="tt-col-value hide-mobile">修改权限</div>
+                </div>
+                <div th:each="user:${usersExceptSelf}">
+                <div class="tt-item">
+                    <div class="tt-col-avatar">
+                        <img  th:src="|data:image/jpg;base64,*{user.userIcon}|" src="../static/images/user.jpg" style="height: 40px;width: 40px;border-radius:50%">
+                    </div>
+                    <div class="tt-col-value  hide-mobile" th:text="*{user.userId}">1</div>
+                    <div class="tt-col-value  hide-mobile" th:text="*{user.userName}">小明</div>
+                    <div class="tt-col-value  hide-mobile" th:text="*{user.gender}">男</div>
+                    <div class="tt-col-value  hide-mobile" th:text="*{user.job}">学生</div>
+                    <div class="tt-col-value  hide-mobile" th:text="*{user.integral}">308</div>
+                    <div class="tt-col-value  hide-mobile" th:text="*{user.age}">12</div>
+                    <div class="tt-col-value  hide-mobile">
+                        <div class="col-11">
+                            <ul class="tt-list-badge">
+                                <li><a th:onclick="|javascript:getHighPower(*{user.userId})|"><span class="tt-badge">查看</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tt-col-value hide-mobile">
+                        <div class="col-11">
+                            <ul class="tt-list-badge">
+                                <li><a th:href="@{/user/deleteUser(userId=*{user.userId})}"><span class="tt-badge" >删除</span></a></li>
+                                <li><a href="#"><span class="tt-badge">修改</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tt-col-value hide-mobile">
+                        <div class="col-11">
+                            <ul class="tt-list-badge">
+                                <li><a th:href="@{/userRole/updateUserRole(type='up',opUserId=${#authentication.name},userId=*{user.userId})}"><span class="tt-badge" >提升</span></a></li>
+                                <li><a th:href="@{/userRole/updateUserRole(type='down',opUserId=${#authentication.name},userId=*{user.userId})}"><span class="tt-badge" >降低</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script th:inline="javascript">
+        function getHighPower(userId) {
+        $.ajax({
+            url:"/userRole/getHighRole?userId="+userId,
+            contentType : "application/json",              //发送至服务器的类型   
+            dataType : "json",                                     //预期服务器返回类型  
+            type:"get",
+            success:function (data) {
+               alert(data);
+            }
+        });
+    }
+</script>
+</body>
+</html>

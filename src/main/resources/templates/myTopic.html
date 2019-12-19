@@ -13,46 +13,45 @@
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/subItem.js}"></script>
     <script th:src="@{/js/topic.js}"></script>
+    <style>
+        hr{
+            margin-top:0 ;
+            margin-bottom: 0;
+        }
+        .tt-wrapper-success {
+            border: 1px solid #68c193;
+            background-color: #e6fbf0;
+        }
+
+    </style>
+    <style>
+        ul.pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.pagination li {display: inline;}
+
+        ul.pagination li a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            margin: 0 10px ;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        ul.pagination li a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        ul.pagination li a:hover:not(.active) {background-color: #ddd;}
+    </style>
 </head>
-<style>
-    hr{
-        margin-top:0 ;
-        margin-bottom: 0;
-    }
-    .tt-wrapper-success {
-        border: 1px solid #68c193;
-        background-color: #e6fbf0;
-    }
-
-</style>
-<style>
-    ul.pagination {
-        display: inline-block;
-        padding: 0;
-        margin: 0;
-    }
-
-    ul.pagination li {display: inline;}
-
-    ul.pagination li a {
-        color: black;
-        float: left;
-        padding: 8px 16px;
-        margin: 0 10px ;
-        text-decoration: none;
-        border-radius: 5px;
-    }
-
-    ul.pagination li a.active {
-        background-color: #4CAF50;
-        color: white;
-        border-radius: 5px;
-    }
-
-    ul.pagination li a:hover:not(.active) {background-color: #ddd;}
-</style>
-
-<body >
+<body>
 <!-- tt-mobile menu -->
 <nav class="panel-menu" id="mobile-menu">
     <ul>
@@ -74,45 +73,54 @@
     <div class="container">
         <div class="row tt-row no-gutters">
             <div class="col-auto">
-                <!-- toggle mobile menu -->
                 <a class="toggle-mobile-menu" href="#">
                     <svg class="tt-icon">
                         <use xlink:href="#icon-menu_icon"></use>
                     </svg>
                 </a>
-                <!-- /toggle mobile menu -->
-                <!-- logo -->
                 <div class="tt-logo">
-                    <a href="../static/test/index.html"><img src="../static/images/logo.png" alt=""></a>
+                    <a href="/index"><img src="../static/test/images/logo.png" alt=""></a>
                 </div>
-                <!-- /logo -->
-                <!-- desctop menu -->
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="../static/test/page-categories.html"><span>Categories</span></a>
-                            </li>
-
+                            <li><a href="/index"><span>主页</span></a></li>
                         </ul>
                     </nav>
                 </div>
-                <!-- /desctop menu -->
             </div>
-            <div class="col-auto ml-auto">
-                <div class="tt-user-info d-flex justify-content-center">
-                    <a href="#" class="tt-btn-icon">
-                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
-                    </a>
-                    <div class="tt-avatar-icon tt-size-md">
-                        <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
+            <div class="col-auto ml-auto" sec:authorize="hasRole('ROLE_USER')">
+                <div class="col-auto ml-auto">
+                    <div class="tt-user-info d-flex justify-content-center">
+                        <div class="tt-avatar-icon tt-size-md">
+                            <i class="tt-icon">
+                                <img  th:src="|data:image/jpg;base64,${#authentication.userIcon}|" style="height: 40px;width: 40px;border-radius:50%;margin-top: 15px">
+                            </i>
+                        </div>
+                        <div class="custom-select-01">
+                            <div class="tt-desktop-menu">
+                                <nav>
+                                    <ul>
+                                        <li>
+                                            <a><span sec:authentication="userName">用户昵称</span></a>
+                                            <ul>
+                                                <li><a th:href="@{/topic/mytopic}">我的帖子</a></li>
+                                                <li><a th:href="@{/user/showUserMesUpdate}">修改信息</a></li>
+                                                <li sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/user/showAdminManageUser(userId=${#authentication.name})}">用户管理</a></li>
+                                                <li><a th:href="@{/logout}">退出登录</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
                     </div>
-                    <div class="custom-select-01">
-                        <select>
-                            <option value="Default Sorting">azyrusmax</option>
-                            <option value="value 01">value 01</option>
-                            <option value="value 02">value 02</option>
-                        </select>
-                    </div>
+                </div>
+            </div>
+            <div class="col-auto ml-auto" sec:authorize="!hasRole('ROLE_USER')">
+                <div class="tt-account-btn">
+                    <a th:href="@{/user}" class="btn btn-primary">登录</a>
+                    <a th:href="@{/user/register}"   class="btn btn-secondary">注册</a>
                 </div>
             </div>
         </div>

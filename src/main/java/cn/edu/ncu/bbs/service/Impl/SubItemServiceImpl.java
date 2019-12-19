@@ -89,8 +89,8 @@ public class SubItemServiceImpl implements SubItemService
         return subItemMapper.countByExample(subItemExample);
     }
 
-    public int getManagerIdBySubItemId(Integer subItemId)
+  /*  public int getManagerIdBySubItemId(Integer subItemId)
     {
         return subItemMapper.getManagerIdBySubItemId(subItemId);
-    }
+    }*/
 }

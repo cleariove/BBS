@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+你的注册ID是：<p th:text="*{userId}"></p>
+<a th:href="@{/user}">前往登录</a>
+</body>
+</html>

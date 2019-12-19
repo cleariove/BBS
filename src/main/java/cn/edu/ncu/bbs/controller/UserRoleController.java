@@ -42,4 +42,10 @@ public class UserRoleController {
         return userRoleService.getHighPower(userId);
     }
 
+
+    @RequestMapping(value = "/findAllManage",method = RequestMethod.GET)
+    @ResponseBody
+    public List<User> findAllManage(){
+    return   userRoleService.findAllManage();
+    }
 }

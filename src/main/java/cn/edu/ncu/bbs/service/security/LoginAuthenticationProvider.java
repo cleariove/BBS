@@ -5,6 +5,7 @@ import cn.edu.ncu.bbs.domain.security.MyToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
@@ -44,8 +45,9 @@ public class LoginAuthenticationProvider implements AuthenticationProvider
         myToken.setUserIcon(user.getUserIcon());
         myToken.setIntegral(user.getIntegral());
         myToken.setJob(user.getJob());
+        myToken.setPassword(user.getPassword());
         return myToken;
-//        return new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
+      // return new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
     }
 
     @Override

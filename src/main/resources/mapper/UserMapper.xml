@@ -233,19 +233,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.edu.ncu.bbs.domain.User" >
     update user
     <set >
+      user_id = #{userId,jdbcType=INTEGER},
       <if test="userName != null and userName!=''" >
         user_name = #{userName,jdbcType=VARCHAR},
       </if>
       <if test="password != null and password != ''" >
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="name != null" >
+      <if test="name != null and name!=''" >
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="gender != null and gender!=''">
         gender = #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="age != null">
+      <if test="age != null and age!=''">
         age = #{age,jdbcType=INTEGER},
       </if>
       <if test="job != null and job!=''">
@@ -255,7 +256,7 @@
         integral = #{integral,jdbcType=INTEGER},
       </if>
       <if test="userIcon != null and userIcon!=''" >
-        user_icon = #{userIcon,jdbcType=VARCHAR},
+        user_icon = #{userIcon,jdbcType=VARCHAR}
       </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}

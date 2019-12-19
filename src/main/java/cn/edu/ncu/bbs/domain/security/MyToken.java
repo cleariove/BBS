@@ -15,6 +15,8 @@ public class MyToken extends AbstractAuthenticationToken
 
     private String gender;
 
+    private String password;
+
     private Integer age;
 
     private String job;
@@ -126,5 +128,13 @@ public class MyToken extends AbstractAuthenticationToken
     public void setUserIcon(String userIcon)
     {
         this.userIcon = userIcon;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

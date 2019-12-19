@@ -18,6 +18,11 @@ function checkImgType(element)
             element.value = "";
             return false;
         }
+        if(element.files[0].size > 0.99*1024*1024)
+        {
+            alert("请上传小于0.99M大小的图片");
+            return false;
+        }
     }
     return true;
 }
