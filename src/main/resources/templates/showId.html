@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
-你的注册ID是：<p th:text="*{userId}"></p>
-<a th:href="@{/user}">前往登录</a>
+<div style="text-align: center">
+    你的注册ID是:<p style="color: red;display: inline-block" th:text="|*{userId}|"></p>
+    <br>
+    <br>
+    <div>
+        <a th:href="@{/user}" class="btn btn-secondary" style="color: aliceblue">前往登录</a>
+    </div>
+</div>
 </body>
 </html>

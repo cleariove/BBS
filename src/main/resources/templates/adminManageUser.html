@@ -6,24 +6,13 @@
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Forum - Responsive HTML5 Template">
     <meta name="author" content="Forum">
-    <link rel="shortcut icon" href="/static/test/favicon/favicon.ico">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../static/test/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
     <script src="../static/js/jquery.min.js"></script>
 </head>
 <body>
-<!--    <div th:each="user:${usersExceptSelf}" style="border:1px solid;float: left;margin-left: 30px;height: 330px">
-        <img  th:src="|data:image/jpg;base64,*{user.userIcon}|" width="80px" height="80px" alt="用户头像"/>
-        <p id="userId" th:text="*{user.userId}">用户编号</p>
-        <p th:text="*{user.userName}">用户昵称</p>
-        <p th:text="*{user.age}">用户年龄</p>
-        <p th:text="*{user.integral}">用户积分</p>
-        <a  th:onclick="|javascript:getHighPower(*{user.userId})|">查看最高权限</a><br>
-        <a th:href="@{/user/deleteUser(userId=*{user.userId})}">删除</a>
-        <a th:href="@{/userRole/updateUserRole(type='down',opUserId=${#authentication.name},userId=*{user.userId})}">权限下降</a>
-        <a th:href="@{/userRole/updateUserRole(type='up',opUserId=${#authentication.name},userId=*{user.userId})}">权限提升</a>
-    </div>-->
 <header id="tt-header">
     <div class="container">
         <div class="row tt-row no-gutters">
@@ -82,33 +71,33 @@
     </div>
 </header>
 <main id="tt-pageContent">
-        <div class="container">
-            <div class="tt-catSingle-title">
-                <div class="tt-innerwrapper tt-row">
-                    <div class="tt-col-left">
-                        <ul class="tt-list-badge">
-                            <li><a><span class="tt-color01 tt-badge">管理用户</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="tt-innerwrapper">
-                    轻松便捷地管理用户
+    <div class="container">
+        <div class="tt-catSingle-title">
+            <div class="tt-innerwrapper tt-row">
+                <div class="tt-col-left">
+                    <ul class="tt-list-badge">
+                        <li><a><span class="tt-color01 tt-badge">管理用户</span></a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="tt-topic-list">
-                <div class="tt-list-header">
-                    <div class="tt-col-value hide-mobile">用户头像</div>
-                    <div class="tt-col-value hide-mobile">用户编号</div>
-                    <div class="tt-col-value hide-mobile">用户昵称</div>
-                    <div class="tt-col-value hide-mobile">用户性别</div>
-                    <div class="tt-col-value hide-mobile">用户工作</div>
-                    <div class="tt-col-value hide-mobile">用户积分</div>
-                    <div class="tt-col-value hide-mobile">用户年龄</div>
-                    <div class="tt-col-value hide-mobile">最高权限</div>
-                    <div class="tt-col-value hide-mobile">用户管理</div>
-                    <div class="tt-col-value hide-mobile">修改权限</div>
-                </div>
-                <div th:each="user:${usersExceptSelf}">
+            <div class="tt-innerwrapper">
+                轻松便捷地管理用户
+            </div>
+        </div>
+        <div class="tt-topic-list">
+            <div class="tt-list-header">
+                <div class="tt-col-value hide-mobile">用户头像</div>
+                <div class="tt-col-value hide-mobile">用户编号</div>
+                <div class="tt-col-value hide-mobile">用户昵称</div>
+                <div class="tt-col-value hide-mobile">用户性别</div>
+                <div class="tt-col-value hide-mobile">用户工作</div>
+                <div class="tt-col-value hide-mobile">用户积分</div>
+                <div class="tt-col-value hide-mobile">用户年龄</div>
+                <div class="tt-col-value hide-mobile">最高权限</div>
+                <div class="tt-col-value hide-mobile">用户管理</div>
+                <div class="tt-col-value hide-mobile">修改权限</div>
+            </div>
+            <div th:each="user:${usersExceptSelf}">
                 <div class="tt-item">
                     <div class="tt-col-avatar">
                         <img  th:src="|data:image/jpg;base64,*{user.userIcon}|" src="../static/images/user.jpg" style="height: 40px;width: 40px;border-radius:50%">
@@ -145,9 +134,8 @@
                 </div>
             </div>
         </div>
-    </main>
-</div>
-
+    </div>
+</main>
 <script th:inline="javascript">
         function getHighPower(userId) {
         $.ajax({
