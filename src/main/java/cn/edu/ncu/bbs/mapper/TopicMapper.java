@@ -4,13 +4,12 @@ import cn.edu.ncu.bbs.domain.Topic;
 import cn.edu.ncu.bbs.domain.TopicExample;
 import java.util.List;
 
-import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-@Mapper
 @Repository
+@Mapper
 public interface TopicMapper {
     int countByExample(TopicExample example);
 
