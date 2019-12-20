@@ -19,14 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private MyUserDetailService myUserDetailService;
 
-    //处理登录成功后的页面
-    @Autowired
-    private LoginSuccessAuthenticationHandler successAuthenticationHandler;
-
-    //处理登录失败后的页面
-    @Autowired
-    private LoginFailureAuthenticationHandler failureAuthenticationHandler;
-
     //处理权限不足的页面
     @Autowired
     private AuthenticationAccessDeniedHandler accessDeniedHandler;
@@ -77,12 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
 
                 .and()
                 .formLogin()
-                .successHandler(successAuthenticationHandler)
-                .failureHandler(failureAuthenticationHandler)
+                .loginPage("/login.html")
+                .loginProcessingUrl("/index")
                 .permitAll()
 
                 .and()
-                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
+                .exceptionHandling()
+                .accessDeniedHandler(accessDeniedHandler)
 
                 .and()
                 .rememberMe()
@@ -90,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .and()
                 .logout()
                 .logoutUrl("/logout")
+                .logoutSuccessUrl("/index")
 
                 .and()
                 .httpBasic();

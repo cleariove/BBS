@@ -19,10 +19,6 @@ public class AuthenticationAccessDeniedHandler implements AccessDeniedHandler
     {
         //设置响应码
         httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        httpServletResponse.setContentType("application/json;charset=UTF-8");
-
-        PrintWriter out = httpServletResponse.getWriter();
-        out.print("您的权限不足无法访问");
-        out.flush();
+        httpServletRequest.getRequestDispatcher("/page/403").forward(httpServletRequest,httpServletResponse);
     }
 }
