@@ -127,45 +127,19 @@
     </div>
 </header>
 <main id="tt-pageContent" class="tt-offset-small">
-    <!--<div class="tt-wrapper-section">-->
-        <!--<div class="container">-->
-            <!--<div class="tt-user-header">-->
-                <!--<div class="tt-col-avatar">-->
-                    <!--<img alt="栏目图片" th:src="|data:image/jpg;base64,${subItem.getSubItemIcon()}|"-->
-                         <!--style="max-width: 100px;max-height: 100px">-->
-                <!--</div>-->
-                <!--<div class="tt-col-title" style="position: relative;right: -10px">-->
-                    <!--<div class="tt-title">-->
-                        <!--<a href="#" th:text="${subItem.getSubItemName()}"></a>-->
-                    <!--</div>-->
-                    <!--<ul class="tt-list-badge">-->
-                        <!--<li>-->
-                            <!--<a href="#">-->
-                                <!--<span class="tt-color14 tt-badge" th:text="|帖子总数:${pageInfo.total+topTopics.size()}|">-->
-                                <!--</span>-->
-                            <!--</a>-->
-                        <!--</li>-->
-                        <!--<li style="position: relative;top: 30px;left: -180px">-->
-                            <!--<a href="#">-->
-                                <!--<span class="tt-color10 tt-badge" th:text="${subItem.subItemDescription}">-->
-                                <!--</span>-->
-                            <!--</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-                <!--<div class="tt-col-btn" id="js-settings-btn" sec:authorize="isAuthenticated()">-->
-                    <!--<div class="tt-list-btn">-->
-                        <!--<a href="#" class="tt-btn-icon" th:if="(${#authentication.userId} eq ${subItem.getManager()}) or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
-                            <!--<svg class="tt-icon">-->
-                                <!--<use xlink:href="#icon-settings_fill"></use>-->
-                            <!--</svg>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
     <div class="container">
+        <div class="tt-categories-title">
+            <div class="tt-title">我的帖子</div>
+<!--            <div style="width: 50px;height: 50px">-->
+<!--                <a href="/item/manage">-->
+<!--                    <span class="tt-icon">-->
+<!--                        <svg style="width: 50px;height: 50px">-->
+<!--                            <use xlink:href="#icon-create_new"></use>-->
+<!--                        </svg>-->
+<!--                    </span>-->
+<!--                </a>-->
+<!--            </div>-->
+        </div>
         <div class="tt-topic-list">
             <div class="tt-list-header">
                 <div   class="tt-col-topic">文章</div>

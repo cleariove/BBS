@@ -1,13 +1,9 @@
 package cn.edu.ncu.bbs.service.Impl;
 
-import cn.edu.ncu.bbs.domain.Item;
-import cn.edu.ncu.bbs.domain.ItemExample;
 import cn.edu.ncu.bbs.domain.Topic;
 import cn.edu.ncu.bbs.domain.TopicExample;
 import cn.edu.ncu.bbs.mapper.TopicMapper;
 import cn.edu.ncu.bbs.service.TopicService;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +12,8 @@ import java.util.List;
 @Service
 public class TopicServiceImpl implements TopicService {
 
-
-
     @Autowired
     private TopicMapper topicMapper;
-
 
     @Override
     public void createTopic(Topic topic) {
@@ -33,7 +26,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> getTopicByUserId(TopicExample topicExample,int userId) {
+    public List<Topic> getTopicByUserId(TopicExample topicExample, int userId) {
         TopicExample.Criteria criteria =topicExample.createCriteria();
         criteria.andManagerEqualTo(userId);
         return topicMapper.selectByExample(topicExample);
@@ -123,6 +116,12 @@ public class TopicServiceImpl implements TopicService {
         topic.setTopicId(topicId);
         topic.setAdoptId(commentId);
         topicMapper.updateByPrimaryKeySelective(topic);
+    }
+
+    @Override
+    public List<Topic> findByItemId(Integer itemId)
+    {
+        return topicMapper.findByItemId(itemId);
     }
 
 

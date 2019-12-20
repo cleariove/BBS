@@ -2,10 +2,12 @@ package cn.edu.ncu.bbs.controller;
 
 import cn.edu.ncu.bbs.domain.Item;
 import cn.edu.ncu.bbs.domain.SubItem;
+import cn.edu.ncu.bbs.domain.Topic;
 import cn.edu.ncu.bbs.domain.User;
 import cn.edu.ncu.bbs.domain.security.MyToken;
 import cn.edu.ncu.bbs.service.Impl.ItemServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.SubItemServiceImpl;
+import cn.edu.ncu.bbs.service.Impl.TopicServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.UserRoleServiceImpl;
 import cn.edu.ncu.bbs.until.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class SubItemController
     @Autowired
     private UserRoleServiceImpl userRoleService;
 
+    @Autowired
+    private TopicServiceImpl topicService;
+
     @RequestMapping("/show")
     public String showSubItemByItemId(Model model, @RequestParam("itemId")String id)
     {
@@ -47,6 +52,8 @@ public class SubItemController
                 model.addAttribute("managers",users);
             }
         }
+        List<Topic> topics = topicService.findByItemId(Integer.valueOf(id));
+        model.addAttribute("topics",topics);
         model.addAttribute("count",count);
         model.addAttribute("selectItem",item);
         model.addAttribute("allSubItem",subItems);

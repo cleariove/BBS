@@ -97,6 +97,13 @@
     from topic
     where topic_id = #{topicId,jdbcType=INTEGER}
   </select>
+  <select id="findByItemId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from topic
+    where sub_item_id IN
+    (SELECT sub_item_id
+    from sub_item
+    WHERE item_id = #{topicId,jdbcType=INTEGER})
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from topic
     where topic_id = #{topicId,jdbcType=INTEGER}

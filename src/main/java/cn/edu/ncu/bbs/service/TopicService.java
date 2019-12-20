@@ -2,7 +2,6 @@ package cn.edu.ncu.bbs.service;
 
 import cn.edu.ncu.bbs.domain.Topic;
 import cn.edu.ncu.bbs.domain.TopicExample;
-import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -37,9 +36,11 @@ public interface TopicService {
 
     void updateBrowse(int id,int browse);
 
-    List<Topic> getTopicByUserId(TopicExample topicExample,int userId);
+    List<Topic> getTopicByUserId(TopicExample topicExample, int userId);
 
     void chooseAdoptId(int topicId, int commentId);
+
+    List<Topic> findByItemId(Integer itemId);
 
     //PageInfo<Topic> selectRoleList(Integer pageNum, Integer pageSize, Topic topic);
 }

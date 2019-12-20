@@ -89,7 +89,6 @@
         </div>
     </div>
 </header>
-
 <main id="tt-pageContent">
     <div class="tt-custom-mobile-indent container">
         <div class="tt-categories-title">
@@ -137,7 +136,7 @@
                                         <li th:each="subItem:${showSubItemInItem}">
                                             <a th:if="(*{subItem.getItemId()} eq *{item.getItemId()})"
                                                th:href="@{'/topic?subItemId='+${subItem.subItemId}}">
-                                                <span class="tt-badge" th:text="*{subItem.getSubItemName()}">
+                                                <span class="tt-color15 tt-badge" th:text="*{subItem.getSubItemName()}">
                                                 </span>
                                             </a>
                                         </li>
@@ -160,7 +159,6 @@
                 </div>
                 </div>
             </div>
-        </div>
     </div>
 </main>
 <script src="../static/js/bundle.js"></script>

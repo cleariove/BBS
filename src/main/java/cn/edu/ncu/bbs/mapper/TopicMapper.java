@@ -35,5 +35,7 @@ public interface TopicMapper {
 
     List<Topic> getTopicByUserId(TopicExample topicExample,int userId);
 
+    List<Topic> findByItemId(Integer itemId);
+
     //PageInfo<Topic> selectRoleList(Integer pageNum, Integer pageSize, Topic topic);
 }

@@ -107,7 +107,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li style="position: relative;top: 30px;left: -180px">
+                        <li style="position: relative;top: 30px;left: -150px">
                             <a href="#">
                                 <span class="tt-color10 tt-badge" th:text="${selectItem.getItemDescription()}">
                                 </span>
@@ -133,8 +133,14 @@
             <div class="tt-wrapper-inner">
                 <ul class="nav nav-tabs pt-tabs-default" role="tablist">
                     <li class="nav-item tt-hide-md show">
-                        <a class="nav-link active" data-toggle="tab" href="#tt-tab-06" role="tab"><span>子栏目</span></a>
+                        <a class="nav-link active" data-toggle="tab" href="#tt-tab-06" role="tab">
+                            <span>子栏目</span>
+                        </a>
                     </li>
+                    <a th:href="@{'/subItem/manage?itemId='+${selectItem.getItemId()}}"
+                       class="btn btn-primary" sec:authorize="isAuthenticated()" style="position: relative;top: 10px;left: 900px">
+                        创建子栏目
+                    </a>
                 </ul>
             </div>
             <div class="tab-content">
@@ -168,16 +174,15 @@
                                                     <h6 class="tt-title" th:onload="|javascript:getSubItemByItemId(*{subItem.getSubItemId()})|">
                                                         文章
                                                     </h6>
-    <!--                                                <ul class="tt-list-badge">-->
-    <!--                                                    <li th:each="subItem:${showSubItemInItem}">-->
-    <!--                                                        <a th:if="*{subItem.getItemId()} == *{item.getItemId()}"-->
-    <!--                                                           th:href="@{'/topic?subItemId='+${subItem.subItemId}}">-->
-    <!--                                            <span class="tt-badge" th:text="*{subItem.getSubItemName()}">-->
-
-    <!--                                            </span>-->
-    <!--                                                        </a>-->
-    <!--                                                    </li>-->
-    <!--                                                </ul>-->
+                                                    <ul class="tt-list-badge">
+                                                        <li th:each="topic:${topics}">
+                                                            <a th:if="(*{subItem.getSubItemId()} == *{topic.getSubItemId()})"
+                                                               th:href="@{'/topic/' + ${topic.topicId}}">
+                                                                <span class="tt-color08 tt-badge" th:text="*{topic.getTitle()}">
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>

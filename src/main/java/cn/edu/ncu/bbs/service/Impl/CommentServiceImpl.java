@@ -2,7 +2,6 @@ package cn.edu.ncu.bbs.service.Impl;
 
 import cn.edu.ncu.bbs.domain.Comment;
 import cn.edu.ncu.bbs.domain.CommentExample;
-import cn.edu.ncu.bbs.domain.TopicExample;
 import cn.edu.ncu.bbs.mapper.CommentMapper;
 import cn.edu.ncu.bbs.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
