@@ -1,6 +1,8 @@
 package cn.edu.ncu.bbs.controller;
 
 import cn.edu.ncu.bbs.domain.User;
+import cn.edu.ncu.bbs.service.Impl.ItemServiceImpl;
+import cn.edu.ncu.bbs.service.Impl.SubItemServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.UserServiceImpl;
 import cn.edu.ncu.bbs.until.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,12 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private ItemServiceImpl itemService;
+
+    @Autowired
+    private SubItemServiceImpl subItemService;
 
     @RequestMapping("")
     public void returnLogin(HttpServletResponse response) {
@@ -68,15 +76,15 @@ public class UserController {
         return "myCenter";
     }
 
-
     @RequestMapping(value = "/deleteUser",method = RequestMethod.GET)
-    public String deleteUserByUserId(@RequestParam("userId")Integer userId,Model model){
+    public String deleteUserByUserId(@RequestParam("userId")Integer userId,@RequestParam("opUserId")Integer opUserId,Model model){
+        itemService.removePermissionByUserId(userId);
+        subItemService.removePermissionByUserId(userId);
         userService.deleteUser(userId);
-        List<User> users=userService.selectALLExceptSelf(userId);
+        List<User> users=userService.selectALLExceptSelf(opUserId);
         model.addAttribute("usersExceptSelf", users);
         return "adminManageUser";
     }
-
 
     @RequestMapping(value = "/changeIntegral",method = RequestMethod.POST)
     @ResponseBody

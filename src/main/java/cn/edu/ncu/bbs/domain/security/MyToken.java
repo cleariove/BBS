@@ -137,4 +137,14 @@ public class MyToken extends AbstractAuthenticationToken
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public boolean containsRole(String role)
+    {
+        for(GrantedAuthority g:this.getAuthorities())
+        {
+            if(g.getAuthority().equals(role))
+                return true;
+        }
+        return false;
+    }
 }

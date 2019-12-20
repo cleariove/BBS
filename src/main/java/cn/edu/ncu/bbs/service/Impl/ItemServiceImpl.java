@@ -69,8 +69,18 @@ public class ItemServiceImpl implements ItemService
         itemMapper.updateByExampleSelective(item, itemExample);
     }
 
-    public int getManagerIdByItemId(String itemId)
+//    public int getManagerIdByItemId(String itemId)
+//    {
+//        return itemMapper.getManagerIdByItemId(Integer.valueOf(itemId));
+//    }
+
+    public void removePermissionByUserId(Integer id)
     {
-        return itemMapper.getManagerIdByItemId(Integer.valueOf(itemId));
+        ItemExample itemExample = new ItemExample();
+        ItemExample.Criteria criteria = itemExample.createCriteria();
+        criteria.andManagerEqualTo(id);
+        Item item = new Item();
+        item.setManager(3);
+        itemMapper.updateByExampleSelective(item,itemExample);
     }
 }

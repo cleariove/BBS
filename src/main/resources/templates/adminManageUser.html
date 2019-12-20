@@ -29,6 +29,7 @@
                     <nav>
                         <ul>
                             <li><a href="/index"><span>主页</span></a></li>
+
                         </ul>
                     </nav>
                 </div>
@@ -118,7 +119,7 @@
                     <div class="tt-col-value hide-mobile">
                         <div class="col-11">
                             <ul class="tt-list-badge">
-                                <li><a th:href="@{/user/deleteUser(userId=*{user.userId})}"><span class="tt-badge" >删除</span></a></li>
+                                <li><a th:href="@{/user/deleteUser(userId=*{user.userId},opUserId=${#authentication.userId})}"><span class="tt-badge" >删除</span></a></li>
                                 <li><a href="#"><span class="tt-badge">修改</span></a></li>
                             </ul>
                         </div>

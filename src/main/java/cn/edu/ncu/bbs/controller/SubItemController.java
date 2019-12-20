@@ -7,7 +7,6 @@ import cn.edu.ncu.bbs.domain.security.MyToken;
 import cn.edu.ncu.bbs.service.Impl.ItemServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.SubItemServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.UserRoleServiceImpl;
-import cn.edu.ncu.bbs.service.Impl.UserServiceImpl;
 import cn.edu.ncu.bbs.until.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -43,7 +41,7 @@ public class SubItemController
             myToken = (MyToken) SecurityContextHolder.getContext().getAuthentication();
         if(myToken != null)
         {
-            if(myToken.getAuthorities().contains("ROLE_ADMIN") || myToken.getUserId().equals(item.getManager()))
+            if(myToken.containsRole("ROLE_ADMIN") || myToken.getUserId().equals(item.getManager()))
             {
                 List<User> users = userRoleService.findAllManage();
                 model.addAttribute("managers",users);

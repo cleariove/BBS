@@ -59,11 +59,9 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     public List<User> findAllManage(){//获得manage用户，权限为2,3
         List<User> users=userService.findAll();
-        System.out.println(users.size());
         List<User> manageUsers=new ArrayList<>();
         for (User user : users)
         {
-            System.out.println(user.getUserId());
             if (getHighPower((long) user.getUserId()) == 2 || getHighPower((long) user.getUserId()) == 3)
                 manageUsers.add(user);
         }
@@ -76,8 +74,9 @@ public class UserRoleServiceImpl implements UserRoleService {
     public Long getHighPower(Long userId) {//获得用户拥有的最高权限
         List<UserRole> userRoleList = getPowerByUserId(userId);
         List<Long> powers = new ArrayList<>();
-        for (int i = 0; i < userRoleList.size(); i++) {
-            powers.add(userRoleList.get(i).getRoleId());
+        for (UserRole userRole : userRoleList)
+        {
+            powers.add(userRole.getRoleId());
         }
         return  Collections.max(powers);
     }

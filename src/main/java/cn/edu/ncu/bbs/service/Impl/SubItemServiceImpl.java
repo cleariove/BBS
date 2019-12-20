@@ -1,8 +1,6 @@
 package cn.edu.ncu.bbs.service.Impl;
 
-import cn.edu.ncu.bbs.domain.SubItem;
-import cn.edu.ncu.bbs.domain.SubItemExample;
-import cn.edu.ncu.bbs.domain.UserExample;
+import cn.edu.ncu.bbs.domain.*;
 import cn.edu.ncu.bbs.mapper.SubItemMapper;
 import cn.edu.ncu.bbs.service.SubItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,8 +87,13 @@ public class SubItemServiceImpl implements SubItemService
         return subItemMapper.countByExample(subItemExample);
     }
 
-  /*  public int getManagerIdBySubItemId(Integer subItemId)
+    public void removePermissionByUserId(Integer id)
     {
-        return subItemMapper.getManagerIdBySubItemId(subItemId);
-    }*/
+        SubItemExample subItemExample = new SubItemExample();
+        SubItemExample.Criteria criteria = subItemExample.createCriteria();
+        criteria.andManagerEqualTo(id);
+        SubItem subItem = new SubItem();
+        subItem.setManager(3);
+        subItemMapper.updateByExampleSelective(subItem,subItemExample);
+    }
 }
