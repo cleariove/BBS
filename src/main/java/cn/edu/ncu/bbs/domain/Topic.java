@@ -1,10 +1,8 @@
 package cn.edu.ncu.bbs.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jdk.nashorn.internal.objects.annotations.Constructor;
 
 import java.util.Date;
-
 
 public class Topic {
 
@@ -31,23 +29,7 @@ public class Topic {
 
     private Integer subItemId;//所属子栏目id
 
-    public Topic(Integer topicId, String title, String content, Integer manager, Date date, Integer browse, Integer integral, Boolean help, Boolean elite, Boolean onPageTop, Integer subItemId) {
-        this.topicId = topicId;
-        this.title = title;
-        this.content = content;
-        this.manager = manager;
-        this.date = date;
-        this.browse = browse;
-        this.integral = integral;
-        this.help = help;
-        this.elite = elite;
-        this.onPageTop = onPageTop;
-        this.subItemId = subItemId;
-    }
-
-    public Topic(){
-
-    }
+    private Integer adoptId;//求助帖采纳的评论的id
 
     public Integer getTopicId() {
         return topicId;
@@ -137,20 +119,11 @@ public class Topic {
         this.subItemId = subItemId;
     }
 
-    @Override
-    public String toString() {
-        return "Topic{" +
-                "topicId=" + topicId +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", manager=" + manager +
-                ", date=" + date +
-                ", browse=" + browse +
-                ", integral=" + integral +
-                ", help=" + help +
-                ", elite=" + elite +
-                ", onPageTop=" + onPageTop +
-                ", subItemId=" + subItemId +
-                '}';
+    public Integer getAdoptId() {
+        return adoptId;
+    }
+
+    public void setAdoptId(Integer adoptId) {
+        this.adoptId = adoptId;
     }
 }

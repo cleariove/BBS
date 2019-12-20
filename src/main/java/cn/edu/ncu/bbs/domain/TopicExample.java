@@ -784,6 +784,66 @@ public class TopicExample {
             addCriterion("sub_item_id not between", value1, value2, "subItemId");
             return (Criteria) this;
         }
+
+        public Criteria andAdoptIdIsNull() {
+            addCriterion("adopt_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdIsNotNull() {
+            addCriterion("adopt_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdEqualTo(Integer value) {
+            addCriterion("adopt_id =", value, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdNotEqualTo(Integer value) {
+            addCriterion("adopt_id <>", value, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdGreaterThan(Integer value) {
+            addCriterion("adopt_id >", value, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("adopt_id >=", value, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdLessThan(Integer value) {
+            addCriterion("adopt_id <", value, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdLessThanOrEqualTo(Integer value) {
+            addCriterion("adopt_id <=", value, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdIn(List<Integer> values) {
+            addCriterion("adopt_id in", values, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdNotIn(List<Integer> values) {
+            addCriterion("adopt_id not in", values, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdBetween(Integer value1, Integer value2) {
+            addCriterion("adopt_id between", value1, value2, "adoptId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAdoptIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("adopt_id not between", value1, value2, "adoptId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

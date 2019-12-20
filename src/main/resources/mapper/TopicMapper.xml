@@ -13,6 +13,7 @@
     <result column="elite" property="elite" jdbcType="BIT" />
     <result column="on_page_top" property="onPageTop" jdbcType="BIT" />
     <result column="sub_item_id" property="subItemId" jdbcType="INTEGER" />
+    <result column="adopt_id" property="adoptId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List" >
     topic_id, title, content, manager, date, browse, integral, help, elite, on_page_top, 
-    sub_item_id
+    sub_item_id, adopt_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.edu.ncu.bbs.domain.TopicExample" >
     select
@@ -110,11 +111,11 @@
     insert into topic (title, content,
       manager, date, browse, 
       integral, help, elite, on_page_top, 
-      sub_item_id)
+      sub_item_id, adopt_id)
     values (#{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
       #{manager,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, #{browse,jdbcType=INTEGER}, 
       #{integral,jdbcType=INTEGER}, #{help,jdbcType=BIT}, #{elite,jdbcType=BIT}, #{onPageTop,jdbcType=BIT}, 
-      #{subItemId,jdbcType=INTEGER})
+      #{subItemId,jdbcType=INTEGER}, #{adoptId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.ncu.bbs.domain.Topic" >
     insert into topic
@@ -152,6 +153,9 @@
       <if test="subItemId != null" >
         sub_item_id,
       </if>
+      <if test="adoptId != null" >
+        adopt_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="topicId != null" >
@@ -186,6 +190,9 @@
       </if>
       <if test="subItemId != null" >
         #{subItemId,jdbcType=INTEGER},
+      </if>
+      <if test="adoptId != null" >
+        #{adoptId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -231,6 +238,9 @@
       <if test="record.subItemId != null" >
         sub_item_id = #{record.subItemId,jdbcType=INTEGER},
       </if>
+      <if test="record.adoptId != null" >
+        adopt_id = #{record.adoptId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +258,8 @@
       help = #{record.help,jdbcType=BIT},
       elite = #{record.elite,jdbcType=BIT},
       on_page_top = #{record.onPageTop,jdbcType=BIT},
-      sub_item_id = #{record.subItemId,jdbcType=INTEGER}
+      sub_item_id = #{record.subItemId,jdbcType=INTEGER},
+      adopt_id = #{record.adoptId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +297,9 @@
       <if test="subItemId != null" >
         sub_item_id = #{subItemId,jdbcType=INTEGER},
       </if>
+      <if test="adoptId != null" >
+        adopt_id = #{adoptId,jdbcType=INTEGER},
+      </if>
     </set>
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
@@ -300,7 +314,8 @@
       help = #{help,jdbcType=BIT},
       elite = #{elite,jdbcType=BIT},
       on_page_top = #{onPageTop,jdbcType=BIT},
-      sub_item_id = #{subItemId,jdbcType=INTEGER}
+      sub_item_id = #{subItemId,jdbcType=INTEGER},
+      adopt_id = #{adoptId,jdbcType=INTEGER}
     where topic_id = #{topicId,jdbcType=INTEGER}
   </update>
 </mapper>
