@@ -16,7 +16,10 @@ public class CommentServiceImpl  implements CommentService {
     @Autowired
     private CommentMapper commentMapper;
 
-
+@Override
+    public  Comment getCommentById(int commentId){
+        return commentMapper.selectByPrimaryKey(commentId);
+    }
     @Override
     public void createComment(Comment comment) {
         commentMapper.insert(comment);

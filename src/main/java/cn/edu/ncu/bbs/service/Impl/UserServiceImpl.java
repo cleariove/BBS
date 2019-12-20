@@ -81,6 +81,14 @@ public class UserServiceImpl implements UserService {
         return   user;
     }
 
+    public void changeIntegral(Integer userId,Integer integral){
+        User user = selectUserById(userId);
+        user.setIntegral(user.getIntegral()+integral);
+        userMapper.updateByPrimaryKeySelective(user);
+
+    }
+
+
     public List<User> findAll()
     {
         UserExample userExample=new UserExample();

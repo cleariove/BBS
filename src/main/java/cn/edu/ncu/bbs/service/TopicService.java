@@ -39,5 +39,7 @@ public interface TopicService {
 
     List<Topic> getTopicByUserId(TopicExample topicExample,int userId);
 
+    void chooseAdoptId(int topicId, int commentId);
+
     //PageInfo<Topic> selectRoleList(Integer pageNum, Integer pageSize, Topic topic);
 }

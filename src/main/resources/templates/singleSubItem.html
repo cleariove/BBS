@@ -307,8 +307,15 @@
                                 <h6 class="tt-title"><a th:href="@{'/topic/'+${topic.topicId}}">
                                     <!--文章标题-->
                                     <div th:if="${topic.help} eq true">
-                                    <span class="tt-color08 tt-badge">求助!</span>
-                                        <span th:text="${topic.title}"></span>
+                                        <div th:if="${#strings.isEmpty(topic.adoptId)}">
+                                            <span class="tt-color08 tt-badge">求助!</span>
+                                            <span th:text="${topic.title}"></span>
+                                        </div>
+                                        <div th:if="${!#strings.isEmpty(topic.adoptId)}">
+                                            <span class="tt-color08 tt-badge">已解决</span>
+                                            <span th:text="${topic.title}"></span>
+                                        </div>
+
                                     </div>
                                     <div th:if="${topic.help} eq false">
                                         <span class=" tt-badge">讨论</span>

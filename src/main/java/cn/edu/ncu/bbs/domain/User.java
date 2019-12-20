@@ -141,6 +141,7 @@ public class User implements UserDetails
         this.userIcon = userIcon == null ? null : userIcon.trim();
     }
 
+
     @Override
     public String toString() {
         return "User{" +

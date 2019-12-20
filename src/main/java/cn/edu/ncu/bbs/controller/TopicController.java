@@ -63,7 +63,7 @@ public class TopicController {
         TopicExample topicExample =new TopicExample();
         TopicExample topicExample2 = new TopicExample();
         //pageNum:表示第几页  pageSize:表示一页展示的数据
-        PageHelper.startPage(pageNum,1);
+        PageHelper.startPage(pageNum,5);
         List<Topic> topics=topicService.findTopicBySubItemId(topicExample,subItemId);
         //将查询到的数据封装到PageInfo对象
         PageInfo<Topic> pageInfo=new PageInfo(topics);
@@ -101,7 +101,7 @@ public class TopicController {
             user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
         if (user != null)
         {
-            PageHelper.startPage(pageNum,1);
+            PageHelper.startPage(pageNum,5);
             List<Topic> topics=topicService.getTopicByUserId(topicExample,user.getUserId());
             //将查询到的数据封装到PageInfo对象
             PageInfo<Topic> pageInfo=new PageInfo(topics);
@@ -143,9 +143,13 @@ public class TopicController {
         MyToken user = null;
         if(SecurityContextHolder.getContext().getAuthentication() instanceof MyToken)
             user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
-        if(user != null)
+
+        if(user != null){
             topic.setManager(user.getUserId());
-        topicService.createTopic(topic);
+            topicService.createTopic(topic);
+            userService.changeIntegral(user.getUserId(),topic.getIntegral());
+
+        }
         map.put("result","OK");
         return map;
 
@@ -163,10 +167,13 @@ public class TopicController {
         List<Comment> comments = commentService.getCommentByTopicId(commentExample, Integer.parseInt(id));
         model.addAttribute("comments",comments);
 
-        //通过commentId找出对应子评论
-        List<Integer> commentIds = comments.stream().map(Comment::getCommentId).collect(Collectors.toList());
-        List<SubComment> subComments = subCommentService.getAllSubComment(subCommentExample,commentIds);
-        model.addAttribute("subComments",subComments);
+        List<User> users = userService.findAll();
+        model.addAttribute("users",users);
+
+//        //通过commentId找出对应子评论
+//        List<Integer> commentIds = comments.stream().map(Comment::getCommentId).collect(Collectors.toList());
+//        List<SubComment> subComments = subCommentService.getAllSubComment(subCommentExample,commentIds);
+//        model.addAttribute("subComments",subComments);
 
         //通过id加载文章
         Topic topic= topicService.getTopicById(Integer.parseInt(id));
@@ -177,7 +184,13 @@ public class TopicController {
         model.addAttribute("user",user);
 
 
-        return "singleTopic";
+        if(topic.getHelp())
+        {
+            return "helpTopic";
+        }else {
+
+            return "singleTopic";
+        }
     }
 
 
@@ -237,6 +250,16 @@ public class TopicController {
     public String outEliteById(@PathVariable int subItemId,@PathVariable int id){
         topicService.outEliteById(id);
         return "redirect:/topic?subItemId="+subItemId;
+    }
+
+    //选择采纳回复
+    @GetMapping("/adoptId/{topicId}/{adoptId}")
+    public String adoptComment(@PathVariable int topicId,@PathVariable int adoptId){
+        Topic topic = topicService.getTopicById(topicId);
+        Comment comment = commentService.getCommentById(adoptId);
+        topicService.chooseAdoptId(topicId,adoptId);
+        userService.changeIntegral(comment.getCommentFrom(),-(topic.getIntegral()));
+        return "redirect:/topic/"+topicId;
     }
 
     @GetMapping("/updateBrowse/{topicId}")

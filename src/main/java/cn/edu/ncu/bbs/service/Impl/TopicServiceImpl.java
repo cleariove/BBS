@@ -51,8 +51,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public void deleteTopic(int id) {
-        topicMapper.deleteByPrimaryKey(id);
+    public void deleteTopic(int topicId) {
+        topicMapper.deleteByPrimaryKey(topicId);
     }
 
     @Override
@@ -79,43 +79,52 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public void onTopPageById(int id) {
+    public void onTopPageById(int topicId) {
         Topic topic = new Topic();
-        topic.setTopicId(id);
+        topic.setTopicId(topicId);
         topic.setOnPageTop(true);
         topicMapper.updateByPrimaryKeySelective(topic);
     }
 
     @Override
-    public void outTopPageById(int id) {
+    public void outTopPageById(int topicId) {
         Topic topic = new Topic();
-        topic.setTopicId(id);
+        topic.setTopicId(topicId);
         topic.setOnPageTop(false);
         topicMapper.updateByPrimaryKeySelective(topic);
     }
 
     @Override
-    public void eliteById(int id) {
+    public void eliteById(int topicId) {
         Topic topic = new Topic();
-        topic.setTopicId(id);
+        topic.setTopicId(topicId);
         topic.setElite(true);
         topicMapper.updateByPrimaryKeySelective(topic);
     }
     @Override
-    public void outEliteById(int id) {
+    public void outEliteById(int topicId) {
         Topic topic = new Topic();
-        topic.setTopicId(id);
+        topic.setTopicId(topicId);
         topic.setElite(false);
         topicMapper.updateByPrimaryKeySelective(topic);
     }
 
     @Override
-    public void updateBrowse(int id,int browse) {
+    public void updateBrowse(int topicId,int browse) {
         Topic topic = new Topic();
-        topic.setTopicId(id);
+        topic.setTopicId(topicId);
         topic.setBrowse(browse);
         topicMapper.updateByPrimaryKeySelective(topic);
     }
+
+    @Override
+    public void chooseAdoptId(int topicId,int commentId){
+        Topic topic = new Topic();
+        topic.setTopicId(topicId);
+        topic.setAdoptId(commentId);
+        topicMapper.updateByPrimaryKeySelective(topic);
+    }
+
 
 //    @Override
 //    public PageInfo<Topic> selectRoleList(Integer pageNum, Integer pageSize, Topic topic) {

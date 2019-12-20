@@ -4,6 +4,7 @@ import cn.edu.ncu.bbs.domain.Comment;
 import cn.edu.ncu.bbs.domain.CommentExample;
 import cn.edu.ncu.bbs.domain.security.MyToken;
 import cn.edu.ncu.bbs.service.Impl.CommentServiceImpl;
+import cn.edu.ncu.bbs.service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,16 @@ public class CommentController {
     @Autowired
     private CommentServiceImpl commentService;
 
+    @Autowired
+    private UserServiceImpl userService;
+
     @PostMapping("")
     @ResponseBody
     public Map<String,Object> CreateComment(@RequestBody Comment comment){
         Map<String,Object> map = new HashMap<>();
         MyToken user=(MyToken) SecurityContextHolder.getContext().getAuthentication();
         comment.setCommentFrom(user.getUserId());
+        userService.changeIntegral(user.getUserId(),1);
         commentService.createComment(comment);
         map.put("result","OK");
         return map;

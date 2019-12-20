@@ -6,7 +6,7 @@
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Forum - Responsive HTML5 Template">
     <meta name="author" content="Forum">
-    <link rel="shortcut icon" href="/static/test/favicon/favicon.ico">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="../static/css/style.css">
@@ -106,11 +106,13 @@
                     <div class="tt-item-header">
                         <div class="tt-item-info info-top">
                             <div class="tt-avatar-icon">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-ava-d"></use></svg></i>
+                                <i class="tt-icon">
+                                    <img  th:src="|data:image/jpg;base64,${user.userIcon}|" style="height: 60px;width: 60px;border-radius:50%;margin-top: 15px">
+                                </i>
                             </div>
                             <div class="tt-avatar-title">
                                 <a href="#">
-                                    <span th:text="${user.name}"></span>
+                                    <span th:text="${user.userName}"></span>
                                     <!--用户名称-->
                                 </a>
                             </div>
@@ -158,82 +160,94 @@
                 </div>
                 <hr>
             </div>
+                <!--判断评论是否为空-->
+                <div th:if="${comments}">
+                    <div th:each="user:${users}">
+                        <div th:each="comment:${comments}">
+                            <div th:if="${user.userId}==${comment.commentFrom}">
+                                <div class="background tt-item ">
+                                    <div class="tt-single-topic">
+                                        <div class="tt-item-header pt-noborder">
+                                            <div class="tt-item-info info-top">
+                                                <div class="tt-avatar-icon">
+                                                    <i class="tt-icon">
+                                                        <img  th:src="|data:image/jpg;base64,${user.userIcon}|" style="height: 60px;width: 60px;border-radius:50%;margin-top: 15px">
+                                                    </i>
+                                                </div>
+                                                <div class="tt-avatar-title">
+                                                    <!--评论人-->
+                                                    <a th:text="${user.userName}" href="#"></a>
+                                                    <!--<a th:text="${comment.commentFrom}" href="#"> </a>-->
+                                                </div>
+                                                <a href="#" class="tt-info-time">
+                                                    <!--评论时间-->
+                                                    <p th:text="${#dates.format(comment.date,'MM-dd')}"></p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="tt-item-description">
+                                            <!--评论内容-->
+                                            <p th:text="${comment.content}"></p>
 
-            <!--文章评论-->
-            <div th:if="${comments}">
-                <div th:each="comment:${comments}">
-                    <div class="tt-item background">
-                        <div class="tt-single-topic">
-                            <div class="tt-item-header pt-noborder">
-                                <div class="tt-item-info info-top">
-                                    <div class="tt-avatar-icon">
-                                        <i class="tt-icon"><svg><use xlink:href="#icon-ava-v"></use></svg></i>
+                                        </div>
+
+                                        <div class="info-bottom">
+                                            <!--<a th:href="|javascript:commentModel(this)"-->
+                                            <!--登录才能进行回复-->
+                                            <div th:id="${comment.commentId}">
+                                                <a  sec:authorize="isAuthenticated()"   style="float: right" th:href="|javascript:commentModel(${comment.commentFrom},${comment.commentId},${topic.topicId})|">回复</a>
+                                                <a  sec:authorize="!isAuthenticated()"   style="float: right" onclick="unLogin()">回复</a>
+                                            </div>
+
+                                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                                <!--管理员才能删除-->
+                                                <br>
+                                                <a style="float: right" class="tt-icon-btn tt-hover-02 tt-small-indent" th:href="@{'/comment/delete/?commentId='+${comment.commentId}+'&topicId='+${topic.topicId}}">
+                                                    删除 </a>
+                                            </div>
+                                            <!--<a th:href= "|javascript:getSubComment(${comment.commentId},${topic.topicId})|" >展开回复</a>-->
+                                        </div>
+                                        <div class="tt-item-description">
+                                            <!--子回复-->
+                                            <!--登录才能查看子回复-->
+                                            <div th:id="comment+${comment.commentId}">
+                                                <a sec:authorize="isAuthenticated()" th:href= "|javascript:getSubComment(${comment.commentId},${topic.topicId})|" >展开回复</a>
+                                                <a sec:authorize="!isAuthenticated()" onclick="unLogin()" >展开回复</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="tt-avatar-title">
-                                        <!--评论人-->
-                                        <a th:text="${comment.commentFrom}" href="#"> </a>
-                                    </div>
-                                    <a href="#" class="tt-info-time">
-                                        <!--评论时间-->
-                                        <p th:text="${#dates.format(comment.date,'MM-dd')}"></p>
-                                    </a>
+                                    <hr>
                                 </div>
                             </div>
-                            <div class="tt-item-description">
-                                <!--评论内容-->
-                                <p th:text="${comment.content}"></p>
 
+                        </div>
+                    </div>
+                    <div class="tt-wrapper-inner">
+                        <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
+                    </div>
+
+                    <div class="tt-wrapper-inner">
+                        <div class="pt-editor form-default">
+                            <h6 class="pt-title"> 发 表 回 复</h6>
+                            <!--评论框-->
+                            <div class="form-group">
+                                <textarea id="commentContent" name="message" class="form-control" rows="5"></textarea>
                             </div>
-
-                            <div class="info-bottom">
-                                <!--<a th:href="|javascript:commentModel(this)"-->
-                                <div th:id="${comment.commentId}">
-                                <a  sec:authorize="isAuthenticated()"   style="float: right" th:href="|javascript:commentModel(${comment.commentFrom},${comment.commentId},${topic.topicId})|">回复</a>
-                                <a  sec:authorize="!isAuthenticated()"   style="float: right" onclick="unLogin()">回复</a>
+                            <div class="pt-row">
+                                <div class="col-auto">
                                 </div>
-
-
-                                <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <a style="float: right" class="tt-icon-btn tt-hover-02 tt-small-indent" th:href="@{'/comment/delete/?commentId='+${comment.commentId}+'&topicId='+${topic.topicId}}">
-                                        删除 </a>
+                                <div class="col-auto">
+                                    <!--提交评论-->
+                                    <a sec:authorize="isAuthenticated()" style="color: white" onclick="insertComment()" class="btn btn-secondary btn-width-lg">回 复</a>
+                                    <a sec:authorize="!isAuthenticated()" style="color: white;" onclick="unLogin()" class="btn btn-secondary btn-width-lg">回 复</a>
                                 </div>
-                                <!--<a th:href= "|javascript:getSubComment(${comment.commentId},${topic.topicId})|" >展开回复</a>-->
                             </div>
-                            <div class="tt-item-description">
-                                <!--子回复-->
-                            <div th:id="comment+${comment.commentId}">
-                                <a sec:authorize="isAuthenticated()" th:href= "|javascript:getSubComment(${comment.commentId},${topic.topicId})|" >展开回复</a>
-                                <a sec:authorize="!isAuthenticated()" onclick="unLogin()" >展开回复</a>
-                            </div>
-                            </div>
+                        </div>
                     </div>
-                    <hr>
                 </div>
-            </div>
 
-        <div class="tt-wrapper-inner">
-            <h4 class="tt-title-separator"><span>You’ve reached the end of replies</span></h4>
-        </div>
 
-        <div class="tt-wrapper-inner">
-            <div class="pt-editor form-default">
-                <h6 class="pt-title"> 发 表 回 复</h6>
-                <!--评论框-->
-                <div class="form-group">
-                    <textarea id="commentContent" name="message" class="form-control" rows="5"></textarea>
-                </div>
-                <div class="pt-row">
-                    <div class="col-auto">
-                    </div>
-                    <div class="col-auto">
-                        <!--提交评论-->
-                        <a sec:authorize="isAuthenticated()" style="color: white" onclick="insertComment()" class="btn btn-secondary btn-width-lg">回 复</a>
-                        <a sec:authorize="!isAuthenticated()" style="color: white;" onclick="unLogin()" class="btn btn-secondary btn-width-lg">回 复</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
+
     </div>
     </div>
 </main>

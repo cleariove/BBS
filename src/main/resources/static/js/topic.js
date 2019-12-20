@@ -19,8 +19,10 @@ function initAJAX() {
 }
 
 function getTopicType(type) {
-    topicType = type.innerText;
-    if (topicType == "Question") {
+    topicType = type.id;
+    if (topicType == "help") {
+        document.getElementById("discussion").className="tt-button-icon";
+        document.getElementById("help").className="tt-button-icon active";
         document.getElementById("setting").innerHTML = "<div class=\" form-default\">\n" +
             "        <div class=\"form-group\">\n" +
             "        <input name=\"settingIntegral\" class=\"form-control\" placeholder=\"设置积分\" rows=\"1\">\n" +
@@ -28,6 +30,8 @@ function getTopicType(type) {
             "        </div>"
     }
     else {
+        document.getElementById("help").className="tt-button-icon";
+        document.getElementById("discussion").className="tt-button-icon active";
         document.getElementById("setting").innerHTML="";
     }
 
@@ -43,7 +47,7 @@ function getTopic() {
     var type=topicType
     var integral;
     alert(type);
-    if(type=="Question"){
+    if(type=="help"){
         var strValue = [];
         $(".settingIntegral").each(function () {
             var value = $(this).val();
@@ -80,12 +84,12 @@ function getTopic() {
 
 function createTopic() {
 
-    var title = document.getElementById("title").value;
-    var content =  document.getElementById("content").value;
+    var title=$("#title").val();
+    var content=$("#content").val();
     var subItemId = document.getElementById("subItemId").value;
     var type=topicType;
     var integral;
-    if(type=="Question"){
+    if(type=="help"){
 
         integral = -(document.getElementsByName("settingIntegral")[0].value);
         ifHelp=true;
@@ -97,34 +101,42 @@ function createTopic() {
     }
     var date=getDate();
 
-    var data={
-        "topicId":"",
-        "title":title,
-        "content":content,
-        "manager":"",
-        "date":date,
-        "browse":"0",
-        "integral":integral,
-        "help":ifHelp,
-        "elite":false,
-        "onPageTop":false,
-        "subItemId":subItemId
-    };
+    if(title==''){
+        alert("请输入文章标签")
+    }else if (content==''){
+        alert("文章内容不能为空")
+    } else {
 
-    $.ajax({
-        url:"/topic/createTopic",
-        data:JSON.stringify(data),
-        contentType : "application/json",              //发送至服务器的类型   
-        dataType : "json",                                     //预期服务器返回类型  
-        type:"post",
-        success:function (data) {
-            if(data.result == "OK") {
-                alert("文章发表成功");
-                window.location.href = "/topic?subItemId=" + subItemId
+        var data = {
+            "topicId": "",
+            "title": title,
+            "content": content,
+            "manager": "",
+            "date": date,
+            "browse": "0",
+            "integral": integral,
+            "help": ifHelp,
+            "elite": false,
+            "onPageTop": false,
+            "subItemId": subItemId,
+            "adoptId":""
+        };
+
+        $.ajax({
+            url: "/topic/createTopic",
+            data: JSON.stringify(data),
+            contentType: "application/json",              //发送至服务器的类型   
+            dataType: "json",                                     //预期服务器返回类型  
+            type: "post",
+            success: function (data) {
+                if (data.result == "OK") {
+                    alert("文章发表成功");
+                    window.location.href = "/topic?subItemId=" + subItemId
+                }
+
             }
-
-        }
-    });
+        });
+    }
 
 }
 
@@ -169,42 +181,48 @@ function getDate() {
 }
 
 function updateTopic() {
-
+    var title=$("#title").val();
+    var content=$("#content").val();
     var topicId =document.getElementById("topicId").value;
-    var title = document.getElementById("title").value;
-    var content =  document.getElementById("content").value;
     var subItemId = document.getElementById("subItemId").value;
     var manager= document.getElementById("manager").innerText;
     var date=getDate();
 
-    var data={
-        "topicId":topicId,
-        "title":title,
-        "content":content,
-        "manager":manager,
-        "date":date,
-        "browse":"",
-        "integral":"",
-        "help":topicType,
-        "elite":false,
-        "onpageTop":false,
-        "subItemId":subItemId
-    };
+    if(title==''){
+        alert("请输入文章标签")
+    }else if (content==''){
+        alert("文章内容不能为空")
+    } else {
+        var data = {
+            "topicId": topicId,
+            "title": title,
+            "content": content,
+            "manager": manager,
+            "date": date,
+            "browse": "",
+            "integral": "",
+            "help": topicType,
+            "elite": false,
+            "onpageTop": false,
+            "subItemId": subItemId,
+            "adoptId":''
+        };
 
-    $.ajax({
-        url:"/topic/update",
-        data:JSON.stringify(data),
-        contentType : "application/json",              //发送至服务器的类型   
-        dataType : "json",                                     //预期服务器返回类型  
-        type:"post",
-        success:function (data){
-            if(data.result == "OK") {
-                alert("修改成功");
-                window.location.href = "/topic/" + topicId
+        $.ajax({
+            url: "/topic/update",
+            data: JSON.stringify(data),
+            contentType: "application/json",              //发送至服务器的类型   
+            dataType: "json",                                     //预期服务器返回类型  
+            type: "post",
+            success: function (data) {
+                if (data.result == "OK") {
+                    alert("修改成功");
+                    window.location.href = "/topic/" + topicId
 
+                }
             }
-        }
-    });
+        });
+    }
 
 }
 
