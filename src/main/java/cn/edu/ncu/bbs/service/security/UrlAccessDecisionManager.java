@@ -33,29 +33,18 @@ public class UrlAccessDecisionManager implements AccessDecisionManager
         for(ConfigAttribute cfgA : collection)
         {
             String needRole = cfgA.getAttribute();
-            //如果当前页面只需要登录就能访问
-            if("ROLE_LOGIN".equals(needRole))
+            //这里判断当前返回的用户信息是否表明登录了
+            // 在MyUserDetailService中未登录或登录失败返回AnonymousAuthenticationToken对象
+            if(!(authentication instanceof AnonymousAuthenticationToken))
             {
-                //这里判断当前返回的用户信息是否表明登录了
-                // 在MyUserDetailService中未登录或登录失败返回AnonymousAuthenticationToken对象
-                if(authentication instanceof AnonymousAuthenticationToken)
+                //这里遍历用户的角色
+                for (GrantedAuthority grantedAuthority : authentication.getAuthorities())
                 {
-                    throw new BadCredentialsException("请登录后在进行访问");
-                }
-                //如果登录就直接放行
-                else
-                {
-                    break;
-                }
-
-            }
-            //这里遍历用户的角色
-            for (GrantedAuthority grantedAuthority:authentication.getAuthorities())
-            {
-                //用户角色如果与url所需角色有交集，则放行
-                if(grantedAuthority.getAuthority().equals(needRole))
-                {
-                    return;
+                    //用户角色如果与url所需角色有交集，则放行
+                    if (grantedAuthority.getAuthority().equals(needRole))
+                    {
+                        return;
+                    }
                 }
             }
         }

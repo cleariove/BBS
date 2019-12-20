@@ -37,8 +37,9 @@ public class DemoController
     }
 
     @RequestMapping("404")
-    public String error()
+    public String error(HttpServletResponse response)
     {
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         return "error";
     }
 }

@@ -15,12 +15,14 @@ public class SubItemServiceImpl implements SubItemService
     @Autowired
     private SubItemMapper subItemMapper;
 
+    @Override
     public List<SubItem> selectAll()
     {
         SubItemExample subItemExample = new SubItemExample();
         return subItemMapper.selectByExample(subItemExample);
     }
 
+    @Override
     public List<SubItem> selectByExample(String itemId)
     {
         SubItemExample subItemExample = new SubItemExample();
@@ -29,11 +31,13 @@ public class SubItemServiceImpl implements SubItemService
         return subItemMapper.selectByExample(subItemExample);
     }
 
+    @Override
     public SubItem selectByPrimaryKey(String subItemId)
     {
         return subItemMapper.selectByPrimaryKey(Integer.valueOf(subItemId));
     }
 
+    @Override
     public void insert(String name, String description, String manager, String itemId)
     {
         SubItem subItem = createSubItem(name, description, manager, itemId);
@@ -41,11 +45,13 @@ public class SubItemServiceImpl implements SubItemService
         subItemMapper.insert(subItem);
     }
 
+    @Override
     public void delete(String id)
     {
         subItemMapper.deleteByPrimaryKey(Integer.valueOf(id));
     }
 
+    @Override
     public void setIconPath(String id,String path)
     {
         SubItem subItem = new SubItem();
@@ -56,6 +62,7 @@ public class SubItemServiceImpl implements SubItemService
         subItemMapper.updateByExampleSelective(subItem,subItemExample);
     }
 
+    @Override
     public void update(String id, String name, String description, String manager, String itemId)
     {
         SubItem subItem = createSubItem(name, description, manager, itemId);
@@ -79,6 +86,7 @@ public class SubItemServiceImpl implements SubItemService
         return subItem;
     }
 
+    @Override
     public int countByItemId(String itemId)
     {
         SubItemExample subItemExample = new SubItemExample();
@@ -87,6 +95,7 @@ public class SubItemServiceImpl implements SubItemService
         return subItemMapper.countByExample(subItemExample);
     }
 
+    @Override
     public void removePermissionByUserId(Integer id)
     {
         SubItemExample subItemExample = new SubItemExample();

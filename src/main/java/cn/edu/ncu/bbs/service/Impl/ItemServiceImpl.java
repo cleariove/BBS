@@ -16,6 +16,8 @@ public class ItemServiceImpl implements ItemService
     @Autowired
     private ItemMapper itemMapper;
 
+
+    @Override
     public void insert(String name, String description, String manager)
     {
         Item item = new Item();
@@ -28,17 +30,22 @@ public class ItemServiceImpl implements ItemService
         itemMapper.insert(item);
     }
 
+
+    @Override
     public List<Item> findAll()
     {
         ItemExample itemExample = new ItemExample();
         return itemMapper.selectByExample(itemExample);
     }
 
+
+    @Override
     public Item selectByPrimaryKey(String itemId)
     {
         return itemMapper.selectByPrimaryKey(Integer.valueOf(itemId));
     }
 
+    @Override
     public int updateByPrimaryKey(String id, String name, String description, String manager)
     {
         Item item = new Item();
@@ -54,11 +61,13 @@ public class ItemServiceImpl implements ItemService
         return itemMapper.updateByExampleSelective(item, itemExample);
     }
 
+    @Override
     public int deleteByPrimaryKey(String itemId)
     {
         return itemMapper.deleteByPrimaryKey(Integer.valueOf(itemId));
     }
 
+    @Override
     public void setIconPath(String id, String base64)
     {
         Item item = new Item();
@@ -69,11 +78,7 @@ public class ItemServiceImpl implements ItemService
         itemMapper.updateByExampleSelective(item, itemExample);
     }
 
-//    public int getManagerIdByItemId(String itemId)
-//    {
-//        return itemMapper.getManagerIdByItemId(Integer.valueOf(itemId));
-//    }
-
+    @Override
     public void removePermissionByUserId(Integer id)
     {
         ItemExample itemExample = new ItemExample();
