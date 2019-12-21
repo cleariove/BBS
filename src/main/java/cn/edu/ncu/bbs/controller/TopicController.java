@@ -112,17 +112,27 @@ public class TopicController {
         return "myTopic";
     }
 
-//    //显示所有文章
-//    @RequestMapping(value = "/")
-//    public String topic(Model model){
-//        TopicExample topicExample =new TopicExample();
-//
-//        List<Topic> topics = topicService.findAllTopic(topicExample);   //全部文章
-//        List<Topic> topTopics = topicService.findTopTopic(topicExample); //置顶文章
-//        model.addAttribute("topics",topics);
-//        model.addAttribute("topTopics",topTopics);
-//        return "page-categories-single";
-//    }
+    //显示所有文章
+    @RequestMapping(value = "/alltopic",method = RequestMethod.GET)
+    public String allTopic( @RequestParam(value = "pageNum",defaultValue="1") int pageNum,Model model){
+        TopicExample topicExample =new TopicExample();
+
+        MyToken user = null;
+        if(SecurityContextHolder.getContext().getAuthentication() instanceof MyToken)
+            user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
+        if (user != null)
+        {
+            PageHelper.startPage(pageNum,10);
+            List<Topic> topics=topicService.findAllTopic(topicExample);
+            //将查询到的数据封装到PageInfo对象
+            PageInfo<Topic> pageInfo=new PageInfo(topics);
+            model.addAttribute("pageInfo",pageInfo);
+            model.addAttribute("topics",topics);
+
+        }
+        return "allTopic";
+    }
+
 
     //文章发布界面
     @RequestMapping(value = "/create/{id}")
@@ -158,26 +168,24 @@ public class TopicController {
 
     //返回对应id的文章
     @GetMapping("/{id}")
-    public String getTopicById(@PathVariable String id, Model model){
+    public String getTopicById(@PathVariable int id, Model model){
         CommentExample commentExample =new CommentExample();
         SubCommentExample subCommentExample = new SubCommentExample();
 
 
         //通过id返回文章所有评论
-        List<Comment> comments = commentService.getCommentByTopicId(commentExample, Integer.parseInt(id));
+        List<Comment> comments = commentService.getCommentByTopicId(commentExample, id);
         model.addAttribute("comments",comments);
 
         List<User> users = userService.findAll();
         model.addAttribute("users",users);
 
-//        //通过commentId找出对应子评论
-//        List<Integer> commentIds = comments.stream().map(Comment::getCommentId).collect(Collectors.toList());
-//        List<SubComment> subComments = subCommentService.getAllSubComment(subCommentExample,commentIds);
-//        model.addAttribute("subComments",subComments);
-
         //通过id加载文章
-        Topic topic= topicService.getTopicById(Integer.parseInt(id));
+        Topic topic= topicService.getTopicById(id);
         model.addAttribute("topic",topic);
+
+        SubItem subItem = subItemService.selectByPrimaryKey(String.valueOf(topic.getSubItemId()));
+        model.addAttribute("subItem",subItem);
 
         //文章作者
         User user =userService.findById(String.valueOf(topic.getManager()));

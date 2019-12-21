@@ -381,7 +381,7 @@
 
                     <li th:if="${pageInfo.getPages()} eq 0" >
 
-                        <a  class="active" th:href="@{'/topic/mytopic?pageNum=1'}" th:text="${1}"></a>
+                        <a  class="active" th:href="@{'/topic?subItemId='+${subItem.subItemId}+'&pageNum=1'}" th:text="${1}"></a>
 
                     </li>
                     <li th:if="${pageInfo.getPages()} ne 0" th:each="i:${#numbers.sequence(1,pageInfo.getPages())}">

@@ -115,6 +115,9 @@
                                     <span th:text="${user.userName}"></span>
                                     <!--用户名称-->
                                 </a>
+                                <!--文章浏览量-->
+                                <span class="tt-text">浏览量：</span>
+                                <span class="tt-text" th:text="${topic.browse}"></span>
                             </div>
                             <!--文章创建时间-->
                             <a th:text="${#dates.format(topic.date,'yyyy-MM-dd')}" href="#" class="tt-info-time">
@@ -135,16 +138,8 @@
                     </div>
                     <div class="tt-item-info info-bottom">
                         <a href="#" class="tt-icon-btn">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
-                            <span class="tt-text">671</span>
-                        </a>
-                        <a href="#" class="tt-icon-btn">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
-                            <span class="tt-text">39</span>
-                        </a>
-                        <a href="#" class="tt-icon-btn">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
-                            <span class="tt-text">12</span>
+                            <span>当前栏目：</span>
+                                <span class="tt-badge" th:text="${subItem.subItemName}"></span>
                         </a>
                         <div class="col-separator"></div>
                         <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
