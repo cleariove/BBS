@@ -36,6 +36,12 @@ public class DemoController
         return "page403";
     }
 
+    @RequestMapping("/page/401")
+    public String nonono()
+    {
+        return "page401";
+    }
+
     @RequestMapping("404")
     public String error(HttpServletResponse response)
     {

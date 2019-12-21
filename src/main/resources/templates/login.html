@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>登录</title>
@@ -51,6 +51,9 @@
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control" id="password" placeholder="************" required="">
                     </div>
+                    <div>
+                        <span  style="color: red" th:text="${session?.SPRING_SECURITY_LAST_EXCEPTION?.message}"></span>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
@@ -70,7 +73,6 @@
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-secondary btn-block" value="登录">
-<!--                        <button type="submit" class="tt-view-all">登录</button>-->
                     </div>
                     <p>没有账号？ <a href="/user/register" class="tt-underline">立即注册</a></p>
                     <div class="tt-notes">

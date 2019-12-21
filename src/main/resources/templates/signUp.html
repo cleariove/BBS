@@ -57,7 +57,10 @@
                     </div>
                     <div class="form-group">
                         <label for="repassword">确认密码</label>
-                        <input type="password" name="repassword" class="form-control" id="repassword" placeholder="************">
+                        <input onkeyup="confirmPassword()" type="password" name="repassword" class="form-control" id="repassword" placeholder="************">
+                    </div>
+                    <div>
+                        <span id="confirmSpan" >1231</span>
                     </div>
                     <div class="form-group">
                         <input type="submit" class="btn btn-secondary btn-block" value="Create my account" />
@@ -85,6 +88,25 @@
                 alert("密码不一致，请修改！");
                 return false
             }
+        }
+    }
+
+    function confirmPassword()//确认密码
+    {
+        var password = document.getElementById("password").value;
+        var confirm = document.getElementById("repassword").value;
+        var span = document.getElementById("confirmSpan");
+        if(password !== confirm)
+        {
+            span.style.color = "red";
+            span.innerHTML = "两次输入密码不一致";
+            return false;
+        }
+        else
+        {
+            span.style.color = "green";
+            span.innerHTML = "密码一致";
+            return true;
         }
     }
 </script>

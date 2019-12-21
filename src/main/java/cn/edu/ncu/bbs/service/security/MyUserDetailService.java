@@ -5,6 +5,7 @@ import cn.edu.ncu.bbs.domain.User;
 import cn.edu.ncu.bbs.service.Impl.RoleServiceImpl;
 import cn.edu.ncu.bbs.service.Impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,9 +32,15 @@ public class MyUserDetailService implements UserDetailsService
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException
     {
+        if(!s.matches("[\\d]+"))
+        {
+//            throw new BadCredentialsException("用户名是纯数字的啦");
+            throw new UsernameNotFoundException("用户不存在");
+        }
         User user = userService.findById(s);
         if(user == null)
         {
+//            throw new BadCredentialsException("芽儿哟~用户名不存在");
             throw new UsernameNotFoundException("用户不存在");
         }
         else
@@ -50,8 +57,8 @@ public class MyUserDetailService implements UserDetailsService
                 }
             }
             user.setAuthorities(grantedAuthorities);
+            user.setPassword(pwd);
             return user;
-//            return new org.springframework.security.core.userdetails.User(String.valueOf(user.getUserId()),pwd,grantedAuthorities);
         }
     }
 }

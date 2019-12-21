@@ -5,7 +5,6 @@ import cn.edu.ncu.bbs.domain.security.MyToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
@@ -23,15 +22,15 @@ public class LoginAuthenticationProvider implements AuthenticationProvider
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException
     {
-
         //获取用户名
         String username = (String) authentication.getPrincipal();
         //获取密码
         String password = (String) authentication.getCredentials();
         //根据用户名通过userDetailService获取数据库中对应数据
         User user = (User) myUserDetailService.loadUserByUsername(username);
-//        UserDetails userDetails = myUserDetailService.loadUserByUsername(username);
+
         String password1 = user.getPassword();
+
         if(!Objects.equals(password,password1))
         {
             throw new BadCredentialsException("用户名或密码不正确");
@@ -47,7 +46,6 @@ public class LoginAuthenticationProvider implements AuthenticationProvider
         myToken.setJob(user.getJob());
         myToken.setPassword(user.getPassword());
         return myToken;
-      // return new UsernamePasswordAuthenticationToken(username,password,userDetails.getAuthorities());
     }
 
     @Override

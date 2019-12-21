@@ -23,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private AuthenticationAccessDeniedHandler accessDeniedHandler;
 
+    @Autowired
+    private MyAuthenticationEntryPoint authenticationEntryPoint;
+
     //查找访问url所需的角色
     @Autowired
     private UrlAccessDecisionManager decisionManager;
@@ -71,11 +74,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/index")
+                .failureUrl("/login?error=true")
                 .permitAll()
 
                 .and()
+                .sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true);
+
+        http
+                //权限不足的处理
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler)
+                .authenticationEntryPoint(authenticationEntryPoint)
 
                 .and()
                 .rememberMe()
@@ -84,6 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/index")
+                .deleteCookies()
 
                 .and()
                 .httpBasic();
