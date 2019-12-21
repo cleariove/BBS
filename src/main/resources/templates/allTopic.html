@@ -130,44 +130,7 @@
     </div>
 </header>
 <main id="tt-pageContent" class="tt-offset-small">
-    <!--<div class="tt-wrapper-section">-->
-        <!--<div class="container">-->
-            <!--<div class="tt-user-header">-->
-                <!--<div class="tt-col-avatar">-->
-                    <!--<img alt="栏目图片" th:src="|data:image/jpg;base64,${subItem.getSubItemIcon()}|"-->
-                         <!--style="max-width: 100px;max-height: 100px">-->
-                <!--</div>-->
-                <!--<div class="tt-col-title" style="position: relative;right: -10px">-->
-                    <!--<div class="tt-title">-->
-                        <!--<a href="#" th:text="${subItem.getSubItemName()}"></a>-->
-                    <!--</div>-->
-                    <!--<ul class="tt-list-badge">-->
-                        <!--<li>-->
-                            <!--<a href="#">-->
-                                <!--<span class="tt-color14 tt-badge" th:text="|帖子总数:${pageInfo.total+topTopics.size()}|">-->
-                                <!--</span>-->
-                            <!--</a>-->
-                        <!--</li>-->
-                        <!--<li style="position: relative;top: 30px;left: -90px">-->
-                            <!--<a href="#">-->
-                                <!--<span class="tt-color10 tt-badge" th:text="${subItem.subItemDescription}">-->
-                                <!--</span>-->
-                            <!--</a>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-                <!--<div class="tt-col-btn" id="js-settings-btn" sec:authorize="isAuthenticated()">-->
-                    <!--<div class="tt-list-btn">-->
-                        <!--<a href="#" class="tt-btn-icon" th:if="(${#authentication.userId} eq ${subItem.getManager()}) or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
-                            <!--<svg class="tt-icon">-->
-                                <!--<use xlink:href="#icon-settings_fill"></use>-->
-                            <!--</svg>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+
     <div class="container">
         <div class="tt-topic-list">
             <div class="tt-list-header">
@@ -175,11 +138,7 @@
                 <!--<div class="tt-col-category">分类</div>-->
                 <div class="tt-col-value hide-mobile">点击量</div>
                 <div class="tt-col-value hide-mobile">发表时间</div>
-                <div class="tt-col-value">
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        管理
-                    </div>
-                </div>
+
             </div>
             <!--表头-->
 
@@ -219,23 +178,6 @@
                         <div class="tt-col-value hide-mobile">
                             <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
                         </div>
-                        <div class="tt-col-value hide-mobile">
-                            <!--管理员操作-->
-                            <div sec:authorize="hasRole('ROLE_ADMIN')">
-
-                                <ul class="tt-list-badge">
-
-                                    <li>
-                                        <a th:href="@{'/topic/delete/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">删除</span></a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{'/topic/update/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">更新</span></a>
-                                    </li>
-
-                                </ul>
-
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -271,22 +213,6 @@
                             <!--文章发布时间-->
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
-                            </div>
-                            <div class="tt-col-value hide-mobile">
-                                <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <!--管理员操作-->
-
-                                    <ul class="tt-list-badge">
-
-                                        <li>
-                                            <a th:href="@{'/topic/delete/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">删除</span></a>
-                                        </li>
-                                        <li>
-                                            <a th:href="@{'/topic/update/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">更新</span></a>
-                                        </li>
-                                    </ul>
-
-                                </div>
                             </div>
                         </div>
                         <hr>
@@ -337,22 +263,7 @@
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
                             </div>
-                            <div class="tt-col-value hide-mobile">
-                                <div sec:authorize="hasRole('ROLE_ADMIN')">
-                                    <!--管理员操作-->
 
-                                    <ul class="tt-list-badge">
-
-                                        <li>
-                                            <a th:href="@{'/topic/delete/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">删除</span></a>
-                                        </li>
-                                        <li>
-                                            <a th:href="@{'/topic/update/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">更新</span></a>
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
                         </div>
                         <hr>
                     </div>

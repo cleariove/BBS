@@ -92,6 +92,7 @@
                     </nav>
                 </div>
             </div>
+
             <div class="col-auto ml-auto" sec:authorize="hasRole('ROLE_USER')">
                 <div class="col-auto ml-auto">
                     <div class="tt-user-info d-flex justify-content-center">
@@ -158,7 +159,7 @@
                 </div>
                 <div class="tt-col-btn" id="js-settings-btn" sec:authorize="isAuthenticated()">
                     <div class="tt-list-btn">
-                        <a href="#" class="tt-btn-icon" th:if="(${#authentication.userId} eq ${subItem.getManager()}) or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <a href="#" class="tt-btn-icon" th:if="(${#authentication.userId} eq ${subItem.getManager()}) or ${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
                             <svg class="tt-icon">
                                 <use xlink:href="#icon-settings_fill"></use>
                             </svg>
@@ -176,9 +177,10 @@
                 <div class="tt-col-value hide-mobile">点击量</div>
                 <div class="tt-col-value hide-mobile">发表时间</div>
                 <div class="tt-col-value">
-                <div sec:authorize="hasRole('ROLE_ADMIN')">
-                    管理
-                </div>
+                    <div sec:authorize="isAuthenticated()">
+                <div th:if="(${#authentication.userId} eq ${subItem.manager}) or ${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
+                    管理</div>
+                    </div>
                 </div>
             </div>
             <!--表头-->
@@ -221,7 +223,8 @@
                     </div>
                     <div class="tt-col-value hide-mobile">
                         <!--管理员操作-->
-                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <div sec:authorize="isAuthenticated()">
+                         <div th:if="(${#authentication.userId} eq ${subItem.manager}) or ${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
 
                                 <ul class="tt-list-badge">
 
@@ -238,6 +241,7 @@
 
                             </div>
                         </div>
+                    </div>
 
                 </div>
             </div>
@@ -278,7 +282,8 @@
                         <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
                     </div>
                     <div class="tt-col-value hide-mobile">
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <div sec:authorize="isAuthenticated()">
+                    <div th:if="(${#authentication.userId} eq ${subItem.manager}) or ${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
                         <!--管理员操作-->
 
                             <ul class="tt-list-badge">
@@ -296,7 +301,7 @@
                                     <a th:href="@{'/topic/outelite/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">取消加精</span></a>
                                 </li>
                             </ul>
-
+                    </div>
                         </div>
                     </div>
                 </div>
@@ -314,7 +319,7 @@
                                             <span th:text="${topic.title}"></span>
                                         </div>
                                         <div th:if="${!#strings.isEmpty(topic.adoptId)}">
-                                            <span class="tt-color08 tt-badge">已解决</span>
+                                            <span class="tt-color13 tt-badge">已解决</span>
                                             <span th:text="${topic.title}"></span>
                                         </div>
 
@@ -349,7 +354,8 @@
                                 <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
                             </div>
                             <div class="tt-col-value hide-mobile">
-                                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                <div sec:authorize="isAuthenticated()">
+                                <div th:if="(${#authentication.userId} eq ${subItem.manager}) or ${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
                                     <!--管理员操作-->
 
                                     <ul class="tt-list-badge">
@@ -367,7 +373,7 @@
                                             <a th:href="@{'/topic/elite/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">加精</span></a>
                                         </li>
                                     </ul>
-
+                                </div>
                                 </div>
                             </div>
                         </div>

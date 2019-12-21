@@ -139,7 +139,7 @@
                         </p>
                     </div>
                     <div class="tt-item-info info-bottom">
-                        <a href="#" class="tt-icon-btn">
+                        <a th:href="@{'/topic?subItemId='+${topic.subItemId}}" class="tt-icon-btn">
                             <span>当前栏目：</span>
                                 <span class="tt-badge" th:text="${subItem.subItemName}"></span>
                         </a>
@@ -196,11 +196,13 @@
                                                 <a  sec:authorize="!isAuthenticated()"   style="float: right" onclick="unLogin()">回复</a>
                                             </div>
 
-                                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <div sec:authorize="isAuthenticated()">
+                                                <div th:if="(${#authentication.userId} eq ${subItem.manager}) or ${#authorization.expression('hasRole(''ROLE_MANAGER'')')}">
                                                 <!--管理员才能删除-->
                                                 <br>
                                                 <a style="float: right" class="tt-icon-btn tt-hover-02 tt-small-indent" th:href="@{'/comment/delete/?commentId='+${comment.commentId}+'&topicId='+${topic.topicId}}">
                                                     删除 </a>
+                                            </div>
                                             </div>
                                             <!--<a th:href= "|javascript:getSubComment(${comment.commentId},${topic.topicId})|" >展开回复</a>-->
                                         </div>
