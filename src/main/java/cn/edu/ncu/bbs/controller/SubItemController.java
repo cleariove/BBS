@@ -46,7 +46,7 @@ public class SubItemController
             myToken = (MyToken) SecurityContextHolder.getContext().getAuthentication();
         if(myToken != null)
         {
-            if(myToken.containsRole("ROLE_ADMIN") || myToken.getUserId().equals(item.getManager()))
+            if(myToken.containsRole("ROLE_MANAGER") || myToken.getUserId().equals(item.getManager()))
             {
                 List<User> users = userRoleService.findAllManage();
                 model.addAttribute("managers",users);

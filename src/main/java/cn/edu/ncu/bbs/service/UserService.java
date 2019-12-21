@@ -10,7 +10,6 @@ public interface UserService  {
     Integer userRegister(User user);
     void deleteUser(Integer userId);
     void userChange(User user);
-    User changeIntegral(String type,Integer userId,Integer changeIntegral);
     User selectUserById(Integer userId);
     List<User> findAll();
 }

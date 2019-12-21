@@ -86,16 +86,6 @@ public class UserController {
         return "adminManageUser";
     }
 
-    @RequestMapping(value = "/changeIntegral",method = RequestMethod.POST)
-    @ResponseBody
-    public User  changeIntegralByUserId(@RequestParam("type")String type,@RequestParam("userId")Integer userId,
-                                        @RequestParam("changeIntegral")Integer changeIntegral){
-
-
-      return   userService.changeIntegral(type,userId,changeIntegral);
-    }
-
-
     @RequestMapping(value = "/showAdminManageUser",method = RequestMethod.GET)
     public String showAllUser(@RequestParam("userId")Integer userId, Model model){
         List<User> users=userService.selectALLExceptSelf(userId);

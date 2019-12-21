@@ -2,7 +2,7 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
-    <title> 修改文章</title>
+    <title> 修改贴子</title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Forum - Responsive HTML5 Template">
     <meta name="author" content="Forum">
@@ -48,7 +48,7 @@
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="/index"><span>分类</span></a></li>
+                            <li><a href="/index"><span>主页</span></a></li>
                             <li><a href="/subItem/showAll"><span>进吧</span></a></li>
                             <li><a href="/topic/alltopic"><span>查看所有帖子</span></a></li>
                         </ul>
@@ -71,8 +71,9 @@
                                             <a><span sec:authentication="userName">用户昵称</span></a>
                                             <ul>
                                                 <li><a th:href="@{/topic/mytopic}">我的帖子</a></li>
-                                                <li><a th:href="@{/user/showUserMesUpdate}">修改信息</a></li>
+                                                <li><a th:href="@{/user/showUserMesUpdate}">个人信息</a></li>
                                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/user/showAdminManageUser(userId=${#authentication.name})}">用户管理</a></li>
+                                                <li><a th:text="|积分:${#authentication.integral}|"></a></li>
                                                 <li><a th:href="@{/logout}">退出登录</a></li>
                                             </ul>
                                         </li>
@@ -86,7 +87,7 @@
             <div class="col-auto ml-auto" sec:authorize="!hasRole('ROLE_USER')">
                 <div class="tt-account-btn">
                     <a th:href="@{/user}" class="btn btn-primary">登录</a>
-                    <a th:href="@{/user/register}"   class="btn btn-secondary">注册</a>
+                    <a th:href="@{/user/register}" class="btn btn-secondary">注册</a>
                 </div>
             </div>
         </div>
@@ -96,18 +97,18 @@
     <div class="container">
         <div class="tt-wrapper-inner">
             <h1 class="tt-title-border">
-                修 改 文 章<br>
+                修 改 贴 子<br>
             </h1>
             所属板块：<span th:text="${subItem.subItemName}"></span><br>
-            文 章 ID:<span id="subItemId"  th:text="${topic.topicId}"></span><br>
-            文章所属人ID：<span id="manager" th:text="${topic.manager}"></span><br>
+            贴 子 ID:<span id="subItemId"  th:text="${topic.topicId}"></span><br>
+            贴子所属人ID：<span id="manager" th:text="${topic.manager}"></span><br>
             <form class="form-default form-create-topic">
                 <div class="form-group">
-                    <!--文章ID-->
+                    <!--贴子ID-->
                     <input type="hidden" id="topicId"  th:value="${topic.topicId}"/>
                     <label for="title">标 题</label>
                     <div class="tt-value-wrapper">
-                        <!--文章标题-->
+                        <!--贴子标题-->
                         <input th:value="${topic.title}"  id="title" type="text" name="name" class="form-control">
                         <span class="tt-value-input">99</span>
                     </div>
@@ -115,14 +116,14 @@
                 </div>
 
                 <div class="pt-editor">
-                    <h6 class="pt-title">文 章 内 容</h6>
+                    <h6 class="pt-title">贴 子 内 容</h6>
                     <div class="form-group">
-                        <!--文章内容-->
+                        <!--贴子内容-->
                         <textarea th:text="${topic.content}" id="content" name="message" class="form-control" rows="5"></textarea>
                     </div>
                     <div class="row">
                         <div class="col-auto ml-md-auto">
-                            <a style="color: white" onclick="updateTopic()"  class="btn btn-secondary btn-width-lg">提交文章</a>
+                            <a style="color: white" onclick="updateTopic()"  class="btn btn-secondary btn-width-lg">提交贴子</a>
                         </div>
                     </div>
                 </div>

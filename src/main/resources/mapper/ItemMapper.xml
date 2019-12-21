@@ -83,11 +83,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="getManagerIdByItemId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-    select manager
-    from item
-    where item_id = #{itemId,jdbcType=INTEGER}
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

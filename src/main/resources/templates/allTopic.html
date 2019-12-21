@@ -85,7 +85,7 @@
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="/index"><span>分类</span></a></li>
+                            <li><a href="/index"><span>主页</span></a></li>
                             <li><a href="/subItem/showAll"><span>进吧</span></a></li>
                             <li><a href="/topic/alltopic"><span>查看所有帖子</span></a></li>
                         </ul>
@@ -108,8 +108,9 @@
                                             <a><span sec:authentication="userName">用户昵称</span></a>
                                             <ul>
                                                 <li><a th:href="@{/topic/mytopic}">我的帖子</a></li>
-                                                <li><a th:href="@{/user/showUserMesUpdate}">修改信息</a></li>
+                                                <li><a th:href="@{/user/showUserMesUpdate}">个人信息</a></li>
                                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/user/showAdminManageUser(userId=${#authentication.name})}">用户管理</a></li>
+                                                <li><a th:text="|积分:${#authentication.integral}|"></a></li>
                                                 <li><a th:href="@{/logout}">退出登录</a></li>
                                             </ul>
                                         </li>
@@ -123,7 +124,7 @@
             <div class="col-auto ml-auto" sec:authorize="!hasRole('ROLE_USER')">
                 <div class="tt-account-btn">
                     <a th:href="@{/user}" class="btn btn-primary">登录</a>
-                    <a th:href="@{/user/register}"   class="btn btn-secondary">注册</a>
+                    <a th:href="@{/user/register}" class="btn btn-secondary">注册</a>
                 </div>
             </div>
         </div>
@@ -134,15 +135,15 @@
     <div class="container">
         <div class="tt-topic-list">
             <div class="tt-list-header">
-                <div   class="tt-col-topic">文章</div>
-                <!--<div class="tt-col-category">分类</div>-->
+                <div   class="tt-col-topic">帖子</div>
+<!--                <div class="tt-col-category">所属吧</div>-->
                 <div class="tt-col-value hide-mobile">点击量</div>
                 <div class="tt-col-value hide-mobile">发表时间</div>
 
             </div>
             <!--表头-->
 
-            <!--所有文章-->
+            <!--所有帖子-->
             <div th:each="topic:${topics}">
                 <div th:if="${topic.onPageTop}">
                     <div class="tt-item tt-itemselect">
@@ -151,14 +152,14 @@
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-pinned"></use>
                                 </svg>
-                                <!--置顶文章标题-->
+                                <!--置顶帖子标题-->
                                 <span th:text="${topic.title}"></span>
                             </a></h6>
                             <div class="row align-items-center no-gutters">
                                 <div class="col-11">
                                     <ul class="tt-list-badge">
                                         <li class="tt-col-message">
-                                            <!--文章内容-->
+                                            <!--帖子内容-->
                                             <span th:text="${#strings.abbreviate(topic.content,50)}" ></span>
                                         </li>
                                     </ul>
@@ -169,12 +170,12 @@
                             </div>
                         </div>
                         <!--子栏目名称-->
-                        <!--<div class="tt-col-category"><span th:text="${topic.subItemId}" class="tt-color01 tt-badge"></span></div>-->
-                        <!--文章浏览量-->
+<!--                        <div class="tt-col-category"><span th:text="${topic.subItemId}" class="tt-color01 tt-badge"></span></div>-->
+                        <!--帖子浏览量-->
                         <div class="tt-col-value hide-mobile">
                             <span th:text="${topic.browse}"></span>
                         </div>
-                        <!--文章发布时间-->
+                        <!--帖子发布时间-->
                         <div class="tt-col-value hide-mobile">
                             <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
                         </div>
@@ -186,7 +187,7 @@
                         <div class="tt-item tt-wrapper-success">
                             <div class="tt-col-description">
                                 <h6 class="tt-title"><a th:href="@{'/topic/'+${topic.topicId}}">
-                                    <!--文章标题-->
+                                    <!--帖子标题-->
                                     <span class="tt-color13 tt-badge">精</span>
                                     <span th:text="${topic.title}"></span>
                                 </a></h6>
@@ -194,7 +195,7 @@
                                     <div class="col-11">
                                         <ul class="tt-list-badge">
                                             <li class="tt-col-message">
-                                                <!--文章内容-->
+                                                <!--帖子内容-->
                                                 <span th:text="${#strings.abbreviate(topic.content,50)}" ></span>
                                             </li>
                                         </ul>
@@ -206,11 +207,11 @@
                             </div>
                             <!--子栏目名称-->
                             <!--<div class="tt-col-category"><span th:text="${topic.subItemId}" class="tt-color01 tt-badge"></span></div>-->
-                            <!--文章浏览量-->
+                            <!--帖子浏览量-->
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${topic.browse}"></span>
                             </div>
-                            <!--文章发布时间-->
+                            <!--帖子发布时间-->
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
                             </div>
@@ -222,7 +223,7 @@
 
                             <div class="tt-col-description">
                                 <h6 class="tt-title"><a th:href="@{'/topic/'+${topic.topicId}}">
-                                    <!--文章标题-->
+                                    <!--帖子标题-->
                                     <div th:if="${topic.help} eq true">
                                         <div th:if="${#strings.isEmpty(topic.adoptId)}">
                                             <span class="tt-color08 tt-badge">求助!</span>
@@ -243,7 +244,7 @@
                                     <div class="col-11">
                                         <ul class="tt-list-badge">
                                             <li class="tt-col-message">
-                                                <!--文章内容-->
+                                                <!--帖子内容-->
                                                 <span th:text="${#strings.abbreviate(topic.content,50)}" ></span>
                                             </li>
                                         </ul>
@@ -255,11 +256,11 @@
                             </div>
                             <!--&lt;!&ndash;子栏目名称&ndash;&gt;-->
                             <!--<div class="tt-col-category"><span th:text="${topic.subItemId}" class="tt-color01 tt-badge"></span></div>-->
-                            <!--文章浏览量-->
+                            <!--帖子浏览量-->
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${topic.browse}"></span>
                             </div>
-                            <!--文章发布时间-->
+                            <!--帖子发布时间-->
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${#dates.format(topic.date,'MM-dd')}"></span>
                             </div>

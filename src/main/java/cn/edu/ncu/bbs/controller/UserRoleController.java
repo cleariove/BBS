@@ -43,10 +43,13 @@ public class UserRoleController {
         return "adminManageUser";
     }
 
-    @RequestMapping(value = "/getHighRole",method = RequestMethod.GET)
+    @RequestMapping(value = "/getHighRole",method = RequestMethod.POST)
     @ResponseBody
-    public Long  getHighPower(@RequestParam("userId") Long userId){
-        return userRoleService.getHighPower(userId);
+    public String getHighPower(@RequestParam("userId") Long userId){
+        if(userRoleService.getHighPower(userId)==1)
+            return "用户";
+        else
+            return "管理员";
     }
 
 

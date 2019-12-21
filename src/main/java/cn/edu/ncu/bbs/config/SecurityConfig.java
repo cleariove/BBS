@@ -78,11 +78,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .permitAll()
 
                 .and()
-                .sessionManagement()
-                .maximumSessions(1)
-                .maxSessionsPreventsLogin(true);
-
-        http
                 //权限不足的处理
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler)

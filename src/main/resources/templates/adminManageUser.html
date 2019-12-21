@@ -28,7 +28,7 @@
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="/index"><span>分类</span></a></li>
+                            <li><a href="/index"><span>主页</span></a></li>
                             <li><a href="/subItem/showAll"><span>进吧</span></a></li>
                             <li><a href="/topic/alltopic"><span>查看所有帖子</span></a></li>
                         </ul>
@@ -51,8 +51,9 @@
                                             <a><span sec:authentication="userName">用户昵称</span></a>
                                             <ul>
                                                 <li><a th:href="@{/topic/mytopic}">我的帖子</a></li>
-                                                <li><a th:href="@{/user/showUserMesUpdate}">修改信息</a></li>
+                                                <li><a th:href="@{/user/showUserMesUpdate}">个人信息</a></li>
                                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/user/showAdminManageUser(userId=${#authentication.name})}">用户管理</a></li>
+                                                <li><a th:text="|积分:${#authentication.integral}|"></a></li>
                                                 <li><a th:href="@{/logout}">退出登录</a></li>
                                             </ul>
                                         </li>
@@ -66,7 +67,7 @@
             <div class="col-auto ml-auto" sec:authorize="!hasRole('ROLE_USER')">
                 <div class="tt-account-btn">
                     <a th:href="@{/user}" class="btn btn-primary">登录</a>
-                    <a th:href="@{/user/register}"   class="btn btn-secondary">注册</a>
+                    <a th:href="@{/user/register}" class="btn btn-secondary">注册</a>
                 </div>
             </div>
         </div>
@@ -102,7 +103,7 @@
             <div th:each="user:${usersExceptSelf}">
                 <div class="tt-item">
                     <div class="tt-col-avatar">
-                        <img  th:src="|data:image/jpg;base64,*{user.userIcon}|" src="../static/images/user.jpg" style="height: 40px;width: 40px;border-radius:50%">
+                        <img  th:src="|data:image/jpg;base64,*{user.userIcon}|" style="height: 40px;width: 40px;border-radius:50%">
                     </div>
                     <div class="tt-col-value  hide-mobile" th:text="*{user.userId}">1</div>
                     <div class="tt-col-value  hide-mobile" th:text="*{user.userName}">小明</div>
@@ -138,14 +139,16 @@
     </div>
 </main>
 <script th:inline="javascript">
-        function getHighPower(userId) {
+    function getHighPower(userId) {
         $.ajax({
             url:"/userRole/getHighRole?userId="+userId,
-            contentType : "application/json",              //发送至服务器的类型   
-            dataType : "json",                                     //预期服务器返回类型  
-            type:"get",
+            type:"post",
             success:function (data) {
                alert(data);
+            },
+            error:function()
+            {
+                alert("未知错误");
             }
         });
     }

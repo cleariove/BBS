@@ -85,14 +85,13 @@
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="/index"><span>分类</span></a></li>
+                            <li><a href="/index"><span>主页</span></a></li>
                             <li><a href="/subItem/showAll"><span>进吧</span></a></li>
                             <li><a href="/topic/alltopic"><span>查看所有帖子</span></a></li>
                         </ul>
                     </nav>
                 </div>
             </div>
-
             <div class="col-auto ml-auto" sec:authorize="hasRole('ROLE_USER')">
                 <div class="col-auto ml-auto">
                     <div class="tt-user-info d-flex justify-content-center">
@@ -109,8 +108,9 @@
                                             <a><span sec:authentication="userName">用户昵称</span></a>
                                             <ul>
                                                 <li><a th:href="@{/topic/mytopic}">我的帖子</a></li>
-                                                <li><a th:href="@{/user/showUserMesUpdate}">修改信息</a></li>
+                                                <li><a th:href="@{/user/showUserMesUpdate}">个人信息</a></li>
                                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/user/showAdminManageUser(userId=${#authentication.name})}">用户管理</a></li>
+                                                <li><a th:text="|积分:${#authentication.integral}|"></a></li>
                                                 <li><a th:href="@{/logout}">退出登录</a></li>
                                             </ul>
                                         </li>
@@ -124,7 +124,7 @@
             <div class="col-auto ml-auto" sec:authorize="!hasRole('ROLE_USER')">
                 <div class="tt-account-btn">
                     <a th:href="@{/user}" class="btn btn-primary">登录</a>
-                    <a th:href="@{/user/register}"   class="btn btn-secondary">注册</a>
+                    <a th:href="@{/user/register}" class="btn btn-secondary">注册</a>
                 </div>
             </div>
         </div>
@@ -135,7 +135,7 @@
         <div class="container">
             <div class="tt-user-header">
                 <div class="tt-col-avatar">
-                    <img alt="栏目图片" th:src="|data:image/jpg;base64,${subItem.getSubItemIcon()}|"
+                    <img alt="类别图片" th:src="|data:image/jpg;base64,${subItem.getSubItemIcon()}|"
                          style="max-width: 100px;max-height: 100px">
                 </div>
                 <div class="tt-col-title" style="position: relative;right: -10px">
@@ -173,7 +173,7 @@
         <div class="tt-topic-list">
             <div class="tt-list-header">
                 <div   class="tt-col-topic">文章</div>
-                <div class="tt-col-category">分类</div>
+                <div class="tt-col-category">类别</div>
                 <div class="tt-col-value hide-mobile">点击量</div>
                 <div class="tt-col-value hide-mobile">发表时间</div>
                 <div class="tt-col-value">
@@ -211,7 +211,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--子栏目名称-->
+                    <!--贴吧名称-->
                     <div class="tt-col-category"><span th:text="${subItem.subItemName}" class="tt-color01 tt-badge"></span></div>
                     <!--文章浏览量-->
                     <div class="tt-col-value hide-mobile">
@@ -271,7 +271,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--子栏目名称-->
+                    <!--贴吧名称-->
                     <div class="tt-col-category"><span th:text="${subItem.subItemName}" class="tt-color01 tt-badge"></span></div>
                     <!--文章浏览量-->
                     <div class="tt-col-value hide-mobile">
@@ -343,7 +343,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--子栏目名称-->
+                            <!--贴吧名称-->
                             <div class="tt-col-category"><span th:text="${subItem.subItemName}" class="tt-color01 tt-badge"></span></div>
                             <!--文章浏览量-->
                             <div class="tt-col-value hide-mobile">
@@ -445,17 +445,17 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="subItemName">子栏目名称</label>
+            <label for="subItemName">贴吧名称</label>
             <input type="text" name="name" class="form-control" id="subItemName"
                    th:placeholder="${subItem.getSubItemName()}">
         </div>
         <div class="form-group">
-            <label for="subItemDescription">子栏目简介</label>
+            <label for="subItemDescription">贴吧简介</label>
             <input type="text" name="name" class="form-control" id="subItemDescription"
                    th:placeholder="${subItem.getSubItemDescription()}">
         </div>
         <div class="form-group">
-            <label for="itemId">所属栏目</label>
+            <label for="itemId">所属类别</label>
             <select id="itemId" class="form-control">
                 <option th:each="item:${items}" th:text="${item.getItemName()}" th:value="${item.getItemId()}"
                         th:selected="(${item.getItemId()} != ${subItem.getItemId()})?'false':'true'">
