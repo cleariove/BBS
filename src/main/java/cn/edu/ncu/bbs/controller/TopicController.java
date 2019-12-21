@@ -114,11 +114,7 @@ public class TopicController {
     //显示所有文章
     @RequestMapping(value = "/alltopic",method = RequestMethod.GET)
     public String allTopic( @RequestParam(value = "pageNum",defaultValue="1") int pageNum,Model model){
-        MyToken user = null;
-        if(SecurityContextHolder.getContext().getAuthentication() instanceof MyToken)
-            user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
-        if (user != null)
-        {
+
             PageHelper.startPage(pageNum,10);
             List<Topic> topics=topicService.findAllTopic();
             //将查询到的数据封装到PageInfo对象
@@ -126,7 +122,6 @@ public class TopicController {
             model.addAttribute("pageInfo",pageInfo);
             model.addAttribute("topics",topics);
 
-        }
         return "allTopic";
     }
 

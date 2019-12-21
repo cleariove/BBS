@@ -172,7 +172,7 @@
         <div class="tt-topic-list">
             <div class="tt-list-header">
                 <div   class="tt-col-topic">文章</div>
-                <div class="tt-col-category">分类</div>
+                <!--<div class="tt-col-category">分类</div>-->
                 <div class="tt-col-value hide-mobile">点击量</div>
                 <div class="tt-col-value hide-mobile">发表时间</div>
                 <div class="tt-col-value">
@@ -210,7 +210,7 @@
                             </div>
                         </div>
                         <!--子栏目名称-->
-                        <div class="tt-col-category"><span th:text="${subItem.subItemName}" class="tt-color01 tt-badge"></span></div>
+                        <!--<div class="tt-col-category"><span th:text="${topic.subItemId}" class="tt-color01 tt-badge"></span></div>-->
                         <!--文章浏览量-->
                         <div class="tt-col-value hide-mobile">
                             <span th:text="${topic.browse}"></span>
@@ -226,14 +226,12 @@
                                 <ul class="tt-list-badge">
 
                                     <li>
-                                        <a th:href="@{'/topic/delete/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">删除</span></a>
+                                        <a th:href="@{'/topic/delete/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">删除</span></a>
                                     </li>
                                     <li>
-                                        <a th:href="@{'/topic/update/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">更新</span></a>
+                                        <a th:href="@{'/topic/update/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">更新</span></a>
                                     </li>
-                                    <li>
-                                        <a th:href="@{'/topic/outtoppage/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">取消置顶</span></a>
-                                    </li>
+
                                 </ul>
 
                             </div>
@@ -265,7 +263,7 @@
                                 </div>
                             </div>
                             <!--子栏目名称-->
-                            <div class="tt-col-category"><span th:text="${subItem.subItemName}" class="tt-color01 tt-badge"></span></div>
+                            <!--<div class="tt-col-category"><span th:text="${topic.subItemId}" class="tt-color01 tt-badge"></span></div>-->
                             <!--文章浏览量-->
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${topic.browse}"></span>
@@ -281,16 +279,10 @@
                                     <ul class="tt-list-badge">
 
                                         <li>
-                                            <a th:href="@{'/topic/delete/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">删除</span></a>
+                                            <a th:href="@{'/topic/delete/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">删除</span></a>
                                         </li>
                                         <li>
-                                            <a th:href="@{'/topic/update/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">更新</span></a>
-                                        </li>
-                                        <li>
-                                            <a th:href="@{'/topic/ontoppage/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">置顶</span></a>
-                                        </li>
-                                        <li>
-                                            <a th:href="@{'/topic/outelite/'+${subItem.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">取消加精</span></a>
+                                            <a th:href="@{'/topic/update/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">更新</span></a>
                                         </li>
                                     </ul>
 
@@ -335,8 +327,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--子栏目名称-->
-                            <div class="tt-col-category"><span th:text="${topic.subItemId}" class="tt-color01 tt-badge"></span></div>
+                            <!--&lt;!&ndash;子栏目名称&ndash;&gt;-->
+                            <!--<div class="tt-col-category"><span th:text="${topic.subItemId}" class="tt-color01 tt-badge"></span></div>-->
                             <!--文章浏览量-->
                             <div class="tt-col-value hide-mobile">
                                 <span th:text="${topic.browse}"></span>
@@ -357,12 +349,6 @@
                                         <li>
                                             <a th:href="@{'/topic/update/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">更新</span></a>
                                         </li>
-                                        <li>
-                                            <a th:href="@{'/topic/ontoppage/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">置顶</span></a>
-                                        </li>
-                                        <li>
-                                            <a th:href="@{'/topic/elite/'+${topic.subItemId}+'/'+${topic.topicId}}"><span class="tt-badge">加精</span></a>
-                                        </li>
                                     </ul>
 
                                 </div>
@@ -378,7 +364,7 @@
                 <ul class="pagination">
                     <li><a  th:href="@{'/topic/alltopic?pageNum=1'}">«</a></li>
 
-                    <li th:if="${pageInfo.getPages()} eq 0" >
+                    <li th:if="${pageInfo.getPages()} == 0" >
 
                         <a  class="active" th:href="@{'/topic/alltopic?pageNum=1'}" th:text="${1}"></a>
 
@@ -398,103 +384,7 @@
 
     </div>
 </main>
-<div id="js-popup-settings" class="tt-popup-settings">
-    <div class="tt-btn-col-close">
-        <a href="#">
-			<span class="tt-icon-title">
-				<svg>
-					<use xlink:href="#icon-settings_fill"></use>
-				</svg>
-			</span>
-            <span class="tt-icon-text">
-				修改
-			</span>
-            <span class="tt-icon-close">
-				<svg>
-					<use xlink:href="#icon-cancel"></use>
-				</svg>
-			</span>
-        </a>
-    </div>
-    <form class="form-default">
-        <div class="tt-form-upload">
-            <div class="row no-gutter">
-                <div class="col-auto">
-                    <div class="tt-avatar">
-                        <svg>
-                            <use xlink:href="#icon-ava-d"></use>
-                        </svg>
-                    </div>
-                </div>
-                <div class="col-auto ml-auto">
-                    <img th:src="|data:image/jpg;base64,${subItem.getSubItemIcon()}|" alt="图片"
-                         style="max-height: 40px;max-width: 40px">
-                    <input id="subItemFile" type="file" value="文件" style="display: none"
-                           th:onchange="|javascript:uploadSubItemIcon(${subItem.subItemId})|">
-                    <a href="#" class="btn btn-primary" onclick="clickSubInputFile()" style="color: black">上传头像</a>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="subItemName">子栏目名称</label>
-            <input type="text" name="name" class="form-control" id="subItemName"
-                   th:placeholder="${subItem.getSubItemName()}">
-        </div>
-        <div class="form-group">
-            <label for="subItemDescription">子栏目简介</label>
-            <input type="text" name="name" class="form-control" id="subItemDescription"
-                   th:placeholder="${subItem.getSubItemDescription()}">
-        </div>
-        <div class="form-group">
-            <label for="itemId">所属栏目</label>
-            <select id="itemId" class="form-control">
-                <option th:each="item:${items}" th:text="${item.getItemName()}" th:value="${item.getItemId()}"
-                        th:selected="(${item.getItemId()} != ${subItem.getItemId()})?'false':'true'">
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="subItemManager">设置管理</label>
-            <select id="subItemManager" class="form-control">
-                <option th:each="user:${users}" th:text="${user.getUserName()}" th:value="${user.getUserId()}"
-                        th:selected="(${user.getUserId()} != ${subItem.manager})?'false':'true'">
-            </select>
-        </div>
-        <div class="form-group">
-            <a  th:href="|javascript:updateSubItem(${subItem.getSubItemId()})|" class="btn btn-secondary" style="color: white">保存</a>
-        </div>
-        <div class="form-group" style="position: relative;left: 190px;top: -60px">
-            <a th:href="|javascript:deleteSubItem(${subItem.getSubItemId()})|" class="btn btn-secondary" style="color: white">删除</a>
-        </div>
-    </form>
-</div>
 
-<!--<div sec:authorize="isAuthenticated()">-->
-<!--&lt;!&ndash;跳转编辑文章页面&ndash;&gt;-->
-<!--<a  th:href="@{'/topic/create/'+${subItem.subItemId}}" class="tt-btn-create-topic">-->
-<!--<span class="tt-icon">-->
-<!--<svg>-->
-<!--<use xlink:href="#icon-create_new"></use>-->
-<!--</svg>-->
-<!--</span>-->
-<!--</a>-->
-<!--</div>-->
-
-
-<a class="tt-btn-create-topic" sec:authorize="isAuthenticated()"  th:href="@{'/topic/create/'+${subItem.subItemId}}">
-    <span class="tt-icon">
-        <svg>
-            <use xlink:href="#icon-create_new"></use>
-        </svg>
-    </span>
-</a>
-
-<a class="tt-btn-create-topic" sec:authorize="!isAuthenticated()" onclick="unLogin()" >
-    <span class="tt-icon">
-        <svg>
-            <use xlink:href="#icon-create_new"></use>
-        </svg>
-    </span>
-</a>
 
 <script src="/static/js/bundle.js"></script>
 
