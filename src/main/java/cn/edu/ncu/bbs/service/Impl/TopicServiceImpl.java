@@ -49,7 +49,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> findAllTopic(TopicExample topicExample) {
+    public List<Topic> findAllTopic() {
+        TopicExample topicExample =new TopicExample();
         return topicMapper.selectByExample(topicExample);
     }
 

@@ -48,7 +48,9 @@
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="/index"><span>主页</span></a></li>
+                            <li><a href="/index"><span>分类</span></a></li>
+                            <li><a href="/subItem/showAll"><span>进吧</span></a></li>
+                            <li><a href="/topic/alltopic"><span>查看所有帖子</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -68,7 +70,7 @@
                                         <li>
                                             <a><span sec:authentication="userName">用户昵称</span></a>
                                             <ul>
-                                                <li><a th:href="@{/topic/myTopic}">我的帖子</a></li>
+                                                <li><a th:href="@{/topic/mytopic}">我的帖子</a></li>
                                                 <li><a th:href="@{/user/showUserMesUpdate}">修改信息</a></li>
                                                 <li sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/user/showAdminManageUser(userId=${#authentication.name})}">用户管理</a></li>
                                                 <li><a th:href="@{/logout}">退出登录</a></li>

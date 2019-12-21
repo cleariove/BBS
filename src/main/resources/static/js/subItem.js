@@ -101,7 +101,6 @@ function updateSubItem(subItemId)
                 }
             }
         )
-    // }
 }
 
 function insertSubItem(id)

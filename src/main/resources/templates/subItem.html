@@ -46,7 +46,9 @@
                 <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="/index"><span>主页</span></a></li>
+                            <li><a href="/index"><span>分类</span></a></li>
+                            <li><a href="/subItem/showAll"><span>进吧</span></a></li>
+                            <li><a href="/topic/alltopic"><span>查看所有帖子</span></a></li>
                         </ul>
                     </nav>
                 </div>
@@ -171,8 +173,8 @@
                                                     描述
                                                 </div>
                                                 <div class="innerwrapper">
-                                                    <h6 class="tt-title" th:onload="|javascript:getSubItemByItemId(*{subItem.getSubItemId()})|">
-                                                        文章
+                                                    <h6 class="tt-title">
+                                                        帖子
                                                     </h6>
                                                     <ul class="tt-list-badge">
                                                         <li th:each="topic:${topics}">

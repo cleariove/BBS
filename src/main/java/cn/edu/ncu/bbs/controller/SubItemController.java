@@ -60,6 +60,16 @@ public class SubItemController
         return "subItem";
     }
 
+    @RequestMapping("/showAll")
+    public String showAllSubItem(Model model)
+    {
+        List<SubItem> subItems = subItemService.selectAll();
+        List<Topic> topics = topicService.findAllTopic();
+        model.addAttribute("topics",topics);
+        model.addAttribute("subItems",subItems);
+        return "allSubItem";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/manage/upload",method = RequestMethod.POST)
     public String upload(@RequestParam("subItemFile") MultipartFile file,

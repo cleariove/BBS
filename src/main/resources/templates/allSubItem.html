@@ -1,22 +1,20 @@
-<!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8">
-    <title>新建文章</title>
+    <title>贴吧</title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Forum - Responsive HTML5 Template">
     <meta name="author" content="Forum">
-    <link rel="shortcut icon" href="/static/images/favicon.ico">
+    <link rel="shortcut icon" href="../static/images/favicon.ico">
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-
-    <script src="/static/js/topic.js"></script>
-    <script src="/static/js/jquery.min.js" ></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/bundle.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/item.js}"></script>
 </head>
-<body onload="initAJAX()">
+<body>
 <!-- tt-mobile menu -->
 <nav class="panel-menu" id="mobile-menu">
     <ul>
@@ -94,88 +92,60 @@
     </div>
 </header>
 <main id="tt-pageContent">
-    <div class="container">
-        <div class="tt-wrapper-inner">
-            <h1 class="tt-title-border">
-                新建文章  <br>
-                当前板块：<span th:text="${subItem.subItemName}"></span>
-                <input id="subItemId" type="hidden" th:value="${subItem.subItemId}">
-            </h1>
-            <form class="form-default form-create-topic">
-                <div class="form-group">
+    <div class="tt-custom-mobile-indent container" style="width: 1160px">
+        <div class="tt-categories-title">
+            <div class="tt-title">进吧</div>
+        </div>
+        <div class="tt-categories-list">
+            <div class="row">
+                <div class="col-md-6 col-lg-4" th:each="subItem:${subItems}" th:href="@{'/topic?subItemId='+${subItem.subItemId}}">
+                    <a th:href="@{'/topic?subItemId='+${subItem.subItemId}}">
+                        <div class="tt-item">
+                            <img th:src="|data:image/jpg;base64,${subItem.getSubItemIcon()}|" alt="图标"
+                                 style="max-height: 70px;max-width: 70px;">
+                            <div class="tt-item-header">
+                                <ul class="tt-list-badge">
+                                    <li>
+                                        <span class="tt-color01 tt-badge"
+                                              th:text="*{subItem.getSubItemName()}"
+                                              style="position: relative; right: -80px; top:-60px">栏目名
+                                        </span>
+                                    </li>
+                                </ul>
+                                <h6 class="tt-title" th:text=" '管理员id:' + (*{subItem.getManager()} eq null ? '未设置管理' : *{subItem.getManager()})">
+                                    管理员
+                                </h6>
 
-                    <label for="title">标 题</label>
-                    <div class="tt-value-wrapper">
-                        <!--文章标题-->
-                        <input id="title" type="text" name="name" class="form-control"  placeholder="请输入文章标题">
-                    </div>
-                    <!--提示-->
-                    <div class="tt-note"></div>
-                </div>
-                <div class="form-group">
-                    <label>文 章 类 型</label>
-                    <!--文章类型-->
-
-                    <div class="tt-js-active-btn tt-wrapper-btnicon">
-                        <div class="row tt-w410-col-02">
-                            <div class="col-4 col-lg-3 col-xl-2">
-                                <a id="discussion" onclick="getTopicType(this)"  class="tt-button-icon">
-                                    <span class="tt-icon">
-                                        <svg>
-                                            <use xlink:href="#icon-discussion"></use>
-                                        </svg>
-                                    </span>
-                                    <span class="tt-text">讨论</span>
-                                </a>
                             </div>
-
-                            <div class="col-4 col-lg-3 col-xl-2">
-                                <a id="help" onclick="getTopicType(this)"  class="tt-button-icon">
-                                    <span class="tt-icon">
-                                         <svg>
-                                            <use xlink:href="#Question"></use>
-                                        </svg>
-                                    </span>
-                                    <span class="tt-text">求助</span>
-                                </a>
+                            <div class="tt-item-layout">
+                                <div class="innerwrapper" th:text="*{subItem.getSubItemDescription()}">
+                                    描述
+                                </div>
+                                <div class="innerwrapper">
+                                    <h6 class="tt-title">
+                                        帖子
+                                    </h6>
+                                    <ul class="tt-list-badge">
+                                        <li th:each="topic:${topics}">
+                                            <a th:if="(*{subItem.getSubItemId()} == *{topic.getSubItemId()})"
+                                               th:href="@{'/topic/' + ${topic.topicId}}">
+                                                <span class="tt-color08 tt-badge" th:text="*{topic.getTitle()}">
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="setting">
-
+                    </a>
                 </div>
+                <div class="col-12">
                 </div>
-                <div class="pt-editor">
-                    <h6 class="pt-title">文 章 内 容</h6>
-                    <div class="pt-row">
-                        <div class="col-left">
-
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <!--文章内容-->
-                        <textarea id="content" name="message" class="form-control" rows="5" placeholder="输入文章内容"></textarea>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-auto ml-md-auto">
-                            <a style="color: white" onclick="createTopic()"  class="btn btn-secondary btn-width-lg">创建文章</a>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </main>
-
-
-
-
-
-
-
-
-
+<script src="../static/js/bundle.js"></script>
 <svg width="0" height="0" class="hidden">
     <symbol aria-hidden="true" data-prefix="fab" data-icon="facebook-f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" id="facebook-f-brands">
         <path fill="currentColor" d="M215.8 85H264V3.6C255.7 2.5 227.1 0 193.8 0 124.3 0 76.7 42.4 76.7 120.3V192H0v91h76.7v229h94V283h73.6l11.7-91h-85.3v-62.7c0-26.3 7.3-44.3 45.1-44.3z"></path>

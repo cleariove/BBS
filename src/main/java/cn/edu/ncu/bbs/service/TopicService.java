@@ -20,7 +20,7 @@ public interface TopicService {
     //删除文章
     void deleteTopic(int id);
 
-    List<Topic> findAllTopic(TopicExample topicExample);
+    List<Topic> findAllTopic();
 
     List<Topic> findTopTopic(TopicExample topicExample,int id);
 
