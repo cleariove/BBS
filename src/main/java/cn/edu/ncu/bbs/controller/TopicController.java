@@ -75,7 +75,7 @@ public class TopicController {
             user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
         if (user != null)
         {
-            if (user.getUserId().equals(subItem.getManager()) || user.containsRole("ROLE_ADMIN"))
+            if (user.getUserId().equals(subItem.getManager()) || user.containsRole("ROLE_MANAGER"))
             {
                 List<Item> items = itemService.findAll();
                 model.addAttribute("items",items);

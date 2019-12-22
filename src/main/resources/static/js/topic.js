@@ -25,7 +25,7 @@ function getTopicType(type) {
         document.getElementById("help").className="tt-button-icon active";
         document.getElementById("setting").innerHTML = "<div class=\" form-default\">\n" +
             "        <div class=\"form-group\">\n" +
-            "        <input name=\"settingIntegral\" class=\"form-control\" placeholder=\"设置积分\" rows=\"1\">\n" +
+            "        <input type='number' name=\"settingIntegral\" class=\"form-control\" placeholder=\"设置积分\" rows=\"1\">\n" +
             "        </div>\n" +
             "        </div>"
     }
@@ -106,7 +106,7 @@ function createTopic() {
         alert("请输入文章标签")
     }else if (content==''){
         alert("文章内容不能为空")
-    } else if (integral>0){
+    } else if ((ifHelp==true)&&integral>0){
         alert("积分输入错误")
 
     }else {
