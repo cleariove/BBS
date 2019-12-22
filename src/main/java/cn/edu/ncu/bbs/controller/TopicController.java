@@ -147,14 +147,22 @@ public class TopicController {
             user = (MyToken) SecurityContextHolder.getContext().getAuthentication();
 
         if(user != null){
+            int nowIntegral = user.getIntegral();
+            if((nowIntegral+topic.getIntegral())<0){
+                map.put("result","error");
+                map.put("integral",nowIntegral);
+                return map;
+            }else {
             topic.setManager(user.getUserId());
             topicService.createTopic(topic);
             userService.changeIntegral(user.getUserId(),topic.getIntegral());
-
+            map.put("result","OK");
+            return map;
         }
-        map.put("result","OK");
-        return map;
-
+    }else {
+            map.put("result","异常错误，未登录");
+            return map;
+        }
     }
 
 

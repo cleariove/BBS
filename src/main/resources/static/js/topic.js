@@ -89,6 +89,7 @@ function createTopic() {
     var subItemId = document.getElementById("subItemId").value;
     var type=topicType;
     var integral;
+
     if(type=="help"){
 
         integral = -(document.getElementsByName("settingIntegral")[0].value);
@@ -105,7 +106,10 @@ function createTopic() {
         alert("请输入文章标签")
     }else if (content==''){
         alert("文章内容不能为空")
-    } else {
+    } else if (integral>0){
+        alert("积分输入错误")
+
+    }else {
 
         var data = {
             "topicId": "",
@@ -132,6 +136,9 @@ function createTopic() {
                 if (data.result == "OK") {
                     alert("文章发表成功");
                     window.location.href = "/topic?subItemId=" + subItemId
+                }else {
+                    alert("您当前积分不足\n" +
+                        "  您当前积分为："+data.integral);
                 }
 
             }
